@@ -22,13 +22,34 @@
   --color-orca-orange-hover: #e6421b;
   --color-orca-mist: #edf8f9;
   --color-orca-teal-dark: #326367;
+  --color-orca-paper: #f9feff;
+
+  --color-wallpaper-blue-from: #637c86;
+  --color-wallpaper-blue-to: #778599;
+  --color-wallpaper-blue-from-dark: #243a42;
+  --color-wallpaper-blue-to-dark: #232f40;
+
+  --color-wallpaper-brown-from: #8d7359;
+  --color-wallpaper-brown-to: #765959;
+  --color-wallpaper-brown-from-dark: #382d23;
+  --color-wallpaper-brown-to-dark: #3d2323;
+
+  --color-wallpaper-green-from: #9ca88f;
+  --color-wallpaper-green-to: #596352;
+  --color-wallpaper-green-from-dark: #333a2b;
+  --color-wallpaper-green-to-dark: #26361b;
+
+  --color-wallpaper-purple-from: #7b627d;
+  --color-wallpaper-purple-to: #8f6976;
+  --color-wallpaper-purple-from-dark: #412c42;
+  --color-wallpaper-purple-to-dark: #3c1a26;
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f9feff;
+    background-color: var(--color-orca-paper);
     --scroll-padding-top: 0;
     scroll-padding-top: var(--scroll-padding-top);
 

@@ -51,33 +51,19 @@ const tabs = [
   },
 ]
 
-const panelStyle = {
-  borderColor: 'rgba(10, 9, 9, 0.34)',
-}
-
 export function FeatureTabs({ className }: { className?: string }) {
   const [active, setActive] = useState(0)
 
   return (
-    <section
-      className={[
-        'bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
+    <section className={className}>
       <Container className="flex flex-col gap-6 py-16">
         <h2 className="max-w-3xl text-[32px] leading-10 font-bold text-olive-950 dark:text-white">
           Govern every workflow. Orchestrate every agent.
         </h2>
 
         <div className="flex flex-col gap-0">
-          <div
-            className="rounded-sm border bg-orca-mist p-2.5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            style={panelStyle}
-          >
-            <div className="grid grid-cols-2 divide-x divide-[rgba(10,9,9,0.34)] bg-orca-mist md:grid-cols-3 lg:grid-cols-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+          <div className="rounded-sm border border-olive-950/20 p-2.5 dark:border-white/20">
+            <div className="grid grid-cols-2 divide-x divide-olive-950/20 md:grid-cols-3 lg:grid-cols-6 dark:divide-white/20">
               {tabs.map((tab, i) => (
                 <button
                   key={tab.id}
@@ -96,17 +82,11 @@ export function FeatureTabs({ className }: { className?: string }) {
             </div>
           </div>
 
-          <div
-            className="rounded-sm border bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            style={panelStyle}
-          >
+          <div className="rounded-sm border border-olive-950/20 p-6 dark:border-white/20">
             <Text>{tabs[active].description}</Text>
           </div>
 
-          <div
-            className="rounded-sm border bg-orca-mist p-0 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            style={panelStyle}
-          >
+          <div className="rounded-sm border border-olive-950/20 p-0 dark:border-white/20">
             <Image
               key={tabs[active].image}
               src={tabs[active].image}

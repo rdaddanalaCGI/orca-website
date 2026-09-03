@@ -63,7 +63,7 @@ export default function Page() {
       />
 
       <Section id="delivery-model" surface="neutral" className="pt-4">
-        <div className="grid grid-cols-1 items-start gap-10 rounded-3xl bg-orca-mist p-8 lg:grid-cols-2 lg:p-12 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+        <div className="grid grid-cols-1 items-start gap-10 rounded-3xl p-8 lg:grid-cols-2 lg:p-12">
           <div className="flex flex-col gap-6">
             <Eyebrow variant="brand">Delivery Model</Eyebrow>
             <Subheading>The Orca Delivery Model: Platform + Services + Ecosystem</Subheading>
@@ -130,7 +130,7 @@ export default function Page() {
 
       <section id="problem" className="py-16">
         <Container className="flex flex-col items-center gap-6 text-center">
-          <Subheading className="max-w-3xl">Struggling With AI Pilots That Drift Off-Policy?</Subheading>
+          <Subheading className="max-w-none">Struggling With AI Pilots That Drift Off-Policy?</Subheading>
           <Text size="lg" className="max-w-2xl">
             Deterministic agents that follow your playbook and deliver results your auditors can verify.
           </Text>

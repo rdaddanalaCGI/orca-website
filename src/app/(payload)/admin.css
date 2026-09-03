@@ -12,6 +12,9 @@
 :root,
 html[data-theme='light'],
 html[data-theme='dark'] {
+  --color-orca-orange: #ff4b1f;
+  --color-orca-orange-hover: #e6421b;
+
   --theme-success-50: #fef3f0;
   --theme-success-100: #fde3dd;
   --theme-success-150: #fcd0c5;
@@ -29,6 +32,6 @@ html[data-theme='dark'] {
 }
 
 .btn--style-primary {
-  --bg-color: #ff4b1f;
-  --hover-bg: #e6421b;
+  --bg-color: var(--color-orca-orange);
+  --hover-bg: var(--color-orca-orange-hover);
 }

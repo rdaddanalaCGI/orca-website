@@ -62,7 +62,7 @@ export default async function Page() {
     <>
       <HeroCenteredWithDemo
         id="hero"
-        className="bg-[#f9feff] dark:bg-olive-950"
+        className="bg-orca-paper dark:bg-olive-950"
         eyebrow={
           <AnnouncementBadge
             href="/solutions"

@@ -1,0 +1,306 @@
+---
+title: 'Evaluating Enterprise AI Frameworks'
+description: 'How to evaluate AI platforms by asking which parts of the enterprise AI risk landscape they actually control.'
+---
+
+import { Callout } from 'nextra/components'
+
+# Evaluating Enterprise AI Frameworks
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    borderLeft: '4px solid currentColor',
+    background: 'rgba(127,127,127,0.08)',
+    borderRadius: '0.5rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>Core idea</strong>
+  <br />
+  Do not evaluate AI frameworks only by their model, interface, connector list, or agent demo.
+  <br />
+  Evaluate them by asking:{' '}
+  <em>What part of the enterprise AI stack does this platform control — and what remains our responsibility?</em>
+</div>
+
+## At a glance
+
+| Risk from Chapter 1                | What must control it                                                      |
+| ---------------------------------- | ------------------------------------------------------------------------- |
+| **Unsafe context**                 | Context layer, retrieval controls, provenance, permission-aware grounding |
+| **Implicit trust**                 | Trust boundaries, source validation, policy, workflow scoping             |
+| **Tool misuse**                    | Execution layer, tool registry, pre-execution checks, human checkpoints   |
+| **Action without clear authority** | Identity, delegation, authorization, audit, approval records              |
+
+<Callout type="warning" emoji="🧭">
+  The market is confusing because many platforms now use the same words — agents, copilots, assistants, workflows,
+  orchestration, automation — while solving different parts of this stack.
+</Callout>
+
+---
+
+## 1. From risk landscape to solution stack
+
+The four risks from the previous chapter are not controlled by one feature.
+
+A better model does not solve unsafe context. A better prompt does not define delegated authority. A chat interface does not create auditability. A workflow tool does not automatically know which context is trustworthy.
+
+Different risks require different controls:
+
+| Risk                               | What goes wrong                                                                               | Stack layer                                       | What to look for                                                                          |
+| ---------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Unsafe context**                 | The system uses stale, incomplete, low-quality, manipulated, or over-broad information        | Context / RAG / enterprise search / context graph | Permission-aware retrieval, provenance, freshness, source ranking, workflow scoping       |
+| **Implicit trust**                 | The system trusts retrieved data, tool output, agents, or connectors without clear boundaries | Trust and policy layer                            | Source validation, trust labels, tenant boundaries, explicit scopes, policy rules         |
+| **Tool misuse**                    | The system calls the wrong tool, calls a tool incorrectly, or changes business state unsafely | Execution and orchestration layer                 | Tool registry, action schemas, pre-execution checks, approval checkpoints, rollback paths |
+| **Action without clear authority** | Nobody can explain who authorized an action or what authority was delegated                   | Identity and authorization layer                  | Agent identity, delegated authority, scoped permissions, approvals, audit logs            |
+
+<Callout type="important" emoji="🔑">
+  Which risks does this platform help control, and which risks does it leave to us?
+</Callout>
+
+---
+
+## 2. The market map: what each category provides
+
+The enterprise AI market is a maze because many products look similar in demos. Most can show chat, retrieval, connectors, tool calls, or workflows. But their operating models are different.
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    border: '1px solid rgba(127,127,127,0.2)',
+    borderRadius: '0.75rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>The wrong question:</strong> Which platform has the best AI demo?
+  <br />
+  <br />
+  <strong>The better question:</strong> Which part of the enterprise AI stack does this platform provide?
+</div>
+
+| Market lane                                | Example products                                                                                      | Primarily provides                                                                | Usually needs support for                                                         |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Enterprise search / Work AI**            | Glean, Coveo, Elastic AI Search, Microsoft 365 Copilot for knowledge work                             | Knowledge discovery, retrieval, summarization, enterprise Q&A                     | Execution control, delegated authority, workflow governance                       |
+| **Employee support agents**                | Moveworks, Aisera, Leena AI, Espressive                                                               | High-volume IT, HR, finance, procurement, and service request automation          | Complex operational context, bespoke judgment, cross-domain workflows             |
+| **Ecosystem-native agent platforms**       | Microsoft Copilot Studio, Salesforce Agentforce, ServiceNow AI Agents, Google Vertex AI Agent Builder | Agent building inside a major enterprise ecosystem                                | Cross-ecosystem workflows, independent control, domain-specific operating models  |
+| **Automation and orchestration platforms** | UiPath, Workato, n8n, Tray, Zapier                                                                    | API integration, deterministic workflows, triggers, approvals, process automation | AI-native context, delegated authority, explainable reasoning, runtime governance |
+| **Developer agent frameworks**             | LangGraph, LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Semantic Kernel                             | Flexible components for custom agents, memory, tools, and orchestration           | Enterprise governance, identity, lifecycle, audit, admin UX, operations           |
+| **Governed execution platforms**           | Orcaworks-style platforms                                                                             | Controlled AI participation in consequential business workflows                   | Clear workflow design and operating-model definition                              |
+
+<details>
+  <summary><strong>A simple way to navigate the maze</strong></summary>
+
+- If the problem is **finding knowledge**, start with enterprise search or Work AI.
+- If the problem is **resolving repetitive employee requests**, look at employee support agents.
+- If the workflow mostly lives inside **Microsoft, Salesforce, ServiceNow, Google, or a similar ecosystem**, evaluate the native platform first.
+- If the problem is **connecting systems and automating known steps**, look at automation and orchestration platforms.
+- If the problem is **building custom agentic software**, evaluate developer frameworks.
+- If the problem is **letting AI safely participate in consequential workflows**, evaluate governed execution.
+
+</details>
+
+Then ask:
+
+| Assessment question                      | Why it matters                                                 |
+| ---------------------------------------- | -------------------------------------------------------------- |
+| What context does this platform control? | Determines whether it can address unsafe or incomplete context |
+| What tools or actions can it execute?    | Determines whether tool misuse is a serious risk               |
+| Who or what has authority to act?        | Determines whether actions are attributable and approved       |
+| Where are trust boundaries enforced?     | Determines whether the system relies on implicit trust         |
+| What remains outside the platform?       | Determines what the enterprise must build or govern itself     |
+
+---
+
+## 3. What a safe agentic AI stack must provide
+
+Once the market is mapped by risk surface, the next question is not "which vendor category sounds best?"
+
+<Callout type="important" emoji="⚙️">
+  What capabilities must exist in the stack before AI can safely participate in real business workflows?
+</Callout>
+
+For consequential workflows, a safe agentic AI stack needs three core layers — and one adoption layer that is often underestimated.
+
+### 1. Trusted operational context
+
+The first requirement is not simply more data. It is the right context, for the right workflow, under the right boundaries.
+
+Enterprise search helps people find knowledge. Agentic execution requires something narrower and more operational: context tied to the work being performed.
+
+That context may include:
+
+- the work object: case, tender, claim, candidate, provider record, customer issue, or policy exception
+- source documents and system-of-record data
+- user-selected inputs
+- permissions and access boundaries
+- workflow state
+- prior decisions
+- and human notes or approvals
+
+This layer controls the unsafe context problem by making context explicit, scoped, inspectable, and connected to the workflow.
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  <strong>Key distinction:</strong> Search helps people find knowledge. Operational context helps agents perform
+  governed work.
+</div>
+
+### 2. Governed workflow execution
+
+The second requirement is an execution layer that controls how AI participates in the process.
+
+The risk profile changes when AI moves from answering questions to taking or preparing action. At that point, the stack needs to define:
+
+- what workflow is being run
+- which tools are available
+- what context is in scope
+- which steps are deterministic
+- which steps involve AI judgment
+- where human approval is required
+- what happens when a step fails
+- and how the result is recorded
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  <strong>Key distinction:</strong> Automation connects systems. Governed execution controls how AI participates in
+  business work.
+</div>
+
+### 3. Explicit authority and accountability
+
+The third requirement is a clear authority model.
+
+If an AI system can act, the enterprise must be able to answer:
+
+- Who or what is acting?
+- Is the agent acting as itself, as a user, or through delegated authority?
+- What permissions apply?
+- What action was approved?
+- Who approved it?
+- Can the authority be constrained, revoked, or audited?
+
+This layer controls action without clear authority. It separates user intent, model reasoning, tool execution, and business approval.
+
+<Callout type="error" emoji="⚠️">
+  Without this separation, the enterprise is left with a dangerous ambiguity: the system did something, but nobody can
+  clearly explain who authorized it or under what constraints.
+</Callout>
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  Retrieval is not permission. Recommendation is not approval. Tool access is not authority.
+</div>
+
+### Bonus: embedded adoption into existing user flows
+
+The final requirement is not purely technical, but it often determines whether the system succeeds.
+
+Safe agentic AI should not always require users to leave their current workflow and move into a new SaaS application. In many enterprise settings, the better pattern is to bring the agent into the surfaces where work already happens:
+
+- inboxes
+- documents
+- browser-based systems
+- CRMs
+- service platforms
+- collaboration tools
+- approvals
+- and operational dashboards
+
+<details>
+  <summary><strong>Why this matters</strong></summary>
+
+Real work is messy. It lives across tabs, emails, documents, records, comments, exceptions, and human judgment. If AI is separated from that flow, adoption becomes harder and context becomes weaker.
+
+The goal is not simply to give users another AI destination. The goal is to embed governed AI assistance and execution into the way work already happens.
+
+</details>
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    borderLeft: '4px solid currentColor',
+    background: 'rgba(127,127,127,0.08)',
+    borderRadius: '0.5rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>Key insight</strong>
+  <br />
+  The safest stack is not only the one with the best controls. It is the one whose controls fit naturally into real
+  operating workflows.
+</div>
+
+---
+
+## Closing: four questions before choosing a framework
+
+The risk landscape tells us what can go wrong. The stack map tells us which parts of the system need to control those risks.
+
+A good platform choice should make four things clear:
+
+| Question                                              | What a good answer proves                                                                                                                                                                        |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Do we understand the flow of work?**             | The team knows what work is being transformed, which decisions matter, which systems are involved, where humans need to stay in control, and where AI can safely assist or act.                  |
+| **2. Is the required context available and bounded?** | The platform can assemble the right documents, records, workflow state, permissions, user inputs, and source material for the task — without relying on vague, over-broad, or unsafe context.    |
+| **3. Is every meaningful action authorized?**         | The system can distinguish recommendation from approval, user intent from delegated authority, and tool access from permission to execute. Actions are attributable, constrained, and auditable. |
+| **4. Can the agent fit into how users work today?**   | The agent can appear inside existing flows — inboxes, documents, browser apps, CRMs, service systems, dashboards, and approvals — instead of forcing users into a separate AI destination.       |
+
+<Callout type="info" emoji="💡">
+  If any answer is unclear, the platform may still be useful — but the missing layer must be designed, integrated, or
+  governed elsewhere in the stack.
+</Callout>
+
+The next chapter builds the mental model for that kind of controlled AI system.
+
+---
+
+## Further Reading
+
+### 1. Gartner — 2026 Hype Cycle for Agentic AI
+
+🔗 https://www.gartner.com/en/articles/hype-cycle-for-agentic-ai
+
+Use this to support the idea that the agentic AI market is now a maze of different layers: agent platforms, orchestration, governance, security, management, and supporting infrastructure.
+
+**Why it matters:**  
+The hype cycle shows that many enterprises are simultaneously at different stages of maturity across these layers — making framework selection a strategic, not just technical, decision.
+
+---
+
+### 2. Gartner — Managing AI Agent Sprawl
+
+🔗 https://www.gartner.com/en/newsroom/press-releases/2026-04-28-gartner-identifies-six-steps-to-manage-artificial-intelligence-agent-sprawl
+
+**Why it matters:**  
+Agent sprawl becomes a problem when many teams create agents without lifecycle control, monitoring, connector governance, or clear ownership. This supports the governance argument directly.
+
+---
+
+### 3. Gartner — From Assistive AI to Outcome-Focused Workflows
+
+🔗 https://www.gartner.com/en/newsroom/press-releases/2026-04-02-gartner-expects-most-enterprises-to-abandon-assistive-ai-for-outcome-focused-workflow-by-2028
+
+**Why it matters:**  
+Enterprises are moving beyond generic copilots toward workflow-oriented platforms that deliver business outcomes through policy-bound agents — exactly the shift this chapter argues for.
+
+---
+
+### 4. IDC — Charting the Path to Enterprise-Wide AI Orchestration
+
+🔗 https://www.idc.com/resource-center/blog/futurescape-2026-charting-the-path-to-enterprise-wide-orchestration/
+
+**Why it matters:**  
+Isolated pilots are not enough. Enterprises need operating architecture across workflows, systems, and teams — reinforcing the orchestration and stack-layer framing used here.
+
+---
+
+### 5. McKinsey — State of AI Trust in 2026: Shifting to the Agentic Era
+
+🔗 https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/tech-forward/state-of-ai-trust-in-2026-shifting-to-the-agentic-era
+
+**Why it matters:**  
+Platform choice must include control, accountability, monitoring, and risk management. Trust in agentic systems must be earned at the system level, not assumed at the model level.

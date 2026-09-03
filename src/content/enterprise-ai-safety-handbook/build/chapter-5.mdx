@@ -1,0 +1,374 @@
+---
+title: "The Controlled AI System Architecture"
+description: "Do not let language turn into consequence without a control plane."
+---
+
+import { Callout } from 'nextra/components'
+
+# The Controlled AI System Architecture
+
+<Callout type="important" emoji="🔑">
+**Principle:** Do not let language turn into consequence without a control plane.
+</Callout>
+
+## Core idea
+
+Agentic AI should not be built as a model loosely connected to tools.
+
+It should be built as a controlled system where context, authority, workflow state, tool execution, human approval, and audit evidence are managed together.
+
+The important question is no longer only:
+
+> Can the model complete the task?
+
+It becomes:
+
+<div style={{padding: "1rem 1.25rem", border: "1px solid rgba(127,127,127,0.2)", borderRadius: "0.75rem", margin: "1.25rem 0"}}>
+  Can the system control how the task is prepared, executed, paused, approved, resumed, and recorded?
+</div>
+
+This is the purpose of the execution control plane.
+
+---
+
+## At a glance
+
+| Execution risk | Architectural control |
+|---|---|
+| Open-ended autonomy | Explicit workflow structure |
+| Tool misuse | Mediated tool execution |
+| Wrong action at the wrong time | Pre-action checks and policy gates |
+| Informal human review | Structured human-in-the-loop events |
+| Lost workflow state | Durable checkpoints and resumability |
+| Unexplainable outcomes | Execution traces and audit records |
+
+---
+
+## 1. Agents need workflow boundaries
+
+A chatbot produces answers. An agentic system participates in work.
+
+That is a different architectural problem.
+
+Once a system can call tools, update records, send messages, assign cases, prepare decisions, or trigger downstream processes, the risk is no longer only in the generated text. The risk is in the execution path.
+
+The safest enterprise agents are not free-floating workers. They are reasoning components inside controlled workflows.
+
+A workflow defines:
+
+- what task is being performed
+- what context is required
+- which tools are available
+- which actions are read-only
+- which actions require approval
+- where execution can pause
+- what evidence must be recorded
+
+A useful lifecycle:
+
+```text
+Focus → Prepare → Execute → Resolve
+```
+
+Focus identifies the work object and user intent. Prepare assembles the context scope. Execute runs the workflow with controlled tools and checkpoints. Resolve returns the result, records the outcome, and updates relevant systems or context.
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> autonomy becomes safer when it is bounded by workflow state.
+</div>
+
+---
+
+## 2. The execution control plane
+
+The execution control plane is the runtime layer between the model and enterprise systems.
+
+Its role is not to replace the model. Its role is to constrain, observe, authorize, pause, resume, and record execution.
+
+It should answer:
+
+| Question | Why it matters |
+|---|---|
+| What workflow is being run? | Prevents open-ended autonomy |
+| What context is in scope? | Prevents unsafe or over-broad grounding |
+| What authority has been delegated? | Makes action permission explicit |
+| What tools are available? | Limits operational consequence |
+| What requires approval? | Keeps humans in control of sensitive steps |
+| What happened? | Creates traceability and audit evidence |
+
+A simple architecture:
+
+```text
+User / Surface
+      ↓
+Context Scope + Workflow Definition
+      ↓
+Agent / Model Reasoning
+      ↓
+Execution Control Plane
+      ↓
+Policy Checks → HITL Approval → Tool Mediation
+      ↓
+Systems of Record + Audit Trail
+```
+
+The model may propose the next step. The control plane decides what is allowed to happen.
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> the model reasons; the control plane governs execution.
+</div>
+
+---
+
+## 3. Tool calls are attempted actions
+
+A tool call is not just another model output.
+
+It is an attempted action against a system, API, document, record, user interface, or workflow.
+
+That action may be harmless, reversible, sensitive, or irreversible. The system needs to know the difference.
+
+Before a tool call executes, the control plane should check:
+
+| Check | Example question |
+|---|---|
+| Workflow fit | Is this tool allowed in this workflow? |
+| Context sufficiency | Has the required context been prepared? |
+| Authority | Is the user or agent allowed to request this action? |
+| Risk | Does this action require approval? |
+| State | Is this the right point in the workflow? |
+| Auditability | Can we record what changed and why? |
+
+Reading a record, drafting an email, sending an email, updating a case, approving a payment, and deleting data are not equivalent.
+
+They should not pass through the same execution path.
+
+A useful action ladder:
+
+```text
+Read → Draft → Recommend → Request approval → Execute → Record
+```
+
+Each step should have its own controls.
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> tool access is capability. Tool execution is consequence.
+</div>
+
+---
+
+## 4. Human-in-the-loop is a runtime control
+
+Human-in-the-loop should not be treated as a vague safety phrase.
+
+In controlled execution, it is a structured pause in the workflow.
+
+The system may pause because:
+
+- required context is missing
+- the proposed action is sensitive
+- confidence is low
+- policy requires approval
+- multiple valid options exist
+- the user must confirm intent
+- the action will update a system of record
+
+A good HITL event should record:
+
+- what the agent is asking for
+- why human input is needed
+- what context was shown
+- who responded
+- what response was given
+- what execution step resumed afterward
+
+This turns human judgment into part of the execution record.
+
+<div style={{padding: "1rem 1.25rem", borderLeft: "4px solid currentColor", background: "rgba(127,127,127,0.08)", borderRadius: "0.5rem", margin: "1.25rem 0"}}>
+  <strong>Key distinction:</strong> HITL is not a review screen. It is a controlled pause that carries authority, context, and state.
+</div>
+
+---
+
+## 5. Execution state must be durable
+
+Real enterprise workflows do not always complete in one model call or one browser session.
+
+They may require approval, retry, escalation, user correction, external API calls, long-running jobs, or delayed resolution.
+
+That means execution state must survive beyond the live conversation.
+
+A controlled system should know:
+
+- what workflow is running
+- what step it is on
+- what context was prepared
+- what tools were called
+- what outputs were produced
+- what approval is pending
+- what can be safely resumed
+- what has already changed in external systems
+
+<Callout type="warning" emoji="⚠️">
+Without durable state, the system becomes fragile. It may lose pending approvals, repeat actions, resume from the wrong point, or fail to explain what happened.
+</Callout>
+
+Checkpointing is not only an engineering feature. It is a safety feature.
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> if the workflow matters to the business, its state must outlive the chat session.
+</div>
+
+---
+
+## 6. Evidence is part of the output
+
+A controlled AI system should not only return an answer.
+
+It should produce evidence that the work was performed safely.
+
+That evidence should link:
+
+- user intent
+- workflow selected
+- context used
+- authority delegated
+- tools proposed
+- tools executed
+- policy checks
+- approvals requested
+- approvals granted or denied
+- external systems updated
+- final outcome
+
+<details>
+  <summary><strong>Why logs alone are not enough</strong></summary>
+
+Logs are not enough if they are disconnected, incomplete, or impossible for a human to interpret.
+
+The goal is an execution record that can be inspected by users, admins, developers, auditors, and incident responders.
+
+</details>
+
+This does not require exposing hidden model reasoning. It does require preserving the operational path from intent to action.
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> the final artifact is not only the answer. It is the answer plus the evidence that the system acted safely.
+</div>
+
+---
+
+## 7. Where execution sits in the safe AI stack
+
+Chapter 3 focused on context:
+
+> What is the system allowed to know?
+
+Chapter 4 focused on authority:
+
+> What is the system allowed to do?
+
+This chapter focuses on execution:
+
+> How does the system act, pause, approve, resume, and record?
+
+Together, they form the core build pattern:
+
+```text
+Context scope → Delegated authority → Policy-bound action → Controlled execution → Evidence record
+```
+
+<Callout type="info" emoji="💡">
+Without controlled execution, the system may have the right context and the right authority, but still act at the wrong time, call the wrong tool, skip the required approval, lose workflow state, or leave no usable record.
+
+Safe agentic AI needs more than model quality. It needs a runtime architecture for consequence.
+</Callout>
+
+---
+
+## Closing: execution questions by role
+
+Execution looks different depending on who is interacting with the system.
+
+Evaluate it from three angles.
+
+### For the end-user
+
+| Question | What a good answer proves |
+|---|---|
+| What workflow am I running? | The task is explicit, not an open-ended chat. |
+| What is the agent doing now? | Progress and current state are visible. |
+| What am I being asked to approve? | Human input is tied to a specific consequence. |
+| What happens after approval? | The downstream action is clear. |
+| Can I stop, edit, or resume later? | The user remains in control of execution. |
+
+### For the admin or governance owner
+
+| Question | What a good answer proves |
+|---|---|
+| Which workflows are allowed in production? | Automation is governed by business process. |
+| Which tools can each workflow use? | Capabilities are scoped and reviewable. |
+| Which steps require approval? | Risk controls are explicit. |
+| Can execution be paused or disabled safely? | Governance can respond without destroying the workflow. |
+| Can we audit what happened? | Evidence exists for oversight, review, and incident response. |
+
+### For the agent developer
+
+| Question | What a good answer proves |
+|---|---|
+| Where is workflow state stored? | Execution can survive interruption. |
+| Where are tool calls mediated? | Safety is enforced outside the model. |
+| How are HITL events represented? | Human input can pause and resume execution safely. |
+| What events are streamed or persisted? | Users and auditors can reconstruct the run. |
+| What happens on failure or retry? | The workflow avoids duplicate or unsafe actions. |
+
+<Callout type="warning" emoji="🛂">
+If these questions cannot be answered, the system may still be useful for drafting or exploration. But it is not ready for consequential workflow execution.
+</Callout>
+
+Safe agentic AI is not achieved by removing autonomy.
+
+It is achieved by placing autonomy inside a system the enterprise can understand, constrain, observe, and improve.
+
+---
+
+## Further Reading
+
+---
+
+### A Pre-Execution Firewall and Audit Layer for AI Agents
+
+🔗 https://arxiv.org/html/2603.12621v1
+
+A useful reference for the idea that agent actions should pass through a mediation layer before reaching real tools or systems. It supports the execution-control-plane framing of this chapter.
+
+---
+
+### AgentGuard: Runtime Verification of AI Agents
+
+🔗 https://arxiv.org/abs/2509.23864
+
+A runtime verification paper focused on detecting whether agent behavior conforms to policies, constraints, or expected plans. It is useful for understanding how production systems can monitor agent behavior after deployment.
+
+---
+
+### MI9: An Integrated Runtime Governance Framework for Agentic AI
+
+🔗 https://arxiv.org/html/2508.03858v4
+
+A broader runtime governance framework for agentic AI systems. It is relevant for connecting monitoring, policy enforcement, evidence, and operational control into a single production model.
+
+---
+
+### Towards Verifiably Safe Tool Use for LLM Agents
+
+🔗 https://arxiv.org/html/2601.08012v1
+
+A technical reference on making tool use safer through stronger constraints and verification. It supports the chapter's distinction between tool availability and safe tool execution.
+
+---
+
+### A Structured Approach to Safety Case Construction for AI Systems
+
+🔗 https://arxiv.org/html/2601.22773v2
+
+A useful reference for turning operational evidence into defensible safety arguments. It is relevant to the chapter's claim that controlled AI systems should produce evidence, not only outputs.

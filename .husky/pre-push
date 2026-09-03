@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Before code leaves the machine, run the same gate CI will run.
+# Keeps broken branches out of shared history and saves a CI round-trip.
+
+pnpm typecheck && pnpm test

@@ -1,0 +1,121 @@
+---
+title: Evaluating Performance
+description: You can't unit test your way to quality. Here's how to evaluate LLM-driven agents in production.
+---
+
+# Evaluating Performance
+
+Agents are stochastic by nature. You won’t catch issues by looking at a single example — and you can’t rely on instinct or manual checks at scale.
+
+To ship with confidence, you need structured, repeatable ways to evaluate behavior.
+
+---
+
+## Why Evaluation Matters
+
+Evaluation is what separates a working demo from a production system.
+- It protects you from regressions
+- It helps prioritize prompt or model improvements
+- It gives stakeholders visibility into quality and risk
+
+Without it, every change is a gamble.
+
+---
+
+## What to Evaluate
+
+There’s no one-size-fits-all metric, but you should be measuring:
+
+- **Correctness**: Did the agent reach the right output?
+- **Helpfulness**: Was the response useful or actionable?
+- **Confidence**: Does the agent know when it’s uncertain?
+- **Consistency**: Does the agent behave reliably across similar inputs?
+
+Each agent or use case might need custom scoring logic — especially if the output is free-text.
+
+---
+
+## How to Evaluate Agents
+
+Evaluation spans both traditional and modern methods — and for many enterprise use cases, you’ll want both.
+
+### Traditional Metrics (Scikit-learn Style)
+
+If your agent is producing structured outputs (like labels or classifications), you can use standard metrics:
+- **Accuracy**: Overall correctness
+- **Precision/Recall**: Especially useful for imbalanced cases
+- **F1 Score**: Harmonic mean of precision and recall
+- **Confusion Matrix**: Understand types of misclassification
+
+These are great when you have ground truth answers — and many automation use cases do.
+
+### Modern Evaluation (RAG, Reasoning, and Free Text)
+
+When your agent generates free text or does multi-step reasoning:
+- Use **LLM-as-a-judge** to score helpfulness, factuality, reasoning clarity
+- Use **Ragas-style metrics** to assess retrieval quality (faithfulness, context relevance)
+- Include **confidence scoring** to monitor model self-awareness
+
+These can be run offline (on gold datasets) or live (on real user interactions).
+
+### Replacing Unit Tests with Evaluation Workflows
+
+In traditional software, you’d write unit tests for every function. But agents don’t behave deterministically — so instead, we use evaluation workflows.
+
+### ✅ A Simple Evaluation Pipeline
+
+Let’s say you’ve built an agent that classifies support requests into categories.
+
+Your evaluation pipeline might look like:
+
+1. **Create a Golden Dataset**  
+   A JSONL file with 500 real support requests and their expected category labels.
+
+2. **Run the Agent**  
+   Feed the requests into the agent via an API — log its predictions.
+
+3. **Compare with Ground Truth**  
+   Use scikit-learn to compute accuracy, precision, recall, and F1 score.
+
+4. **Report + Alert**  
+   If performance drops >10% from baseline, block rollout.
+
+This can be triggered via CI, scheduled jobs, or manual preview. It replaces brittle unit tests with a robust, outcome-based benchmark.
+
+---
+
+## Example: AutoMarking Eval Strategy
+
+You're grading free-text answers against a rubric. You want to measure:
+
+**Old-school**:
+- F1 Score (against binary human-assigned outcomes)
+- Exact match or rubric-aligned scoring
+
+**New-school**:
+- Reasoning transparency (“Did the agent justify the grade?”)
+- Feedback helpfulness (“Would this feedback help a student improve?”)
+- Confidence scores vs. human override rate
+
+---
+
+Let’s say your AutoMarker is upgraded to a new model (e.g. from GPT-3.5 to GPT-4).
+
+Without evaluation:
+- You roll it out
+- It gives harsher grades on borderline answers
+- Your support queue fills up with complaints
+
+With evaluation:
+- You run the new version on last semester’s dataset
+- You compare scoring distribution and feedback consistency
+- You catch the drift — before it impacts real students
+
+This isn’t optional. It’s infrastructure.
+
+---
+
+With Aegis, every agent can be hooked into evaluation pipelines — both pre-launch and post-launch.
+
+That’s how you scale behavior — not just models.
+

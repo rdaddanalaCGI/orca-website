@@ -1,0 +1,373 @@
+---
+title: "Identity, Authority, and Policy-Bound Action"
+description: "An agent should not act because it can call a tool. It should act only when identity, authority, policy, and approval line up."
+---
+
+import { Callout } from 'nextra/components'
+
+# Identity, Authority, and Policy-Bound Action
+
+<Callout type="important" emoji="🔑">
+**Principle:** An agent should not act because it can call a tool. It should act only when identity, authority, policy, and approval line up.
+</Callout>
+
+## Core idea
+
+Once AI systems can act, identity becomes a runtime control.
+
+The important question is no longer only:
+
+> What can the model do?
+
+It becomes:
+
+<div style={{padding: "1rem 1.25rem", border: "1px solid rgba(127,127,127,0.2)", borderRadius: "0.75rem", margin: "1.25rem 0"}}>
+  Who is the system acting for, what authority has been delegated, and what action is allowed right now?
+</div>
+
+In conventional software, identity and permissions are usually attached to users, roles, services, or applications. In agentic AI systems, this is not enough.
+
+Agents may plan, select tools, summarize intent, ask for approval, and execute steps across multiple systems. They may act on behalf of a user, a team, a workflow, or a service. If that authority is implicit, the system becomes hard to govern.
+
+Safe agentic AI requires explicit authority.
+
+---
+
+## At a glance
+
+| Authority risk | Architectural control |
+|---|---|
+| Agent acts with broad user access | Delegated, task-scoped authority |
+| Agent identity is unclear | Explicit agent identity and runtime principal |
+| Tool access is treated as permission | Pre-action authorization checks |
+| Human approval is informal | Structured approval records |
+| Actions cannot be explained later | Audit trail linking user, agent, policy, tool, and outcome |
+
+---
+
+## 1. User access is not agent authority
+
+A common shortcut is to let the agent inherit the user's access.
+
+That is convenient, but too broad.
+
+Humans often need wide access to inspect records, compare options, and supervise work. Agents need narrower authority tied to the task they are performing.
+
+<details>
+  <summary><strong>Examples of over-broad inherited access</strong></summary>
+
+A user may be allowed to view a customer record. That does not mean an agent should export it, summarize it into another system, or use it outside the current workflow.
+
+A manager may be allowed to approve a payment. That does not mean an agent should approve it without a separate confirmation step.
+
+A recruiter may be allowed to view candidate information. That does not mean an agent should use every candidate attribute in a ranking workflow.
+
+</details>
+
+Agent authority should be bounded by:
+
+- who initiated the task
+- which workflow is running
+- what context is in scope
+- which tools are allowed
+- which actions are read-only
+- which actions require approval
+- which actions are blocked
+- what evidence must be retained
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> user access defines what a human may reach. Agent authority defines what the system may do for this task.
+</div>
+
+---
+
+## 2. Agents need explicit identity
+
+An enterprise system should be able to distinguish human activity from agent activity, and one agent from another.
+
+Different agents have different purposes, owners, workflows, tools, and risk profiles. A drafting assistant is not the same as a record-update agent. A background reconciliation agent is not the same as an agent acting inside a user's browser session.
+
+Agent identity should answer:
+
+| Question | Why it matters |
+|---|---|
+| Which agent is running? | Different agents need different constraints |
+| Who owns or operates it? | Accountability must be clear |
+| Which workflow is it attached to? | Authority should be task-specific |
+| Which user or service invoked it? | Delegation must be traceable |
+| What tools can it request? | Tool access should not be global |
+| What policies apply? | Runtime behavior should be enforceable |
+
+A useful pattern:
+
+```text
+User identity → Agent identity → Workflow authority → Tool authorization → Audit record
+```
+
+This avoids a dangerous ambiguity: when something happens, was it the user, the agent, the workflow, or the underlying service?
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> an agent is not just a prompt. It is a runtime actor that needs identity, ownership, scope, and accountability.
+</div>
+
+---
+
+## 3. Delegation should be scoped to the task
+
+Agentic AI often acts on behalf of someone. That delegation should be explicit.
+
+The system should know what the user asked the agent to do, which authority was delegated, and where that authority stops.
+
+Delegation should be bounded by:
+
+- task
+- workflow
+- context scope
+- time
+- tools
+- action type
+- risk threshold
+- approval requirement
+
+| User intent | Safe delegation boundary |
+|---|---|
+| "Draft a response to this complaint" | Read complaint, retrieve approved policy, draft only |
+| "Prepare a case assignment recommendation" | Read case data, compute ranking, require human approval before update |
+| "Reconcile this provider record" | Compare approved sources, propose change, require confirmation before write-back |
+| "Summarize this contract" | Use selected contract only, no external disclosure, no system updates |
+
+<Callout type="warning" emoji="⚠️">
+The safest authority is temporary, task-specific, and revocable.
+</Callout>
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> delegation is not impersonation. The agent should not become the user. It should receive limited authority for a specific job.
+</div>
+
+---
+
+## 4. Tool access is not permission to act
+
+A tool is a capability, not authorization.
+
+An agent may be able to call a tool, but the system still needs to decide whether that call is allowed in this moment.
+
+Before execution, the system should ask:
+
+| Check | Example question |
+|---|---|
+| Workflow fit | Is this tool allowed in this workflow? |
+| User authority | Is the user allowed to request this action? |
+| Agent authority | Is this agent allowed to perform this type of action? |
+| Context sufficiency | Has the required context been prepared? |
+| Risk threshold | Does this action require approval? |
+| Auditability | Can we record what happened and why? |
+
+This is especially important for write actions.
+
+Reading a record, drafting an email, sending an email, updating a case, approving a payment, and deleting data carry very different consequences.
+
+The system should treat action type as part of authorization.
+
+A simple model:
+
+```text
+Read → Draft → Recommend → Request approval → Execute → Record
+```
+
+Each step should have its own authority boundary.
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> tool access tells us what is technically possible. Authorization decides what is allowed.
+</div>
+
+---
+
+## 5. Human approval must become a system event
+
+Human-in-the-loop is often treated as "a person checks the answer."
+
+That is too vague. In controlled agentic systems, approval should be a structured runtime event.
+
+The system should record:
+
+- what action was proposed
+- why approval was required
+- what context was shown
+- who approved or rejected it
+- when the decision happened
+- what was executed afterward
+- what changed in the system of record
+
+This matters because approval is part of authority.
+
+A user may review a draft without authorizing it to be sent. A manager may accept a recommendation without approving a downstream update. A human may provide missing information without approving the final action.
+
+The system should distinguish these events:
+
+| Human action | Meaning |
+|---|---|
+| Review | "I have inspected this output." |
+| Edit | "I changed the proposed output." |
+| Confirm | "This context or interpretation is correct." |
+| Approve | "This action is authorized to proceed." |
+| Reject | "This action must not proceed." |
+| Override | "I am taking responsibility for a different outcome." |
+
+<div style={{padding: "1rem 1.25rem", borderLeft: "4px solid currentColor", background: "rgba(127,127,127,0.08)", borderRadius: "0.5rem", margin: "1.25rem 0"}}>
+  <strong>Key distinction:</strong> approval is not just user feedback. It is an authority event.
+</div>
+
+---
+
+## 6. Policy-bound action
+
+Policies should not live only in documents, prompts, or training material.
+
+For agentic systems, policy needs to become executable control: applied at the point where action is requested.
+
+Policy-bound action can include:
+
+- blocking disallowed actions
+- requiring approval for sensitive actions
+- limiting tools by workflow
+- limiting context by user or role
+- enforcing read-only mode
+- escalating ambiguous cases
+- applying risk thresholds
+- recording policy decisions
+
+A useful pattern:
+
+```text
+Intent → Context scope → Proposed action → Policy check → Approval if needed → Execution
+```
+
+This keeps policy close to consequence.
+
+<div style={{padding: "1rem 1.25rem", border: "1px solid rgba(127,127,127,0.2)", borderRadius: "0.75rem", margin: "1.25rem 0"}}>
+  A prompt can instruct the model not to do something. A policy check can prevent the action from executing.<br /><br />
+  They are not the same.
+</div>
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> prompts guide behavior. Policy-bound execution constrains action.
+</div>
+
+---
+
+## 7. Where authority sits in the safe AI stack
+
+Chapter 3 focused on context:
+
+> What is the system allowed to know?
+
+This chapter focuses on authority:
+
+> What is the system allowed to do?
+
+The next chapter focuses on execution:
+
+> How does the system act, pause, approve, resume, and record?
+
+Together, they form the core build pattern:
+
+```text
+Context scope → Delegated authority → Policy-bound action → Controlled execution → Evidence record
+```
+
+<Callout type="info" emoji="💡">
+Without explicit authority, the system may retrieve the right context but act beyond the user's intent. It may call the right tool at the wrong time. It may ask for approval but fail to record what was approved.
+
+Safe systems need to know not only what happened, but under whose authority it happened.
+</Callout>
+
+---
+
+## Closing: authority questions by role
+
+Authority looks different depending on who is interacting with the system.
+
+Evaluate it from three angles.
+
+### For the end-user
+
+| Question | What a good answer proves |
+|---|---|
+| What is this agent about to do? | The action is clear before execution. |
+| What information is it using? | The user can inspect the context behind the action. |
+| Am I approving an answer, a recommendation, or an action? | The approval step is not ambiguous. |
+| What happens after I approve? | The downstream consequence is visible. |
+| Can I stop, edit, or reject the action? | Human control is built into the workflow. |
+
+### For the admin or governance owner
+
+| Question | What a good answer proves |
+|---|---|
+| Who is allowed to use this agent? | Access is governed, not open-ended. |
+| Which workflows and tools can it use? | Capabilities are scoped by role, group, process, or workspace. |
+| Which actions require approval? | Risk thresholds are explicit. |
+| What policies are enforced at runtime? | Governance is connected to execution. |
+| Can we audit the authority chain? | The record links user, agent, policy, approval, tool, and outcome. |
+
+### For the agent developer
+
+| Question | What a good answer proves |
+|---|---|
+| What identity does the agent run under? | Agent activity can be distinguished from human activity. |
+| What authority is passed into the run? | The agent is not relying on broad implicit access. |
+| What tools are available at each step? | Tool access is scoped by workflow state. |
+| Where are policy checks enforced? | Safety is implemented outside the prompt. |
+| What events must be recorded? | Execution can be reconstructed after the fact. |
+
+<Callout type="warning" emoji="🛂">
+If these questions cannot be answered, the agent may still be useful for drafting or exploration. But it should not be trusted with consequential action.
+</Callout>
+
+Safe agentic AI does not ask only what the system can do.
+
+It asks what the system is authorized to do — for this user, through this agent, in this workflow, at this moment.
+
+---
+
+## Further Reading
+
+---
+
+### Authenticated Delegation and Authorized AI Agents
+
+🔗 https://arxiv.org/abs/2501.09674
+
+A strong foundation for thinking about agents that act on behalf of users. It introduces authenticated, authorized, and auditable delegation, with an emphasis on scoping agent authority rather than treating the agent as a simple extension of the user.
+
+---
+
+### A Novel Zero-Trust Identity Framework for Agentic AI: Decentralized Authentication and Fine-Grained Access Control
+
+🔗 https://arxiv.org/abs/2505.19301
+
+A useful identity-focused paper that argues traditional IAM patterns are not sufficient for dynamic, multi-agent systems. It is relevant for agent identity, fine-grained access control, provenance, behavioral scope, and revocation.
+
+---
+
+### Identity Management for Agentic AI
+
+🔗 https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf
+
+An OpenID Foundation whitepaper on authentication, authorization, and identity management for agentic AI. It is useful for readers who want to connect agent authority to existing enterprise identity standards such as OAuth and OpenID Connect.
+
+---
+
+### Model Context Protocol Authorization Specification
+
+🔗 https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization
+
+A useful protocol-level reference for how authorization is being handled in MCP-based integrations. It is especially relevant when agents access external tools and data sources through standardized interfaces.
+
+---
+
+### Agent Operation Authorization
+
+🔗 https://datatracker.ietf.org/doc/draft-liu-agent-operation-authorization/
+
+An emerging IETF Internet-Draft that frames agent action as a verifiable authorization problem. It is useful for understanding how future systems may separate proposed operations from authorized operations, with stronger records of delegation and approval.

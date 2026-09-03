@@ -1,0 +1,68 @@
+---
+title: Monitoring and Observability
+description: How to monitor agent performance, track behavior, and catch issues before they escalate.
+---
+
+# Monitoring and Observability
+
+Once your LLM systems are live, everything depends on **what they do — and why**. Agents operate as probabilistic systems: they generate answers, make tool calls, retrieve documents, and decide next steps.
+
+But without the right observability, you're flying blind.
+
+This section will show you how to track, debug, and understand agent behavior across workflows, tenants, and time.
+
+---
+
+## What You Need to Monitor
+
+At a minimum, you should be capturing:
+
+- **Prompt + completion**: including latency, token usage, model used
+- **Tool invocations**: tool name, input parameters, outputs
+- **Document retrievals**: query used, docs returned, source metadata
+- **Execution flow**: which agent(s) were involved, and in what order
+- **User + tenant context**: who triggered what and when
+
+For each request, you want a full trace of **input → decision → output**.
+
+---
+
+## How Aegis Supports Observability
+
+Aegis supports deep observability out of the box:
+
+- Built-in **request tracing** for every agent run
+- Exportable logs for **model calls**, **tool calls**, and **retrievals**
+- Support for **OpenTelemetry** and **custom backends**
+- Usage dashboards by org, user, and tenant
+
+We provide structured data, so you can:
+
+- Build dashboards
+- Set alerts for anomalies (latency spikes, failure rates)
+- Investigate incidents across agents and workflows
+
+---
+
+## LMS Example: Tracking Agent Drift
+
+Say you're auto-marking thousands of student answers a day. Initially the agents work well, but performance starts drifting. Some answers are being graded inconsistently.
+
+With Aegis observability, you can:
+
+- Compare prompt/completion diffs over time
+- Audit changes in retrieved examples from RAG
+- Detect shifts in tool behavior or failure patterns
+- Flag agents that deviate from baseline evaluations
+
+You get **visibility, versioning, and control** — without adding complexity to your codebase.
+
+---
+
+## ✅ Recap: Why Observability Matters
+
+- LLMs are **probabilistic** — same input may yield different outputs
+- Issues may show up only after scale (token costs, poor answers, flakiness)
+- Observability gives you: confidence, control, and context
+
+With Aegis, monitoring isn’t an afterthought — it’s built-in from day one.

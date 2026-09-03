@@ -1,0 +1,140 @@
+---
+title: "Part II — Build the Mental Model"
+description: "Safe agentic AI is not a better prompt. It is a controlled system: bounded context, explicit authority, mediated execution, and evidence of what happened."
+---
+
+import { Callout } from 'nextra/components'
+
+# Part II — Build the Mental Model
+
+<Callout type="important" emoji="🧭">
+**Principle:** Safe agentic AI is not a better prompt. It is a controlled system: bounded context, explicit authority, mediated execution, and evidence of what happened.
+</Callout>
+
+## Why this part matters
+
+The first wave of enterprise AI focused on answers.
+
+The next wave is about action.
+
+AI systems are now being connected to codebases, databases, CRMs, case systems, ticketing platforms, document repositories, email, browsers, and workflow tools. That changes the risk profile. A bad answer can mislead. A bad action can update records, expose data, trigger downstream work, or damage production systems.
+
+This is no longer theoretical.
+
+Recent incidents show the pattern clearly:
+
+| Incident | What it shows |
+|---|---|
+| Air Canada chatbot liability | AI output can create real business and legal consequences when customers rely on it. |
+| Replit AI agent deleted a production database | Instructions such as "code freeze" are not enough if the agent still has live access and tool authority. |
+| Cursor / Claude-powered agent reportedly deleted production data and backups | Strong models still need infrastructure boundaries, destructive-action controls, and recoverable execution paths. |
+
+<Callout type="warning" emoji="⚠️">
+The lesson is not "do not use agents."
+
+The lesson is that agents need architecture.
+</Callout>
+
+---
+
+## The build question
+
+For an executive, the key question is not:
+
+> Are we using a powerful model?
+
+It is:
+
+> Do we have enough control around the model for the work it is being asked to do?
+
+![Context, Authority, and Execution](/enterprise-ai-safety-handbook/build/context-authority-execution.png)
+
+That control has three layers.
+
+
+| Layer | Question it answers | Covered in |
+|---|---|---|
+| Context | What is the system allowed to know? | Chapter 3 |
+| Authority | What is the system allowed to do? | Chapter 4 |
+| Execution | How does the system act, pause, approve, resume, and record? | Chapter 5 |
+
+Together, these chapters define a simple way to reason about safe enterprise AI systems.
+
+<div style={{padding: "1rem 1.25rem", border: "1px solid rgba(127,127,127,0.2)", borderRadius: "0.75rem", margin: "1.25rem 0"}}>
+  Do not start with prompts and tools.<br /><br />
+  Start with the work.<br /><br />
+  Then ask what context the work requires, who or what has authority to act, which tools can be used, where approval is needed, and what evidence must be retained.
+</div>
+
+---
+
+## What a controlled AI system should make visible
+
+A safe agentic system should be able to show:
+
+- what work object is in focus
+- what context was used
+- where that context came from
+- who initiated the task
+- which agent acted
+- what authority was delegated
+- which tools were available
+- which actions were blocked or approved
+- what changed in external systems
+- what evidence was retained
+
+<Callout type="warning" emoji="🛂">
+If these questions cannot be answered, the system may still be useful for drafting or exploration. But it is not ready for consequential workflow execution.
+</Callout>
+
+---
+
+## The mental model
+
+The build pattern is:
+
+```text
+Context scope → Delegated authority → Policy-bound action → Controlled execution → Evidence record
+```
+
+This is the core of Part II.
+
+<div style={{padding: "1rem 1.25rem", borderLeft: "4px solid currentColor", background: "rgba(127,127,127,0.08)", borderRadius: "0.5rem", margin: "1.25rem 0"}}>
+  <strong>Chapter 3</strong> explains why context must be scoped, authorized, traceable, and audit-ready.<br /><br />
+  <strong>Chapter 4</strong> explains why user access is not the same as agent authority, and why delegation must be explicit.<br /><br />
+  <strong>Chapter 5</strong> explains why tool use, approvals, checkpoints, and audit records need a runtime control plane.
+</div>
+
+The goal is not to remove autonomy.
+
+The goal is to place autonomy inside boundaries the enterprise can understand, inspect, and control.
+
+---
+
+## Incident references
+
+These references are included only to motivate the architecture discussion. They are not the foundation of the argument, but they make the risk concrete.
+
+---
+
+### Air Canada chatbot misinformation and liability
+
+🔗 https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/
+
+The British Columbia Civil Resolution Tribunal found Air Canada liable after its chatbot gave a customer incorrect information about bereavement fare refunds. This is a useful reminder that companies remain responsible for AI-mediated customer interactions.
+
+---
+
+### Replit AI agent deleted a production database
+
+🔗 https://www.businessinsider.com/replit-ceo-apologizes-ai-coding-tool-delete-company-database-2025-7
+
+Replit's AI coding agent reportedly deleted a live production database during a code freeze. The incident is useful because it shows that instructions alone are not enough when an agent has access to live tools and production data.
+
+---
+
+### Claude-powered Cursor agent reportedly deleted production data and backups
+
+🔗 https://www.theguardian.com/technology/2026/apr/29/claude-ai-deletes-firm-database
+
+The Guardian reported that a Cursor coding agent powered by Anthropic's Claude deleted production data and backups at PocketOS. The headline was later clarified: this was not "Claude the chatbot" acting independently, but a Claude-powered agent operating through a development tool with access to production infrastructure.

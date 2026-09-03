@@ -1,0 +1,135 @@
+---
+title: Anatomy of an Agent
+description: The essential components that make LLM-powered agents reliable, testable, and reusable.
+---
+
+# Anatomy of an Agent
+
+Most teams start with a single prompt and a model call. But to move from a prototype to something dependable, you need to treat behavior like a system.
+
+An agent is a unit of **composable intelligence** — built from modular components that let you design, evaluate, and evolve behavior safely.
+
+---
+
+## Core Components
+
+Every production-grade agent includes:
+
+### 1. **Inputs**
+Agents work on structured inputs — whether from an API call, a webhook, or another agent.
+
+Inputs should be typed, validated, and versioned. This lets you:
+- Avoid silent failures
+- Enforce consistency across steps
+- Make agents interoperable with others
+
+---
+
+### 2. **Tools**
+LLMs aren't databases. Good agents offload specific tasks to tools — like:
+- Document retrieval
+- Querying an API
+- Fetching metadata or lookups
+
+Tools are defined in code, but invoked from prompts — keeping the logic clean and explainable.
+
+---
+
+### 3. **Prompts (as Config)**
+Prompts are not embedded in your codebase. They're stored as config:
+- Versioned and testable
+- Easy to compare and evaluate
+- Safe to update without redeploying code
+
+Prompt config includes:
+- Template with variables
+- Output schema or expectations
+- Metadata (e.g. which task or use case it supports)
+
+This makes prompts a first-class surface — observable, debuggable, and evolvable.
+
+---
+
+### 4. **Reasoning Flow**
+Agents often need more than one step:
+- Understand intent
+- Fetch data
+- Apply logic
+- Generate output
+
+This flow should be explicit, not implicit. Autogen agents manage this via planning and multi-step chaining. With Aegis, we layer observability and evaluation on top.
+
+---
+
+### 5. **Memory and Context**
+Some agents need to remember past steps, results, or user actions.
+
+Memory can be:
+- Short-term: relevant to this task only
+- Long-term: user or session-specific context
+
+Designing for memory means being deliberate about what’s stored, surfaced, and reused.
+
+---
+
+## Choosing an Agent Framework
+
+You can build agents from scratch, stitch together open-source frameworks like LangChain, or adopt a structured, opinionated framework like **Autogen**.
+
+At Aegis, we build on **Autogen** as the base — but with production-oriented layering for:
+- Prompt and agent config
+- Evaluation
+- Observability
+- Workflow orchestration
+
+This gives you the flexibility of open source with the reliability of a platform.
+
+---
+
+## Example: AutoMarking Agent (Autogen Config)
+
+Here’s a simplified example of an Autogen AssistantAgent defined via config for evaluating free-text answers:
+
+```json
+{
+  "name": "auto_marker",
+  "llm_config": {
+    "model": "gpt-4",
+    "temperature": 0,
+    "system_message": "You are a strict but fair academic marker. Grade the student's answer against the marking rubric."
+  },
+  "tools": ["retrieve_rubric", "fetch_sample_answers"],
+  "input_schema": {
+    "question": "string",
+    "student_answer": "string",
+    "rubric": "string"
+  },
+  "output_schema": {
+    "score": "number",
+    "feedback": "string",
+    "confidence": "number"
+  }
+}
+```
+
+This config lives outside of your Python codebase — which means:
+- You can A/B test versions
+- Product can tweak the tone or logic without asking engineering
+- Evaluation tools can trace performance back to specific config versions
+
+This is what “prompting as infrastructure” looks like.
+
+---
+
+## ✅ What This Enables
+
+- **Testability**: Inputs, outputs, and behavior can be evaluated
+- **Reusability**: Agents can be composed into graphs or workflows
+- **Safety**: Prompts and tools can be changed independently
+
+---
+
+By breaking agents into these parts, you make them easier to scale, evolve, and trust — the same way modern software is built.
+
+Next: How to measure if your agents are actually working.
+

@@ -1,0 +1,220 @@
+---
+title: Security, Privacy, and Compliance
+description: How Aegis keeps your data safe while working with LLMs.
+---
+
+# 🔐 Security, Privacy, and Compliance
+
+Large Language Models (LLMs) open up powerful new capabilities — but they also introduce complex, often invisible security challenges.
+
+You're no longer securing static databases or predictable APIs. You're managing systems that:
+
+- Respond to user prompts with probabilistic outputs
+- Make dynamic tool calls with data access implications
+- Reason across user input, private documents, and model memory
+
+This section breaks down what makes LLM systems uniquely difficult to secure, and how Aegis is designed to close those gaps.
+
+## 🚨 The Hidden Security Threats in LLM Systems
+
+From a CTO’s perspective, the challenge is deceptively simple: give your users access to knowledge, without leaking sensitive data.
+
+But LLM systems introduce a **new surface area** that behaves differently:
+
+- Users prompt systems with **unstructured text** — possibly leaking sensitive data
+- Agents dynamically call tools, retrieve documents, and reason — often without user-specific context
+- LLMs return **probabilistic outputs** — not deterministic responses
+
+Your traditional security model breaks down when:
+
+- The agent doesn’t know which user is behind the prompt
+- The vector database doesn’t enforce access filters
+- The output includes information the user shouldn’t see
+
+You are now operating in an environment where **access control must extend to search**, and **content generation must be monitored like a database query**.
+
+Aegis is designed to bridge this gap.
+
+### User Context Is Often Lost
+
+Agent frameworks today (like LangChain, Autogen, CrewAI) rarely maintain a persistent concept of:
+
+- **Who the user is**
+- **What roles or permissions they have**
+- **What data they’re allowed to query**
+
+This means you risk:
+
+- Leaking data from one tenant to another
+- Letting unprivileged users see restricted outputs
+- Generating responses with untraceable provenance
+
+Aegis solves this by enforcing **user identity propagation** across all agent steps and data access calls.
+
+### Search Is a Security Boundary
+
+Your raw company data (emails, PDFs, chat logs, old assessments) becomes **AI-searchable** after being ingested into the data pipeline. But:
+
+- Who owns that data?
+- Who’s allowed to query it?
+- What filters or redactions should apply?
+
+Every vector search must be scoped to the user's permissions.
+
+### LLMs Are Probabilistic, Not Deterministic
+
+Even with good access control, there’s no guarantee the LLM won’t:
+
+- Mention confidential terms from a prior conversation
+- Parrot back unseen training data
+- Infer relationships that feel like data leaks
+
+That’s why Aegis includes:
+
+- **Memory scoping** (per session, user, tenant)
+- **Prompt-level access filtering**
+- **Output masking + redaction policies**
+
+LLMs don’t have intent. But **you’re on the hook for what they say**.
+
+### Tool Calls and Output Format Matter
+
+Many agents return raw text — but this makes access control nearly impossible. You can’t filter or redact what you can’t parse.
+
+That’s why agents should prefer **structured outputs** — using:
+
+- JSON schemas for return types
+- Explicit tool calls for API actions
+- Code blocks for executable steps
+
+Code-based outputs are more reliable to interpret, enforce, and audit. (See Anthropic, OpenAI, and Autogen best practices.)
+
+However, if your agents return executable code:
+
+- You must sandbox execution securely
+- You must inspect tool parameters before invocation
+
+### ⚠️ Other Threats to Watch For
+
+LLMs may also:
+
+- **Memorize or regurgitate training data** (leakage risk)
+- **Embed sensitive data in embeddings** (vector privacy)
+- **Cascade mistakes across calls** (unintentional inference)
+
+These threats require not just infra hardening — but a complete rethink of **what counts as sensitive data, and when it leaks**.
+
+---
+
+## 🔒 Securing the Stack: What You Need to Get Right
+
+Most traditional security practices still apply — encrypt communication, store secrets properly, isolate environments. These are the baseline.
+
+But LLMs introduce new challenges, and this section focuses specifically on what makes them different and how to mitigate the unique risks they bring.
+
+A modern LLM system has many moving parts — model calls, tool usage, document retrieval, user input — each of which can introduce risk.
+
+To secure a modern LLM application, you need to think in terms of end-to-end responsibility — starting from **data ingestion** all the way to **LLM responses**. Here’s what that looks like in practice:
+
+### 1. **Start with User + Access Modeling**
+
+Before you even start building your pipeline, define your access model:
+
+- Who are your users?
+- What groups or tenants do they belong to?
+- What data should they be able to access or not?
+
+Every document ingested into the system should be tagged with this access metadata from the start. If you don’t tag early, it’s often impossible to retrofit later.
+
+### 2. **Delegate and Enforce Rights in Agent Execution**
+
+Once a user initiates a request, their identity and access rights must be passed to the agent. **But this information must never be leaked to the LLM itself or to any third-party tool or API.**
+When the agent:
+
+- Retrieves documents
+- Calls tools or APIs
+- Sends requests to an LLM proxy
+
+you need policy enforcement at each point. Aegis supports identity propagation across all execution paths.
+
+### 3. **Isolate Execution Environments**
+
+Every agent execution — especially when it involves external tools or code generation — should happen in a **controlled, sandboxed environment**. This reduces the blast radius of a misbehaving agent or prompt. Here's how you can achieve that:
+
+- **Use containers (e.g. Docker)** to encapsulate each agent run. You can spin up short-lived containers for each request or session.
+- **Explore secure sandboxes** like [e2b.dev](https://e2b.dev) for running generated code in ephemeral, locked-down environments.
+- **Avoid sharing process memory** across users or sessions — scope memory, cache, and logs to the specific user or tenant.
+
+Isolation isn’t just a security control — it’s a safety net for reasoning-based systems that may behave unpredictably.
+
+### 4. **Log Every LLM Call — It’s Your Weakest Link**
+
+LLM responses are generated text. Once something is leaked in a completion, it’s too late.
+That’s why we log:
+
+- Every prompt + response pair
+- The originating user, tenant, and workflow
+- Retrieval context and tool results
+
+These logs enable post-hoc analysis, incident response, and regulatory audits.
+
+You’re not just logging system behavior — you’re logging a conversation that could go wrong.
+
+## Data Privacy in LLM Workflows
+
+Sending sensitive prompts to third-party APIs is risky. Aegis helps reduce that risk:
+
+- **Redaction layer** strips or masks PII before LLM calls
+- **Local inference support** so you can run smaller models in-house
+- Optional **PII detection + alerting** on inbound/outbound payloads
+
+We support safe usage even in regulated environments (e.g. education, finance, public sector).
+
+---
+
+## LMS Example: Protecting Student Data
+
+Let’s say you’re using agents to automatically grade student assessments. To improve quality and consistency, your agents retrieve examples of previously graded answers using RAG. These past assessments help the agent understand:
+
+- What a good vs poor response looks like
+- What feedback is usually given
+- How to align with a specific marking rubric
+
+But here’s where things get tricky:
+
+- You should only retrieve examples **from the same institution or tenant** as the requesting user
+- These retrieved examples are passed to the LLM — and at that point, **you have no control over how they are reused**
+
+That means your **data access layer is the final gatekeeper**. If you get it wrong — if a student from Institution A sees examples from Institution B — the leak is irreversible.
+
+Aegis ensures:
+
+- Every document is tagged on ingestion with tenant and role metadata
+- Vector search is scoped at runtime to the requesting user
+- Access control is applied **before** data reaches the LLM
+
+This keeps the agent effective — and your compliance risk low.
+
+We support safe usage even in regulated environments (e.g. education, finance, public sector).
+
+## 🛡️ Bonus: Guardrails for Sensitive Workflows
+
+Even with careful access controls, isolated execution, and prompt filtering — LLMs are still unpredictable. Guardrails and observability help you monitor and respond when things go wrong.
+
+Guardrails for Text-Driven Automation
+
+For highly sensitive tasks — like auto-grading assessments, handling customer complaints, or generating financial summaries — you may want to:
+
+Inject checks into the agent graph to validate intermediate outputs
+
+Use small models to pre-filter content before LLMs engage
+
+Set stopping criteria or human-in-the-loop checkpoints
+
+Restrict tool use to vetted, auditable actions
+
+You’re not locking down creativity — you’re constraining it just enough to stay safe.
+
+For teams looking to implement runtime guardrails programmatically, we recommend exploring the open source project Guardrails AI — it provides schema validation, content moderation, and flow-level rules for LLM outputs.
+
+🔒 Redaction alone is not a solution. By the time something is passed into a prompt, it’s already exposed. The only real defense is scoping and filtering at source.

@@ -1,0 +1,119 @@
+---
+title: Why Stochastic Systems Need Rethinking
+description: You can’t test LLMs like traditional code. You need new tools, and a new mindset.
+---
+
+# Why Stochastic Systems Need Rethinking
+
+Language models don’t behave like traditional software. Same input, different outputs. That’s not a bug — it’s how they work.
+
+This stochastic nature means your approach to development, testing, and improvement must change.
+
+---
+
+## You Can't Just Unit Test It
+
+**How many times have you launched a system into production without testing it?**
+
+You wouldn't ship a new scoring engine, workflow, or API without validation. But that's exactly what teams do when they deploy LLM prompts with no evaluation data, no baselines, and no rollback strategy.
+
+Traditional code:
+
+- Deterministic
+- Repeatable
+- Easy to assert "this output is correct"
+
+LLM-based systems:
+
+- Probabilistic
+- Sensitive to phrasing, order, formatting
+- Quality can vary even with the same prompt
+
+You need to measure output **quality** across **many samples**, not just "did it pass the test."
+
+---
+
+## You Need Statistical Evaluation
+
+The only way to know if a prompt or model behavior is "good enough" is to evaluate it statistically — across real examples.
+
+### The Problem
+
+LLMs vary from run to run. A change that improves one response might break another. Without benchmarks, you're guessing.
+
+### ✅ The Solution: Evaluation Pipelines
+
+You need to treat LLM output like any other non-deterministic system:
+
+- Create **gold datasets** of representative examples
+- Score outputs against known rubrics (binary or scaled)
+- Track **regression vs improvement** across prompt or model changes
+- Set thresholds for shipping or rollback
+
+Evaluation tools give you:
+
+- Confidence in changes
+- A way to compare prompts, models, or workflows
+- A path to quality improvements that are measurable
+
+This is a core part of the Aegis Stack — and it’s how our customers move from intuition to evidence.
+
+---
+
+## From Code to Config
+
+Most teams start by writing prompts directly in Python. It works — until it doesn’t.
+
+### The Problem
+
+When prompts live in code:
+
+- Product teams can’t iterate without dev support
+- There’s no version control or rollback
+- You can’t evaluate or compare changes easily
+
+### ✅ The Solution: Config-Driven Prompting
+
+Move prompts into structured config files — versioned, reviewed, and stored like any other deployable asset.
+
+This allows you to:
+
+- Change behavior without redeploying
+- Run safe experiments with prompt variants
+- Review and collaborate on prompts like product copy
+- Track which version of a prompt was used — and why
+
+> Prompts become a product surface — visible, testable, and safe.
+
+The Aegis Stack supports prompt configuration out of the box, with evaluation hooks and logging to help your team ship with confidence.
+
+---
+
+## LMS Example
+
+You update a grading prompt to better handle vague answers. It seemed like a small improvement — just a tweak to reward answers that use "key phrases" instead of exact matches. You ship it.
+
+A week later, instructors start complaining:
+
+- "The feedback feels inconsistent."
+- "We’re seeing more incorrect answers marked as satisfactory."
+- "We don’t trust the scores anymore."
+
+Your team scrambles to debug. But there’s no version control on the prompt. No evaluation history. No baseline for comparison.
+
+You’re guessing — and burning time.
+
+With Aegis, that prompt change would have been:
+
+- Logged and versioned automatically
+- Evaluated against your gold dataset before going live
+- Compared side-by-side with the previous version
+- Flagged for regression before it impacted your users
+
+And if it still slipped through, Aegis would have made it easy to roll back immediately, restoring trust.
+
+That’s the difference between best guess… and best practice.
+
+---
+
+**Next: Where most teams start — and where they stall.**

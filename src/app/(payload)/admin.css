@@ -1,0 +1,34 @@
+/*
+ * Orcaworks brand accent for the Payload admin panel, matching
+ * --color-orca-orange (#ff4b1f) from globals.css.
+ *
+ * Primary buttons (Login, Save, Publish, Create) don't use the
+ * --theme-success-* scale despite the name -- they're driven by
+ * --theme-elevation-800, which is also the neutral text/icon color used
+ * everywhere else in the UI. Overriding that scale globally would turn body
+ * text and borders orange, so primary buttons are recolored directly via
+ * their own --bg-color/--hover-bg custom properties instead.
+ */
+:root,
+html[data-theme='light'],
+html[data-theme='dark'] {
+  --theme-success-50: #fef3f0;
+  --theme-success-100: #fde3dd;
+  --theme-success-150: #fcd0c5;
+  --theme-success-200: #fbbcad;
+  --theme-success-250: #f9a490;
+  --theme-success-300: #f7896e;
+  --theme-success-400: #f56947;
+  --theme-success-500: #f3461b;
+  --theme-success-600: #da340b;
+  --theme-success-650: #c22e0a;
+  --theme-success-750: #9b2508;
+  --theme-success-800: #7e1e07;
+  --theme-success-850: #611705;
+  --theme-success-900: #441004;
+}
+
+.btn--style-primary {
+  --bg-color: #ff4b1f;
+  --hover-bg: #e6421b;
+}

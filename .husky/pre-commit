@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Fast gate: format + lint only the staged files, and block committed secrets.
+# The full suite (typecheck, tests, build) runs in `pnpm check` and in CI.
+
+pnpm lint-staged && node scripts/check-staged-secrets.mjs

@@ -1,0 +1,181 @@
+/*
+ * Handbook (Nextra) visual integration with the Oatmeal Olive design system.
+ *
+ * All colors reference the central tokens defined in src/app/globals.css:
+ *   --color-olive-*        Oatmeal neutral foundation
+ *   --color-orca-orange    Orcaworks brand accent (primary color is fed to
+ *                          Nextra as HSL via <Head> in layout.tsx)
+ *   --color-orca-mist      subtle branded callout surface
+ *   --color-orca-teal-dark unused for now (Olive + Orange + Mist suffices)
+ *
+ * These rules are unlayered on purpose: they intentionally win over Nextra's
+ * @layer-ed theme styles without needing !important.
+ */
+
+:root {
+  /* Match the site navbar height (5.25rem = 84px) so the sticky sidebar/TOC align.
+   * Must be a pixel or percentage value because Nextra passes it to
+   * IntersectionObserver's rootMargin. */
+  --nextra-navbar-height: 84px;
+
+  /* Nextra primary theme: Orcaworks Orange (#ff4b1f) in HSL. */
+  --nextra-primary-hue: 12deg;
+  --nextra-primary-saturation: 100%;
+  --nextra-primary-lightness: 56%;
+  /* #f9feff as the Nextra page background, matching the site body background. */
+  --nextra-bg: 249, 254, 255;
+
+  /* Inter for all handbook chrome and body copy (same as the marketing site). */
+  --x-font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Remap Nextra's cool gray neutrals onto the warm Oatmeal Olive scale so the
+   * sidebar, TOC, borders, and code chrome sit on the same neutral foundation
+   * as the rest of the site. */
+  --x-color-gray-50: var(--color-olive-50);
+  --x-color-gray-100: var(--color-olive-100);
+  --x-color-gray-200: var(--color-olive-200);
+  --x-color-gray-300: var(--color-olive-300);
+  --x-color-gray-400: var(--color-olive-400);
+  --x-color-gray-600: var(--color-olive-600);
+  --x-color-gray-700: var(--color-olive-700);
+  --x-color-gray-800: var(--color-olive-800);
+  --x-color-gray-900: var(--color-olive-900);
+  --x-color-neutral-400: var(--color-olive-400);
+  --x-color-neutral-800: var(--color-olive-800);
+  --x-color-neutral-900: var(--color-olive-900);
+}
+
+.dark {
+  --nextra-primary-hue: 12deg;
+  --nextra-primary-saturation: 100%;
+  --nextra-primary-lightness: 60%;
+  /* Olive-950 in dark mode. */
+  --nextra-bg: 12, 12, 9;
+}
+
+::selection {
+  background: hsla(var(--nextra-primary-hue), var(--nextra-primary-saturation), var(--nextra-primary-lightness), 0.3);
+}
+
+html {
+  background: rgb(var(--nextra-bg));
+}
+
+/* ---------------------------------------------------------------------------
+ * Typography: editorial page title in Instrument Serif; everything else Inter.
+ * ------------------------------------------------------------------------- */
+
+article h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.75rem;
+  line-height: 1.15;
+  letter-spacing: 0;
+  color: var(--color-olive-950);
+}
+
+.dark article h1 {
+  color: #fff;
+}
+
+/* Small orange editorial rule under the page title (brand signal without
+ * making the title itself orange). */
+article h1::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: 0.75rem;
+  border-radius: 9999px;
+  background-color: var(--color-orca-orange);
+}
+
+/* ---------------------------------------------------------------------------
+ * Callouts: Orcaworks Mist surface with olive text and a restrained accent.
+ * Dark mode gets a muted dark surface instead of pale Mist.
+ * ------------------------------------------------------------------------- */
+
+.nextra-callout {
+  background-color: var(--color-orca-mist);
+  border-color: color-mix(in oklab, var(--color-orca-teal-dark) 25%, transparent);
+  color: var(--color-olive-800);
+}
+
+.dark .nextra-callout {
+  background-color: color-mix(in oklab, var(--color-orca-teal-dark) 20%, var(--color-olive-950));
+  border-color: color-mix(in oklab, var(--color-orca-teal-dark) 45%, transparent);
+  color: var(--color-olive-200);
+}
+
+/* Warning callouts keep a subtle orange identity instead of yellow. */
+.nextra-callout[class*='yellow'] {
+  background-color: color-mix(in oklab, var(--color-orca-orange) 8%, var(--color-olive-50));
+  border-color: color-mix(in oklab, var(--color-orca-orange) 45%, transparent);
+  color: var(--color-olive-800);
+}
+
+.dark .nextra-callout[class*='yellow'] {
+  background-color: color-mix(in oklab, var(--color-orca-orange) 12%, var(--color-olive-950));
+  border-color: color-mix(in oklab, var(--color-orca-orange) 40%, transparent);
+  color: var(--color-olive-200);
+}
+
+/* ---------------------------------------------------------------------------
+ * Sidebar / TOC: neutral olive chrome; the active state comes from the orange
+ * primary color that Nextra derives from <Head color>.
+ * ------------------------------------------------------------------------- */
+
+.nextra-sidebar {
+  font-family: var(--font-sans);
+}
+
+/* Use the same base Nextra primary orange for the active left-hand menubar
+ * link as the right-hand TOC / content links. The default theme uses the
+ * darker primary-800 text for the active sidebar item, while inline links stay
+ * at the base primary-600 tone. */
+.nextra-sidebar a.active,
+.nextra-sidebar a.active:hover {
+  color: hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) var(--nextra-primary-lightness));
+}
+
+/* Mobile "Handbook contents" toggle bar (see HandbookSidebarToggle). */
+.handbook-sidebar-toggle {
+  border-bottom: 1px solid var(--color-olive-200);
+  background-color: var(--color-olive-100);
+}
+
+.dark .handbook-sidebar-toggle {
+  border-bottom-color: var(--color-olive-800);
+  background-color: var(--color-olive-950);
+}
+
+/* ---------------------------------------------------------------------------
+ * Gated content clamp and gate card.
+ * ------------------------------------------------------------------------- */
+
+.gated-content {
+  position: relative;
+  max-height: 14rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  transition: max-height 0.4s ease;
+}
+
+html[data-ow-unlock='1'] .gated-content,
+.gated-content[data-unlocked='true'] {
+  max-height: 9999px;
+  -webkit-mask-image: none;
+  mask-image: none;
+  overflow: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gated-content {
+    transition: none;
+  }
+}
+
+html[data-ow-unlock='1'] .gate-card {
+  display: none;
+}

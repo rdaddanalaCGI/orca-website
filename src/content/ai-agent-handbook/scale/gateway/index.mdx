@@ -1,0 +1,121 @@
+---
+title: Managing API Costs and Throttling
+description: Why you need an LLM gateway to scale safely and cost-effectively.
+---
+
+# Managing API Costs and Throttling
+
+Every team starts by calling an LLM provider’s API directly. That works great — until it doesn’t.
+
+Once you go into production, you hit:
+
+- **Rate limits** from OpenAI or Anthropic
+- **Unexpected spikes** in cost
+- **Lack of visibility** into which workflows are consuming tokens
+- **Compliance concerns** around sending data to third-party APIs
+
+This is where a gateway becomes essential.
+
+---
+
+## What’s an LLM Gateway?
+
+An LLM gateway is a proxy layer between your agents and the LLM provider. It intercepts and manages all traffic going to models like GPT-4, Claude, or your own hosted model.
+
+Aegis includes a FastAPI-based gateway that provides:
+
+- **Request routing** to different models based on workload or cost constraints
+- **Authentication and RBAC** to enforce org/user-level access
+- **Usage logging** per org, team, or use case
+- **Throttling and rate limiting**
+- **Data masking and redaction** before outbound calls
+
+You can run it yourself or deploy it in a secure VPC.
+
+---
+
+## Why It Matters
+
+### How LLMs Charge
+
+Most LLM providers (like OpenAI, Anthropic, Mistral) charge based on:
+
+- **Tokens in** (prompt size)
+- **Tokens out** (response size)
+- **Model type** (e.g. GPT-4 Turbo vs Claude Haiku)
+
+Costs can quickly spiral when prompts get large — especially with RAG or agent workflows. And if you’re relying on just one vendor, you're at their mercy for:
+
+- Pricing changes
+- Quotas or rate limits
+- API outages
+
+### Why Evaluation Enables Switching
+
+Once you have **prompt evaluation pipelines** in place, you can:
+
+- Seamlessly compare different models on the same task
+- Validate output quality vs cost tradeoffs
+- Make informed decisions about **vendor switching or fallback strategies**
+
+You can even **A/B test model swaps** in production with minimal disruption.
+
+### 🛡️ Auditing + Security
+
+In production, you’ll also need:
+
+- **Audit logs** of every prompt and response
+- **Redaction** of PII before sending to external APIs
+- **Throttling per tenant/user/group** to prevent abuse or overuse
+
+All of this needs to happen in one centralized control plane — the gateway.
+
+### Using LiteLLM + Aegis
+
+[LiteLLM](https://github.com/BerriAI/litellm) is a great OSS project that provides a unified interface to multiple LLM APIs.
+
+We optionally layer on:
+
+- **Per-tenant routing + policy enforcement**
+- **RBAC** for endpoints and workflows
+- **Usage reporting** for orgs, users, and use cases
+
+You get the flexibility of LiteLLM with **enterprise-grade access control and observability** — no vendor lock-in, no blind spots.
+
+Without a gateway:
+
+- You have no per-user, per-workflow billing visibility
+- You can’t control or cap API usage
+- You’re tied to a single LLM provider
+
+With a gateway:
+
+- You can **swap models** easily (e.g. Claude Haiku vs GPT-4 Turbo)
+- You can **route based on complexity**
+- You can **self-host** smaller models to save cost
+
+This is how you keep quality high **without blowing your budget**.
+
+---
+
+## LMS Example: Smart Routing for Grading
+
+Let’s say your LMS does auto-grading at scale. Some tasks are:
+
+- Simple (e.g. Yes/No, MCQs)
+- Complex (e.g. open-ended essay responses)
+
+With a gateway:
+
+- You route simple tasks to a cheaper model (e.g. LLMLite or Claude Haiku)
+- Route complex ones to GPT-4 only when needed
+- Track usage by institution, course, or team
+- Log all prompts/responses for evaluation and audit
+
+You’ve now reduced cost **without sacrificing quality**.
+
+---
+
+A good gateway is not just infrastructure. It’s your **cost control center**, **routing engine**, and **security layer** all in one.
+
+Next: How to manage security, privacy, and compliance across your agent stack.

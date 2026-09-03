@@ -1,0 +1,342 @@
+---
+title: "Context as a Controlled Input Layer"
+description: "Give the model the context the job requires — authorized, traceable, and audit-ready — not everything the system happens to find."
+---
+
+import { Callout } from 'nextra/components'
+
+# Context as a Controlled Input Layer
+
+<Callout type="important" emoji="🔑">
+**Principle:** Give the model the context the job requires — authorized, traceable, and audit-ready — not everything the system happens to find.
+</Callout>
+
+## Core idea
+
+Context is not background information.
+
+In agentic AI systems, context is an input that shapes decisions, tool use, and business outcomes. It must therefore be selected, scoped, permission-aware, traceable, and tied to the workflow being executed.
+
+The key question is simple:
+
+<div style={{padding: "1rem 1.25rem", border: "1px solid rgba(127,127,127,0.2)", borderRadius: "0.75rem", margin: "1.25rem 0"}}>
+  What should the AI system be allowed to know for this task?
+</div>
+
+---
+
+## At a glance
+
+| Context risk | Architectural control |
+|---|---|
+| Too much context | Workflow-scoped context selection |
+| Wrong context | Source ranking, validation, and provenance |
+| Stale context | Freshness checks and system-of-record links |
+| Unauthorized context | Permission-aware retrieval and access boundaries |
+| Untraceable context | Context records, evidence links, and audit trails |
+
+---
+
+## 1. Context is not just retrieval
+
+Many AI systems treat context as a retrieval problem: search documents, find relevant chunks, place them in the prompt, and ask the model to answer.
+
+That is useful. But it is not enough for enterprise execution.
+
+<div style={{padding: "1rem 1.25rem", border: "1px solid rgba(127,127,127,0.2)", borderRadius: "0.75rem", margin: "1.25rem 0"}}>
+  <strong>Retrieval answers:</strong> What information might be relevant?<br /><br />
+  <strong>Controlled context answers:</strong> What information is valid for this workflow?
+</div>
+
+The difference matters because agentic AI systems do not only answer questions. They prepare decisions, draft communications, recommend actions, update records, trigger workflow steps, and call tools.
+
+Once AI participates in work, the context it receives becomes part of the execution path.
+
+A retrieved document may be relevant but obsolete. A note may be useful but unverified. A customer record may be accurate but outside the user's permission boundary. A policy may apply to one region but not another. An email may be visible to the user, but not intended to be included in the task.
+
+Relevance alone is not enough.
+
+For enterprise workflows, context must be:
+
+- relevant to the task
+- authorized for the user and workflow
+- current enough for the decision
+- traceable to source material
+- scoped to the work being performed
+- inspectable before consequential action
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> retrieval finds information; controlled context defines what the system is allowed to use.
+</div>
+
+---
+
+## 2. The context scope
+
+A safe agentic AI system needs a context scope for each workflow run.
+
+The context scope is the bounded set of information the system is allowed to use for a specific task, at a specific point in time, for a specific user or delegated authority.
+
+It is not everything the system knows.
+It is not everything the user can access.
+It is not every document that might be semantically similar.
+
+It is the operational input set for this run.
+
+A context scope should answer:
+
+| Question | Why it matters |
+|---|---|
+| What work object is in focus? | Grounds the task in a case, tender, claim, customer, candidate, provider, or record |
+| What does the workflow require? | Ensures the right inputs are present before execution |
+| What did the user select? | Preserves intent and user control |
+| What is permissioned? | Prevents unauthorized context leakage |
+| What is authoritative? | Separates source-of-truth data from notes, summaries, and derived context |
+| What evidence will be retained? | Makes the result auditable |
+
+A useful pattern:
+
+```text
+Work object → Workflow requirement → Context scope → Agent execution → Evidence record
+```
+
+Controlled context starts from the work, not from the corpus.
+
+<details>
+  <summary><strong>Examples of workflow-scoped context</strong></summary>
+
+A tender response should begin with the current tender, required response sections, approved company material, compliance rules, and workflow state — not every similar document in the organization.
+
+A case assignment workflow should begin with the current case, verified attributes, assignment rules, recent allocation history, and approval path — not every note that happens to mention a similar injury.
+
+A provider reconciliation workflow should begin with the specific provider record, conflicting sources, freshness of each source, validation history, and proposed action — not everything known about the provider.
+
+</details>
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> the context scope is not everything the system can retrieve. It is what this workflow is allowed to use.
+</div>
+
+---
+
+## 3. Operational context is different from enterprise search
+
+Enterprise search and operational context are often confused because both involve finding information.
+
+But they serve different purposes.
+
+| Enterprise search | Operational context |
+|---|---|
+| Helps users discover information | Helps agents perform governed work |
+| Broad and exploratory | Bounded and workflow-specific |
+| Optimized for relevance | Optimized for validity, authority, and traceability |
+| User decides what to trust | System must preserve trust signals |
+| Useful for research and knowledge work | Required for safe execution |
+
+Enterprise search can be broad because the user is still interpreting the results.
+
+Operational context must be narrower because the AI system may act on it.
+
+That means operational context should carry control information, not just text. The system needs to know where the context came from, whether it is current, whether it is authorized, whether it is authoritative, and why it was included.
+
+<Callout type="warning" emoji="⚠️">
+A smaller, well-scoped context is often safer than a large, loosely assembled one.
+
+More context can create more confusion, more leakage, more conflict, and more opportunity for untrusted material to influence the system.
+</Callout>
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> enterprise search expands what the user can find. Operational context constrains what the agent can use.
+</div>
+
+---
+
+## 4. Provenance, freshness, and authority
+
+The central context-quality question is not:
+
+> Did the system retrieve something relevant?
+
+It is:
+
+> Can we trust this context for this workflow, for this user, at this moment?
+
+That requires three controls.
+
+### Provenance
+
+Where did this context come from?
+
+A summary, extracted field, graph fact, or retrieved passage should trace back to source material. Derived context can be useful, but it should not silently replace the source of truth.
+
+### Freshness
+
+Is this context still valid?
+
+Many enterprise records change quickly: customer status, provider affiliations, pricing, case assignment, policy versions, availability, risk ratings, and approvals. Some workflows can tolerate stale data. Others cannot. The system needs to know the difference.
+
+### Authority
+
+Should this source be trusted for this task?
+
+Not every source has the same weight. A system-of-record field, approved policy, user note, email, transcript, generated summary, and external webpage should not be treated equally.
+
+A simple classification:
+
+| Context type | Example | Control question |
+|---|---|---|
+| Source-of-truth data | CRM, case system, HRIS, claims platform | Is this authoritative and current? |
+| Derived context | Summaries, extracted fields, graph facts | Can we trace this back to source material? |
+| User-provided context | Notes, selections, uploads | Should this be trusted, verified, or limited? |
+| Ambient context | Current email, browser page, document | Is this intended to be included? |
+| Historical context | Prior runs, old decisions, previous documents | Is this still valid? |
+
+<div style={{padding: "1rem 1.25rem", borderLeft: "4px solid currentColor", background: "rgba(127,127,127,0.08)", borderRadius: "0.5rem", margin: "1.25rem 0"}}>
+  <strong>Important</strong><br />
+  These checks should happen before context enters the run.<br /><br />
+  If unauthorized or inappropriate context has already shaped the model's reasoning, the risk has already entered the system.
+</div>
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> context is not safe because it is relevant. It is safe when it is relevant, authorized, current, and traceable.
+</div>
+
+---
+
+## 5. Context preparation is part of the product
+
+Context control should not be invisible plumbing.
+
+The user should be able to see what the AI system is about to use before it performs consequential work.
+
+A useful lifecycle is:
+
+```text
+Focus → Prepare → Execute → Resolve
+```
+
+This chapter is about **Prepare**.
+
+The Prepare step should show:
+
+- the work object in focus
+- the workflow being prepared
+- required context inputs
+- missing information
+- selected context
+- retrieved context
+- ambient context from the current surface
+- authoritative sources
+- stale or ambiguous inputs
+- blocked execution conditions
+
+<Callout type="info" emoji="💡">
+This improves both safety and adoption.
+
+The user does not start from a blank prompt. The system shows what it needs, what it found, what is missing, and what will be used. The user can add, remove, confirm, or correct context before the model acts.
+</Callout>
+
+<div style={{padding: "0.9rem 1.1rem", background: "rgba(127,127,127,0.06)", borderRadius: "0.75rem", margin: "1rem 0"}}>
+  <strong>Key distinction:</strong> good context control appears as a clear preparation step before execution.
+</div>
+
+---
+
+## 6. Where context sits in the safe AI stack
+
+A safe AI stack separates three questions:
+
+| Layer | Question |
+|---|---|
+| Context | What is the system allowed to know? |
+| Authority | What is the system allowed to do? |
+| Execution | How does the system act, pause, approve, resume, and record? |
+
+Context comes first.
+
+Authority checks need to know which user, agent, workflow, and resource are involved. Execution controls need to know what information the agent used to prepare or justify an action. Audit records need to preserve the path from context to decision to outcome.
+
+Without a controlled context layer, the rest of the stack becomes weaker.
+
+<details>
+  <summary><strong>Why the rest of the stack depends on context</strong></summary>
+
+The system may enforce tool permissions, but still make a recommendation from unauthorized context. It may log tool calls, but fail to record which document influenced the decision. It may require human approval, but present the human with an answer whose evidence cannot be inspected.
+
+</details>
+
+The safer pattern is:
+
+```text
+Work object → Context scope → Authority check → Controlled execution → Evidence record
+```
+
+This is the foundation for the next chapters: identity, authority, policy-bound action, and controlled execution.
+
+---
+
+## Closing: five questions for controlled context
+
+Before allowing AI to reason or act in a workflow, ask:
+
+| Question | What a good answer proves |
+|---|---|
+| 1. What work object is in focus? | The AI is grounded in a specific business task. |
+| 2. What context is required? | The workflow has an explicit input contract. |
+| 3. Where did the context come from? | Sources and provenance are visible. |
+| 4. Is the context authorized and current? | Permission and freshness were checked before use. |
+| 5. Can the user inspect or refine it? | Context control is part of the workflow experience. |
+
+<Callout type="warning" emoji="🛂">
+If these questions cannot be answered, the system may still be useful for exploration or drafting. But it is not ready for consequential workflow execution.
+</Callout>
+
+Safe agentic AI starts before the model reasons.
+
+It starts with controlling what the system is allowed to know.
+
+---
+
+## Further Reading
+
+These references are useful for readers who want to go deeper into why context must be treated as a controlled system input rather than a simple retrieval step.
+
+---
+
+### SoK: Agentic Retrieval-Augmented Generation (RAG): Taxonomy, Architectures, Evaluation, and Research Directions
+
+🔗 https://arxiv.org/html/2603.07379v1
+
+A useful overview of how RAG changes when retrieval becomes part of an agentic loop rather than a static question-answering pipeline. It supports the chapter's argument that context selection becomes a control problem once AI systems can reason, retrieve, plan, and act across multiple steps.
+
+---
+
+### Data Quality Challenges in Retrieval-Augmented Generation
+
+🔗 https://arxiv.org/pdf/2510.00552
+
+A practical reference for freshness, completeness, consistency, provenance, and other data-quality issues in RAG systems. It is useful for explaining why context quality must be managed before the model produces an answer or prepares an action.
+
+---
+
+### Secure Multifaceted-RAG for Enterprise: Hybrid Knowledge Retrieval with Security Filtering
+
+🔗 https://arxiv.org/pdf/2504.13425
+
+A relevant enterprise RAG paper focused on hybrid retrieval and security filtering. It supports the distinction between broad knowledge retrieval and access-aware operational context.
+
+---
+
+### Securing the Model Context Protocol (MCP): Risks, Controls, and Governance
+
+🔗 https://arxiv.org/abs/2511.20920
+
+A focused analysis of MCP security risks. It is useful for understanding how context exchange and tool integration create new trust boundaries in agentic systems.
+
+---
+
+### Breaking the Protocol: Security Analysis of the Model Context Protocol Specification and Prompt Injection Vulnerabilities in Tool-Integrated LLM Agents
+
+🔗 https://arxiv.org/html/2601.17549v1
+
+A technical security analysis of MCP and prompt-injection risks in tool-integrated agents. It supports the chapter's core point that context can become an attack path unless it is scoped, mediated, and treated as part of the system boundary.

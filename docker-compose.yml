@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: orcaworks-postgres-5434
+    environment:
+      POSTGRES_USER: orcaworks
+      POSTGRES_PASSWORD: orcaworks
+      POSTGRES_DB: orcaworks
+    ports:
+      - '5434:5432'
+    volumes:
+      - pgdata-5434:/var/lib/postgresql/data
+
+volumes:
+  pgdata-5434:

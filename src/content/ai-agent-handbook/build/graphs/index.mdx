@@ -1,0 +1,180 @@
+---
+title: From Tasks to Workflow
+description: Building structured workflows with LLMs using simple, composable patterns.
+---
+
+# From Tasks to Workflow
+
+When teams think about “agents,” they often imagine something autonomous, intelligent, and complex. But the most effective systems we’ve seen start much simpler — with predictable, well-structured **workflows**.
+
+Workflows give you reliability and control. They allow you to define the exact steps your system should take, when to call an LLM, and when to trust it. Think of them as blueprints for decision-making, not freeform chatbots.
+
+---
+
+## Composable Patterns That Work
+
+Through customer projects and internal builds, we’ve seen a handful of patterns show up again and again. These aren’t just design ideas — they’re battle-tested ways to reduce cost, improve performance, and gain visibility.
+
+### 1. **Prompt Chaining**
+Break a task into clear sequential steps:
+- Generate → Check → Improve
+- Summarize → Extract → Format
+
+Each step can be validated independently. This trades latency for control — and improves reliability.
+
+### 2. **Routing**
+Classify the input, then direct it to the right subflow or model:
+- FAQ? → cheap model
+- Refund request? → call refund API
+- Complex issue? → escalate to agent
+
+Routing lets you build specialized logic and optimize for speed + cost.
+
+### 3. **Parallelization**
+Split the work:
+- Run multiple LLMs in parallel on different subtasks (sectioning)
+- Run the same prompt multiple times and combine the output (voting)
+
+This improves speed, confidence, and robustness.
+
+### 4. **Evaluator-Optimizer Loops**
+One agent proposes, another reviews:
+- “Write a draft” → “Check for tone and accuracy”
+- “Suggest changes” → “Evaluate if they’re better”
+
+This is useful for creative tasks and continuous improvement cycles.
+
+### 5. **Orchestrator–Workers**
+An LLM breaks down a problem and delegates subtasks:
+- Plan → Delegate → Aggregate
+
+This is useful when the shape of the work changes dynamically.
+
+---
+
+## Designing for the 80/20 of Information Workflows
+
+In most enterprises, **80% of the value** comes from **20% of the workflows** — the predictable, repetitive tasks that follow a known structure.
+
+For these, we recommend building deterministic workflows using Autogen's **DiGraphGroupChat**. They're easier to test, debug, and optimize.
+
+For the remaining 20% — the fuzzy, complex, or one-off tasks — use Autogen **Teams** for more flexible, agent-led execution.
+
+This lets you:
+- Optimize core tasks with low-latency, high-confidence chains
+- Handle exceptions or novel queries with adaptive agents
+- Keep evaluation, cost, and control where they matter most
+
+---
+
+## How We Implement This at Aegis
+
+We use [Autogen](https://github.com/microsoft/autogen) under the hood — with two core abstractions:
+
+- **DiGraphGroupChat**: for predictable workflows with defined structure (used in chaining, routing, parallelization, etc.)
+- **Autogen Teams**: for more open-ended agents with autonomy and planning
+
+You can start with DiGraph for reliability, then move to Teams when you need flexibility.
+
+These are both configurable via YAML or JSON, meaning you can define workflows declaratively — and evaluate them consistently.
+
+### Example: DiGraph Config for a Grading Workflow
+
+```json
+{
+  "type": "digraph",
+  "nodes": [
+    {"name": "marker", "agent": "auto_marker"},
+    {"name": "evaluator", "agent": "grade_evaluator"},
+    {"name": "finaliser", "agent": "final_check"}
+  ],
+  "edges": [
+    ["marker", "evaluator"],
+    ["evaluator", "finaliser"]
+  ]
+}
+```
+
+This defines a structured 3-step process:
+1. `auto_marker` gives an initial grade
+2. `grade_evaluator` checks tone, rubric alignment, etc.
+3. `final_check` applies final filters, formatting, and schema checks
+
+This graph can be run, tested, and versioned — with prompt and tool logic externalized in config.
+
+For less structured tasks (like debugging unexpected student answers or handling appeals), we switch to `Autogen Teams`, where agents reason more freely within defined safety limits.
+
+---
+
+## Example: Using Autogen Teams for Open-Ended Tasks
+
+Let’s say your grading workflow fails — the evaluator detects that an answer is borderline or mismatched with rubric expectations. This is where an **Autogen Team** can take over.
+
+Instead of just re-prompting, you spawn a structured team to reason through:
+- Was the rubric misinterpreted?
+- Should this be escalated to a human?
+- Can we enrich the feedback with citations or examples?
+
+A sample team config might look like:
+
+```json
+{
+  "type": "team",
+  "agents": [
+    {"name": "marker", "llm_config": {"model": "gpt-4", "system_message": "Grade based on rubric"}},
+    {"name": "moderator", "llm_config": {"model": "gpt-4", "system_message": "Resolve grading conflicts and make final call"}},
+    {"name": "explainer", "llm_config": {"model": "gpt-4", "system_message": "Summarize key strengths and improvement areas for the student"}}
+  ],
+  "coordination": {
+    "entry_point": "marker",
+    "strategy": "discuss_until_resolved",
+    "termination": "moderator_decision"
+  }
+}
+```
+
+This gives your system flexibility when things get fuzzy — without bloating the core workflow.
+
+---
+
+## LMS Example
+
+### LMS Evaluation Pipeline: Step-by-Step
+
+1. **Student submits answer**  
+   Triggered via frontend or API — the structured input is validated and passed to the workflow engine.
+
+2. **`auto_marker` assigns an initial grade**  
+   Based on rubric alignment, using a config-driven prompt.
+
+3. **`grade_evaluator` checks the response**  
+   Evaluates tone, justification, and alignment with expected feedback norms.
+
+4. **Failure triggers fallback logic**  
+   A confidence threshold or rubric mismatch activates a rerun, possibly with clarification.
+
+5. **Optional Autogen Team invocation**  
+   When ambiguous, a structured Autogen Team takes over for deliberation and final call.
+
+6. **`final_check` normalizes and formats the result**  
+   Applies schema validation and optionally appends rationale or scoring metadata.
+
+7. **Log and return**  
+   Results are saved for evaluation metrics (e.g. F1, feedback helpfulness) and returned to the LMS.
+
+---
+
+Let’s say your LMS has an evaluation pipeline:
+- A student submits an answer
+- The agent grades it, then runs an LLM-based evaluator to verify tone and coverage
+- If it fails, it re-prompts with an improvement instruction
+- Finally, a lightweight scoring model double-checks consistency
+
+That’s not “an agent.” That’s a **workflow**. And it’s exactly how you should build your first real system.
+
+---
+
+Build workflows. Validate outputs. Keep it simple until complexity is earned.
+
+Next: How to give your agents access to data — without leaking everything.
+

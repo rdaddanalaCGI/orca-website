@@ -1,0 +1,130 @@
+---
+title: Working with Data
+description: Context matters. Here's how to prepare your data for real-time retrieval and reasoning.
+---
+
+# Working with Data
+
+Most teams hit a wall when the LLM doesn't “know enough.” The usual fix? Stuff more context into the prompt. But that only works if the data is structured, searchable, and relevant.
+
+That’s why every serious LLM application eventually needs a **RAG pipeline** — Retrieval-Augmented Generation — and the infrastructure to support it.
+
+---
+
+## The 80/20 Retrieval Problem
+
+80% of retrieval success comes from 20% of your documents — but only if:
+- They’re chunked appropriately
+- Enriched with metadata
+- Kept up-to-date
+
+Otherwise, your “search” is just noise. And your agents will hallucinate or miss critical context.
+
+---
+
+## Building a RAG-Ready Pipeline
+
+Aegis provides end-to-end support for production-grade RAG (Retrieval-Augmented Generation) workflows. Here's what a full pipeline typically involves:
+
+### 1. **Data Source Integration**
+Connect to structured and unstructured sources:
+- File systems (PDFs, DOCX, CSVs)
+- Web pages and HTML portals
+- Internal tools and APIs (via SDKs or scraping)
+- LMS platforms or data exports
+
+We use the [`unstructured`](https://github.com/Unstructured-IO/unstructured) library to parse and extract clean text and layout metadata from these sources.
+
+### 2. **Chunking + Metadata Enrichment**
+Content is chunked based on structure — not fixed size. We:
+- Preserve headings, bullet structure, and tables
+- Extract metadata like `document_type`, `owner`, `course_id`, `tags`, and `timestamp`
+
+### 3. **Embedding + Indexing**
+Each chunk is:
+- Embedded using your preferred model (e.g. OpenAI, Cohere, or LLMLite)
+- Indexed into **Vespa**, which supports:
+  - Dense and lexical search (hybrid)
+  - Filtering and access control
+  - Ranking functions and freshness prioritization
+
+### 4. **Search API**
+A simple REST API exposes search capabilities to your agents. You can query:
+- By relevance
+- With filters (course ID, document type, date)
+- By document section, tag, or content type
+
+### 5. **Refresh + Syncing**
+Scheduled jobs monitor data sources:
+- Re-index updated content
+- Flag stale or unused data for review
+
+This ensures relevance and auditability over time.
+
+---
+
+The Aegis stack supports this out of the box. A good pipeline includes:
+
+1. **Ingestion**: PDFs, HTML, internal systems, etc.
+2. **Chunking**: Content is split intelligently, preserving semantic boundaries
+3. **Enrichment**: Add metadata (owner, document type, last reviewed, tags)
+4. **Embedding**: Convert to vector form using your model of choice
+5. **Indexing**: Store in Vespa (or similar) for fast, filtered retrieval
+6. **Sync + Refresh**: Keep stale data from polluting your responses
+
+These steps make sure your agents never fly blind.
+
+---
+
+## LMS Example: Indexing Rubrics + Assessments
+
+Let’s say your LMS stores past assessments, marking rubrics, and model answers — but they’re buried in PDFs and scattered folders.
+
+With the Aegis RAG pipeline:
+
+- You ingest and chunk these documents using `unstructured`
+- We enrich each chunk with:
+  - `course_id`
+  - `assessment_type`
+  - `rubric_section`
+  - `version`
+- The chunks are embedded and indexed into Vespa
+
+At runtime, your DiGraph-based agent retrieves the top `k` rubric chunks and past answers **as few-shot examples**. These are injected into the prompt for the `marker` or `evaluator` agent.
+
+This leads to:
+- Consistent, rubric-aligned grading
+- Transparent and traceable feedback
+- Faster iteration on prompts (you can swap out examples without changing code)
+
+You’ve now automated the high-effort, low-value lookup task — and embedded it directly into the grading loop.
+
+Let’s say your LMS needs to surface past rubrics, model answers, or policy guidelines.
+
+Without a pipeline:
+- You manually paste chunks of PDFs into the prompt
+- Or worse, let the LLM hallucinate policy
+
+With a pipeline:
+- The agent retrieves only the relevant rubric section
+- You track versioning and source attribution
+- Your feedback is grounded, consistent, and auditable
+
+This unlocks real automation — not just fancy autocomplete.
+
+---
+
+## Graphs + Retrieval in Practice
+
+RAG components show up inside agent graphs too:
+- A node in your DiGraph might call a retrieval tool
+- A Team agent might ask questions then query a vector DB
+
+The goal isn’t to fetch documents — it’s to **inject useful, task-specific knowledge** into the workflow at the right time.
+
+That’s what makes the difference between a generic chatbot and a reliable enterprise agent.
+
+---
+
+Next: How to run these agents safely, scalably, and cost-effectively in production.
+

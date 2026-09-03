@@ -1,0 +1,571 @@
+---
+title: 'The Emerging Risk Landscape'
+description: 'Why agentic AI changes the enterprise risk conversation: unsafe context, implicit trust, tool misuse, and action without clear authority.'
+---
+
+# The Emerging Risk Landscape
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    borderLeft: '4px solid currentColor',
+    background: 'rgba(127,127,127,0.08)',
+    borderRadius: '0.5rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>Core idea</strong>
+  <br />
+  Agentic AI changes enterprise risk because the system no longer just generates outputs. It retrieves context, makes
+  decisions at runtime, uses tools, and acts inside live workflows.
+</div>
+
+## At a glance
+
+If you remember only four things from this chapter, remember these:
+
+1. **The risk is no longer only in the model.**
+2. **Context is now part of the attack surface.**
+3. **Tool use turns language into consequence.**
+4. **Authority must be explicit, not implied.**
+
+![Emerging Risks in Agentic AI Systems](/enterprise-ai-safety-handbook/understand/Emerging_risks.png)
+
+---
+
+## Why this chapter matters
+
+For many organizations, the first wave of enterprise AI felt manageable.
+Models summarized documents, drafted responses, answered questions, and generated
+recommendations. Even when they were wrong, the failure usually stayed close to the output.
+
+Agentic AI changes that. These systems do not simply respond.
+They **retrieve**, **plan**, **choose**, **delegate**, and **act**.
+They operate across context sources, tools, APIs, and business systems.
+They do not just produce language. They participate in execution.
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    border: '1px solid rgba(127,127,127,0.2)',
+    borderRadius: '0.75rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>The new question</strong>
+  <br />
+  The question is no longer only <em>“Is the model good enough?”</em>
+  <br />
+  It is now also <em>“What governs the system while it is running?”</em>
+</div>
+
+---
+
+## The shift
+
+Traditional enterprise applications are largely controlled by logic defined in advance.
+Traditional AI systems may be probabilistic, but many still sit inside relatively fixed
+boundaries: a user asks, the system responds, and the application determines the next step.
+
+Agentic systems work differently. They operate through loops:
+
+- observe
+- retrieve
+- interpret
+- plan
+- act
+- reflect
+- continue
+
+That creates a different kind of system.
+
+Not a model wrapped in an interface, but a **runtime decision system**.
+
+### From bounded output to runtime action
+
+| Earlier AI systems              | Agentic AI systems                                |
+| ------------------------------- | ------------------------------------------------- |
+| Mostly generate outputs         | May generate, decide, and act                     |
+| Fixed application flow          | Runtime control loops                             |
+| Limited interaction surface     | Tools, APIs, memory, retrieval, delegation        |
+| Main risk is incorrect answer   | Main risk is incorrect action or unsafe execution |
+| Evaluated mainly at model layer | Must be evaluated at system layer                 |
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    borderLeft: '4px solid currentColor',
+    background: 'rgba(127,127,127,0.08)',
+    borderRadius: '0.5rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>Key transition</strong>
+  <br />
+  The enterprise problem is shifting from <strong>model quality</strong> to <strong>runtime system control</strong>.
+</div>
+
+---
+
+## What changed technically
+
+The shift is easy to miss because the user experience can still look simple.
+
+A chat box is still a chat box.
+
+But behind that interface, the system may now be:
+
+- retrieving documents from multiple sources
+- combining structured and unstructured context
+- calling internal and external tools
+- passing outputs between agents or services
+- maintaining memory across steps
+- deciding whether to continue an execution loop
+- acting with delegated authority
+
+This means the real risk is no longer just in what the model says.
+
+It is in what the **system is allowed to know, trust, and do**.
+
+<details>
+  <summary><strong>Why this matters in practice</strong></summary>
+
+A system that merely drafts an email can be reviewed before sending. A system that can retrieve
+CRM data, inspect prior messages, generate a reply, choose recipients,
+and send automatically is operating very differently. The visible interface may look almost
+identical, but the risk profile is not.
+
+</details>
+
+---
+
+## The old mental model breaks down
+
+Many organizations still assess AI systems using assumptions inherited from earlier software
+and machine learning systems.
+
+Those assumptions sound reasonable:
+
+- if the model is accurate enough, the system is safe enough
+- if the prompt is well designed, the behavior is controlled
+- if outputs are filtered, the main risks are covered
+- if a governance policy exists, the deployment is manageable
+
+These assumptions become too weak once the system can retrieve context dynamically and
+act across tools.
+
+Why?
+
+Because in agentic systems, important choices are made during execution:
+
+- which context to use
+- which source to trust
+- which tool to call
+- whether to continue a chain of action
+- how to interpret retrieved material
+- under whose authority an action should occur
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    border: '1px solid rgba(127,127,127,0.2)',
+    borderRadius: '0.75rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>What breaks</strong>
+  <br />
+  Even good code can still produce unsafe outcomes if the runtime system composes the wrong context, inherits the wrong
+  permissions, or trusts the wrong tool.
+</div>
+
+---
+
+## Four failure modes define the new landscape
+
+This chapter uses four simple ideas to explain the emerging risk landscape.
+
+### 1. Unsafe context
+
+Agentic systems are context-hungry.
+
+They depend on retrieved documents, search results, APIs, tool outputs, memory, conversation state,
+and intermediate artifacts created during execution.
+
+That context may be:
+
+- stale
+- incomplete
+- inconsistent
+- low quality
+- malicious
+- subtly manipulated
+
+In older systems, bad context often led to a bad answer.
+
+In agentic systems, bad context can shape planning and action.
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  <strong>Key idea:</strong> Context is no longer just an input problem. It is a<strong>control problem</strong>.
+</div>
+
+<details>
+  <summary><strong>Example</strong></summary>
+
+A system retrieves an outdated policy document, treats it as current, then uses it to approve or
+reject a workflow step. The failure is not just factual. It affects business execution.
+
+</details>
+
+### 2. Implicit trust
+
+Agentic systems often combine many sources of information and many execution surfaces.
+
+A retrieved document may influence reasoning.  
+A tool output may be treated as authoritative.  
+A planner may pass work to another agent.  
+An external service may provide context that is then reused downstream.
+
+The danger is not just that one thing is wrong.
+
+The danger is that **trust propagates**.
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  <strong>Key idea:</strong> The system behaves as though provenance, reliability, and authority are already settled
+  when they are still uncertain.
+</div>
+
+<details>
+  <summary><strong>Example</strong></summary>
+
+An internal-looking source is treated as trusted because it arrived through a sanctioned connector,
+even though the underlying content was never validated and may have been injected or manipulated.
+
+</details>
+
+### 3. Tool misuse
+
+Tool use is the point where language becomes consequence.
+Once an AI system can send an email, create a ticket, update a database, trigger a workflow, or move
+data across systems, mistakes stop being merely informational.
+They become operational.
+
+Tool misuse includes:
+
+- choosing the wrong tool
+- calling the right tool with the wrong parameters
+- chaining tools in the wrong order
+- acting on misleading tool output
+- using tools outside their intended scope
+- exposing or exfiltrating sensitive data through tool flows
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  <strong>Key idea:</strong> A dangerous system may complete the wrong work
+  <strong>successfully</strong>.
+</div>
+
+<details>
+  <summary><strong>Example</strong></summary>
+
+A workflow assistant creates and closes a ticket automatically based on a misread tool response.
+Everything executes correctly at the API level, but the business outcome is wrong.
+
+</details>
+
+### 4. Action without clear authority
+
+This is one of the most important enterprise risks.
+Many AI systems are described as acting “on behalf of” a user, a team, or a workflow.
+But that phrase often hides unresolved questions:
+
+- Who delegated authority?
+- What exactly was delegated?
+- For how long?
+- Under what constraints?
+- Can it be revoked?
+- Can the action be explained later?
+- Can the system distinguish between proposing an action and being permitted to execute it?
+
+<div
+  style={{ padding: '0.9rem 1.1rem', background: 'rgba(127,127,127,0.06)', borderRadius: '0.75rem', margin: '1rem 0' }}
+>
+  <strong>Key idea:</strong> The enterprise risk is not just unauthorized action. It is{' '}
+  <strong>ambiguous authorization</strong>.
+</div>
+
+<details>
+  <summary><strong>Example</strong></summary>
+
+An assistant “for” a sales manager updates customer data because it inherited broad service
+credentials. After the fact, nobody can clearly explain whether the manager delegated that action,
+whether the system was meant only to suggest it, or where the control boundary should have been.
+
+</details>
+
+---
+
+## This is not just a model safety problem
+
+A lot of AI risk discussion still focuses on:
+
+- harmful content
+- hallucinations
+- bias
+- lack of transparency
+
+Those still matter.
+
+But they are not enough for understanding enterprise agentic systems.
+
+The central issue is no longer only what the model says.
+
+It is what the system can do.
+
+### The evaluation lens has to change
+
+| Model-centric questions      | System-centric questions                |
+| ---------------------------- | --------------------------------------- |
+| Is the model accurate?       | What context can the system access?     |
+| Is the answer safe?          | What does it trust by default?          |
+| Was the output filtered?     | What tools can it invoke?               |
+| Was the prompt well written? | What authority does it operate under?   |
+| Did it pass evaluation?      | What happens before an action executes? |
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    borderLeft: '4px solid currentColor',
+    background: 'rgba(127,127,127,0.08)',
+    borderRadius: '0.5rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>Key transition</strong>
+  <br />
+  This is the move from <strong>model-centric safety</strong> to <strong>system-centric control</strong>.
+</div>
+
+---
+
+## Why traditional controls are no longer enough
+
+This does not mean existing AI governance work is irrelevant.
+Policies, evaluations, secure development practices, prompt controls, and output safeguards
+still matter. But they were largely built for systems that were less autonomous, less stateful,
+and less operationally entangled.
+
+Agentic systems introduce runtime composition. Safety now depends not only on what the model
+was trained to do, but on what the overall system is allowed to know, trust, and execute while
+it is running.
+
+### What traditional controls miss
+
+| Traditional control | Still useful? | What it misses in agentic systems                              |
+| ------------------- | ------------: | -------------------------------------------------------------- |
+| Prompt engineering  |           Yes | Does not control runtime context or permissions                |
+| Model evaluation    |           Yes | Does not capture dynamic tool chains and authority propagation |
+| Output filtering    |           Yes | Focuses on response content, not pre-execution decisions       |
+| Governance policy   |           Yes | Often too abstract unless tied to runtime enforcement          |
+
+---
+
+## Tooling and control surfaces to watch
+
+As systems become more agentic, technical leaders should pay close attention to where control
+actually lives.
+
+### High-risk control surfaces
+
+- retrieval and search layers
+- memory stores
+- orchestration frameworks
+- tool registries
+- API gateways
+- identity and delegation layers
+- approval and pre-execution checkpoints
+- audit and trace systems
+
+<details>
+  <summary><strong>Why these matter</strong></summary>
+
+These are the places where enterprise AI systems decide what they can know, what they can invoke,
+and what they are permitted to execute. In many deployments, they matter more than the prompt itself.
+
+</details>
+
+---
+
+## The real message for technical leaders
+
+If you are evaluating enterprise AI, the key question is no longer:
+
+> **Is this a good model?**
+
+The more important question is:
+
+> **Is this a controlled runtime system?**
+
+That means looking past fluency and beyond demos.
+
+A polished interface can hide:
+
+- poor context hygiene
+- hidden trust assumptions
+- weak authorization boundaries
+- unsafe tool affordances
+- missing auditability
+
+<div
+  style={{
+    padding: '1rem 1.25rem',
+    border: '1px solid rgba(127,127,127,0.2)',
+    borderRadius: '0.75rem',
+    margin: '1.25rem 0',
+  }}
+>
+  <strong>Leadership takeaway</strong>
+  <br />
+  Some of the most dangerous systems will not look broken.
+  <br />
+  They will look highly capable.
+</div>
+
+---
+
+## Where this handbook goes next
+
+This chapter is about the shift in risk, not yet the full solution.
+Its purpose is to reframe the conversation.
+The rest of the handbook will make explicit what is too often left implicit:
+
+- context
+- identity
+- authorization
+- execution boundaries
+- runtime controls
+- traceability
+
+But before building that mental model, we need to be clear about the problem.
+Agentic AI changes enterprise risk because it changes **where decisions happen**.
+They now happen at runtime.
+And when decisions happen at runtime, control cannot live only in the codebase, the policy document, or the prompt template.
+It has to live in the system itself.
+
+---
+
+## Further Reading
+
+The following resources provide deeper insight into the systemic risks introduced by
+modern AI systems — particularly around context, trust boundaries, and action.
+
+---
+
+### Prompt Injection Attacks Against LLM Applications
+
+https://arxiv.org/abs/2302.12173
+
+This paper is foundational for understanding why LLM systems are inherently vulnerable when
+exposed to external inputs. It shows that models cannot reliably distinguish between instructions
+and data, making prompt injection a structural weakness rather than a bug.
+
+**Why it matters:**  
+If your system consumes external context (documents, user input, APIs), then **context
+itself becomes an attack surface**.
+
+---
+
+### OWASP Top 10 for Large Language Model Applications
+
+https://owasp.org/www-project-top-10-for-large-language-model-applications/
+
+A practical and evolving taxonomy of real-world risks in LLM systems, including prompt injection,
+data leakage, insecure output handling, and excessive agency.
+
+**Why it matters:**  
+This reframes AI risk from abstract concerns to **concrete system-level vulnerabilities** that can
+be engineered against.
+
+---
+
+### Stochastic Parrots: On the Dangers of Large Language Models
+
+https://dl.acm.org/doi/10.1145/3442188.3445922
+
+A widely cited paper arguing that language models do not understand meaning — they generate
+plausible text based on statistical patterns in training data.
+
+**Why it matters:**  
+It challenges the assumption that models “know” anything, reinforcing why **blind trust in
+model outputs is fundamentally unsafe**.
+
+---
+
+### Toolformer: Language Models Can Teach Themselves to Use Tools
+
+https://arxiv.org/abs/2302.04761
+
+Demonstrates how models can learn to call external tools (APIs, calculators, search) to improve
+performance.
+
+**Why it matters:**  
+Tool access transforms models from passive generators into **systems that can act**, significantly
+expanding both capability and risk.
+
+---
+
+### ReAct: Synergizing Reasoning and Acting in Language Models
+
+https://arxiv.org/abs/2210.03629
+
+Introduces a framework where models interleave reasoning steps with actions, enabling more complex
+and autonomous behavior.
+
+**Why it matters:**  
+This is a key step toward agentic systems — where **decisions and actions are tightly coupled at
+runtime**.
+
+---
+
+### Secure AI Systems (Microsoft Architecture Guidance)
+
+https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/secure-ai-systems
+
+Microsoft’s architectural guidance for building secure AI systems, covering prompt injection,
+data validation, and trust boundaries across components.
+
+**Why it matters:**  
+It reinforces that prompt injection is not just a prompt issue — it is a **failure of system design,
+particularly around context validation and boundary control**.
+
+---
+
+### GPT-4 System Card
+
+https://cdn.openai.com/papers/gpt-4-system-card.pdf
+
+A detailed report on observed behaviors, risks, and limitations of GPT-4 in real-world deployments.
+
+**Why it matters:**  
+Provides evidence that **emergent behaviors and misuse risks appear only at system level**,
+not in isolated model evaluation.
+
+---
+
+### Emerging Agent Stack (Glean, 2026)
+
+https://www.glean.com/blog/emerging-agent-stack-2026
+
+Explores how modern AI systems are evolving into multi-component stacks combining retrieval,
+tools, orchestration, and memory.
+
+**Why it matters:**  
+Highlights the shift from single models to **composite systems**, where risk emerges from
+interactions between components.
+
+---

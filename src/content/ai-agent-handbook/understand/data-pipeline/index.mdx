@@ -1,0 +1,71 @@
+---
+title: Why You Need a Data Pipeline
+description: RAG is just the tip — without clean, structured data, your LLM won't deliver.
+---
+
+# Why You Need a Data Pipeline
+
+When teams hear about RAG (Retrieval-Augmented Generation), they imagine it solves everything. Just embed your documents and plug them into a prompt, right?
+
+But here’s the catch: **RAG only works if your data is clean, chunked, structured, and retrievable.**
+
+That’s a data engineering problem — not a prompt engineering one.
+
+---
+
+## The Problem: Your Data Isn’t Ready
+
+Most enterprise data is:
+
+- Buried in PDFs, PowerPoints, emails, and portals
+- Full of tables, footnotes, and irrelevant noise
+- Out of sync with the workflows that rely on it
+
+Your LLM can’t reason over data it can’t parse or doesn’t see.
+
+Without a pipeline, teams end up:
+
+- Hardcoding summaries into prompts
+- Copy-pasting examples into context windows
+- Duplicating effort across use cases
+
+---
+
+## The Solution: A Real Data Pipeline
+
+A production-grade LLM application needs a data pipeline to:
+
+- **Extract** content from varied sources (PDFs, HTML, forms, etc.)
+- **Chunk** intelligently — not too small, not too large
+- **Enrich** with metadata (type, owner, validity)
+- **Embed** using model-compatible representations
+- **Index** into a retriever (e.g., Vespa, OpenSearch, Postgres)
+- **Track** versions and sources for traceability
+
+> Without these steps, your “RAG system” is just guesswork.
+
+The pipeline is what makes context relevant, reusable, and trustworthy.
+
+---
+
+## LMS Example
+
+Imagine you’re surfacing course policy documents and past grading rubrics in response to student support queries or instructor evaluations.
+
+Without a pipeline:
+
+- The AI fetches outdated, irrelevant, or duplicative context
+- It misleads the student, or contradicts your policy
+
+With a pipeline:
+
+- Only the most relevant, tagged, up-to-date sections are retrieved
+- You can trace any AI response back to the document and version it came from
+
+**That’s how you go from demo to dependable.**
+
+The Aegis Stack supports full RAG pipelines — from extraction and embedding to indexing and retrieval — with the same observability and modularity built into the rest of the platform.
+
+---
+
+**Next: Why even your LLM calls need a gateway.**

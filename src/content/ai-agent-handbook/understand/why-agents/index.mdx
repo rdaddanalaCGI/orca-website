@@ -1,0 +1,126 @@
+---
+title: First Steps Beyond Prompting
+description: What you need when prompting stops working.
+---
+
+# First Steps Beyond Prompting
+
+Most teams start strong with prompts.
+They build workflows to classify tickets, summarize documents, or generate feedback. And at first — it works. It's fast, cheap, and impressive.
+
+But soon, things get messy:
+
+- Prompts balloon into fragile blocks of logic
+- You hit token limits and context confusion
+- You can't reliably evaluate or improve them
+
+You realize you're not building prompts anymore — you're engineering behavior. And prompts alone don’t give you the tools to do it well.
+
+---
+
+## ❌ Where Prompts Break
+
+### 1. **Context Overload**
+
+You feed in too much: instructions, history, edge cases, and the LLM starts missing the point.
+
+✅ You need **retrieval** — dynamically pulling in only the relevant context for the task at hand.
+
+---
+
+### 2. **Multi-Step Logic**
+
+You want to:
+
+1. Check if the input is complete
+2. Match it against a rubric
+3. Then give specific feedback
+
+Prompts don’t carry forward reasoning between steps.
+
+✅ You need **structured workflows** — sequences, branches, conditionals, and memory.
+
+---
+
+### 3. **System Integration**
+
+You want to pull metadata or save results. LLMs don’t talk to APIs on their own.
+
+✅ You need **tool calls** — safe, structured access to your internal systems.
+
+---
+
+### 4. **Zero Visibility**
+
+When something fails, you don’t know why.
+
+- Was it the prompt?
+- The data?
+- The retrieved input?
+
+✅ You need **observability** — full traceability into what the model saw and why it responded the way it did.
+
+---
+
+### 5. **No Testability**
+
+You tweak a prompt and hope it helped. But did it?
+
+✅ You need **evaluation** — side-by-side output comparison, score tracking, prompt versioning.
+
+---
+
+## What You Actually Need
+
+When prompting stops being enough, you don’t need more hacks — you need a system:
+
+- **Retrieval** to focus the model
+- **Tools** to act on real data
+- **Workflows** to structure logic
+- **Prompt config** you can update and version
+- **Evaluation** to drive quality and improvement
+
+This is how you go from demo to dependable. From magic to infrastructure.
+
+This is the core of what the Aegis Stack delivers.
+
+---
+
+## So What Is an Agent?
+
+An **agent** is not a buzzword — it’s just the name for a system that combines all of the above:
+
+- It uses prompts — but in structured, reusable ways
+- It pulls in external context via retrieval
+- It calls tools or APIs to get things done
+- It tracks what happened, and adapts based on outcome
+
+You can think of it as **composable intelligence**:
+
+> A unit of behavior you can version, evaluate, and integrate safely into your product or process.
+
+It’s what turns prompting into production.
+
+---
+
+## A Real Example
+
+Let’s say you’re the CTO of an LMS platform. You’re trying to auto-grade short answer questions. You build a prompt using the model answer and a rubric. It works — for a bit.
+
+But:
+
+- Some questions are too long for the prompt
+- Others have multi-part scoring logic
+- You can’t tell if it’s improving or getting worse
+- And your customers want transparency
+
+What you actually need:
+
+- Retrieval of only the rubric elements that matter
+- A step-by-step logic chain for grading
+- A final summarization step that maps to your feedback style
+- Evaluation sets to validate grading quality
+
+**This is what Aegis helps you build — not just a prompt, but a reliable, production-grade marking assistant.**
+
+Next: what goes wrong when teams try to “just prompt.”

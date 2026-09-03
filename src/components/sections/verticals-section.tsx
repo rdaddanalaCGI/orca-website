@@ -195,7 +195,7 @@ export function VerticalsSection() {
   const [active, setActive] = useState(0)
 
   return (
-    <Section id="verticals" surface="mist">
+    <Section id="verticals">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:sticky lg:top-16 lg:col-span-4 lg:self-start">
           <div className="flex flex-col gap-6">
@@ -222,7 +222,7 @@ export function VerticalsSection() {
                     'relative z-10 cursor-pointer rounded-full px-4 py-2 text-sm/7 font-medium whitespace-nowrap transition-colors',
                     active === i
                       ? 'bg-transparent text-white dark:text-olive-950'
-                      : 'bg-white text-olive-700 shadow-sm ring-1 ring-olive-950/20 hover:bg-olive-950/5 hover:text-olive-950 dark:bg-olive-950/40 dark:text-olive-100 dark:ring-white/20 dark:hover:bg-olive-900/60 dark:hover:text-white',
+                      : 'bg-white text-olive-700 shadow-sm ring-1 ring-olive-950/20 hover:bg-transparent hover:text-olive-950 dark:bg-olive-950/40 dark:text-olive-100 dark:ring-white/20 dark:hover:bg-transparent dark:hover:text-white',
                   )}
                 >
                   {active === i && (

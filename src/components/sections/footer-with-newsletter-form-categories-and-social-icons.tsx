@@ -18,7 +18,7 @@ export function FooterCategory({ title, children, ...props }: { title: ReactNode
 
 export function FooterLink({ href, className, ...props }: { href: string } & Omit<ComponentProps<'a'>, 'href'>) {
   return (
-    <li className={clsx('text-olive-700 dark:text-olive-400', className)}>
+    <li className={clsx('text-white/70', className)}>
       <Link href={href} {...props} />
     </li>
   )
@@ -34,13 +34,7 @@ export function SocialLink({
   name: string
 } & Omit<ComponentProps<'a'>, 'href'>) {
   return (
-    <Link
-      href={href}
-      target="_blank"
-      aria-label={name}
-      className={clsx('text-olive-950 *:size-6 dark:text-white', className)}
-      {...props}
-    />
+    <Link href={href} target="_blank" aria-label={name} className={clsx('text-white *:size-6', className)} {...props} />
   )
 }
 
@@ -56,18 +50,18 @@ export function NewsletterForm({
   return (
     <form className={clsx('flex max-w-sm flex-col gap-2', className)} {...props}>
       <p>{headline}</p>
-      <div className="flex flex-col gap-4 text-olive-700 dark:text-olive-400">{subheadline}</div>
-      <div className="flex items-center border-b border-olive-950/20 py-2 has-[input:focus]:border-olive-950 dark:border-white/20 dark:has-[input:focus]:border-white">
+      <div className="flex flex-col gap-4 text-white/70">{subheadline}</div>
+      <div className="flex items-center border-b border-white/20 py-2 has-[input:focus]:border-white">
         <input
           type="email"
           placeholder="Email"
           aria-label="Email"
-          className="flex-1 text-olive-950 focus:outline-hidden dark:text-white"
+          className="flex-1 text-white placeholder:text-white/50 focus:outline-hidden"
         />
         <button
           type="submit"
           aria-label="Subscribe"
-          className="relative inline-flex size-7 items-center justify-center rounded-full after:absolute after:-inset-2 hover:bg-olive-950/10 dark:hover:bg-white/10 after:pointer-fine:hidden"
+          className="relative inline-flex size-7 items-center justify-center rounded-full text-white after:absolute after:-inset-2 hover:bg-white/10 after:pointer-fine:hidden"
         >
           <ArrowNarrowRightIcon />
         </button>
@@ -91,7 +85,7 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
 } & ComponentProps<'footer'>) {
   return (
     <footer className={clsx('pt-16', className)} {...props}>
-      <div className="bg-olive-950/2.5 py-16 text-olive-950 dark:bg-white/5 dark:text-white">
+      <div className="bg-orca-teal-dark py-16 text-white">
         <Container className="flex flex-col gap-16">
           <div className="grid grid-cols-1 gap-x-6 gap-y-16 text-sm/7 lg:grid-cols-2">
             {cta}
@@ -100,7 +94,7 @@ export function FooterWithNewsletterFormCategoriesAndSocialIcons({
             </nav>
           </div>
           <div className="flex items-center justify-between gap-10 text-sm/7">
-            <div className="text-olive-600 dark:text-olive-500">{fineprint}</div>
+            <div className="text-white/50">{fineprint}</div>
             {socialLinks && <div className="flex items-center gap-4 sm:gap-10">{socialLinks}</div>}
           </div>
         </Container>

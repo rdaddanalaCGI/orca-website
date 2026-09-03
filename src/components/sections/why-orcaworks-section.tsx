@@ -177,7 +177,6 @@ export function WhyOrcaworksSection() {
   return (
     <Section
       id="why-orcaworks"
-      surface="mist"
       eyebrow="WHY ORCAWORKS"
       eyebrowVariant="brand"
       headline="One blueprint. From how the work operates to how the application runs."

@@ -75,7 +75,7 @@ describe('SEO: sitemap and routes', () => {
     const pageFiles = await findPageFiles(APP_DIR)
 
     const routesOnDisk = pageFiles
-      .map((file) => path.dirname(path.relative(APP_DIR, file)))
+      .map((file) => path.dirname(path.relative(APP_DIR, file)).split(path.sep).join('/'))
       // Remove the marketing route-group prefix and map to public URL paths.
       .map((dir) => {
         const stripped = dir.replace(/^\(marketing\)\/?/, '')

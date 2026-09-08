@@ -15,7 +15,7 @@ export function SolutionHero({ hero }: { hero: SolutionHeroData }) {
           {hero.subheadline}
         </Text>
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <ButtonLink href={hero.primaryCta.href} color="brand" size="lg">
+          <ButtonLink href={hero.primaryCta.href} size="lg">
             {hero.primaryCta.label}
           </ButtonLink>
           {hero.secondaryCta && (

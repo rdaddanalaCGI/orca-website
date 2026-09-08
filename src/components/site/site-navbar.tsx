@@ -47,9 +47,7 @@ export function SiteNavbar() {
           <PlainButtonLink href="/" className="max-sm:hidden">
             Log in
           </PlainButtonLink>
-          <ButtonLink href="/contact" color="brand">
-            Get started
-          </ButtonLink>
+          <ButtonLink href="/contact">Get started</ButtonLink>
         </>
       }
     />

@@ -53,7 +53,7 @@ function plans(option: string) {
           'Slack integration',
         ]}
         cta={
-          <ButtonLink color="brand" href="/contact" size="lg">
+          <ButtonLink href="/contact" size="lg">
             Start free trial
           </ButtonLink>
         }
@@ -342,7 +342,7 @@ export default function Page() {
         }
         cta={
           <div className="flex items-center gap-4">
-            <ButtonLink color="brand" href="/contact" size="lg">
+            <ButtonLink href="/contact" size="lg">
               Chat with us
             </ButtonLink>
 

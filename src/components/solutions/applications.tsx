@@ -217,7 +217,6 @@ export function SolutionApplications({
 
                   <ButtonLink
                     href={active.cta.href}
-                    color="brand"
                     size="lg"
                     target={active.cta.type === 'external' ? '_blank' : undefined}
                     rel={active.cta.type === 'external' ? 'noopener noreferrer' : undefined}

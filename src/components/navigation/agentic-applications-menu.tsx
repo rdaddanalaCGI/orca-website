@@ -1,7 +1,7 @@
 'use client'
 
 import { clsx } from 'clsx/lite'
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -104,45 +104,33 @@ export function AgenticApplicationsMenu() {
               <span className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-olive-400">
                 Industries
               </span>
-              <LayoutGroup>
-                <ul className="mt-4 flex flex-col gap-1" role="list">
-                  {solutions.map((vertical) => {
-                    const isActive = active.id === vertical.id
-                    return (
-                      <li key={vertical.id}>
-                        <Link
-                          href={vertical.href}
-                          onMouseEnter={() => setActiveId(vertical.id)}
-                          onFocus={() => setActiveId(vertical.id)}
+              <ul className="mt-4 flex flex-col gap-1" role="list">
+                {solutions.map((vertical) => {
+                  const isActive = active.id === vertical.id
+                  return (
+                    <li key={vertical.id}>
+                      <Link
+                        href={vertical.href}
+                        onMouseEnter={() => setActiveId(vertical.id)}
+                        onFocus={() => setActiveId(vertical.id)}
+                        className={clsx(
+                          'flex items-center justify-between px-3 py-2.5 text-sm/7 font-medium transition-colors',
+                          isActive ? 'text-orca-orange' : 'text-olive-950 dark:text-white',
+                          'hover:text-orca-orange',
+                        )}
+                      >
+                        <span className="pr-2">{vertical.name}</span>
+                        <ArrowNarrowRightIcon
                           className={clsx(
-                            'group relative flex items-center justify-between rounded-lg px-3 py-2.5 text-sm/7 font-medium transition-colors',
-                            isActive ? 'text-orca-orange' : 'text-olive-950 dark:text-white',
-                            'hover:text-orca-orange',
+                            'h-4 w-4 shrink-0 transition-opacity',
+                            isActive ? 'opacity-100' : 'opacity-0',
                           )}
-                        >
-                          {isActive && (
-                            <motion.div
-                              layoutId="active-solution-row"
-                              className="absolute inset-0 -z-10 rounded-lg bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-                              initial={false}
-                              transition={
-                                shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }
-                              }
-                            />
-                          )}
-                          <span className="pr-2">{vertical.name}</span>
-                          <ArrowNarrowRightIcon
-                            className={clsx(
-                              'h-4 w-4 shrink-0 transition-opacity',
-                              isActive ? 'opacity-100' : 'opacity-0',
-                            )}
-                          />
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </LayoutGroup>
+                        />
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
 
             <div className="lg:col-span-6">
@@ -168,15 +156,17 @@ export function AgenticApplicationsMenu() {
                       key={item.id}
                       href={item.href}
                       onClick={(event) => handleApplicationClick(event, item.href)}
-                      className="group flex items-start justify-between gap-4 rounded-lg border border-olive-950/5 bg-orca-mist p-4 transition-colors hover:border-orca-orange/30 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
+                      className="group/app flex items-start justify-between gap-4 p-4 transition-colors"
                     >
                       <div className="flex flex-col gap-1">
-                        <span className="font-display text-lg/7 text-olive-950 dark:text-white">{item.title}</span>
+                        <span className="font-display text-lg/7 text-olive-950 transition-colors group-hover/app:text-orca-orange dark:text-white">
+                          {item.title}
+                        </span>
                         {item.description && (
                           <span className="text-sm/6 text-olive-700 dark:text-olive-400">{item.description}</span>
                         )}
                       </div>
-                      <ArrowNarrowRightIcon className="mt-0.5 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
+                      <ArrowNarrowRightIcon className="mt-0.5 h-4 w-4 shrink-0 transition-transform group-hover/app:translate-x-1" />
                     </Link>
                   ))}
                 </motion.div>

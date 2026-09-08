@@ -94,7 +94,7 @@ export function GateReveal({
           <p className="font-medium text-olive-950 dark:text-white">You&apos;re in.</p>
           <p className="mt-1 text-sm/6 text-olive-700 dark:text-olive-200">Enjoy the full guide below.</p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Button type="button" color="brand" onClick={() => setShowSuccess(false)} className="justify-self-start">
+            <Button type="button" onClick={() => setShowSuccess(false)} className="justify-self-start">
               Continue reading online
             </Button>
             {resource.pdf && (

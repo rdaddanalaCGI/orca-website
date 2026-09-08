@@ -8,6 +8,11 @@ const sizes = {
   lg: 'px-4 py-2',
 }
 
+const base =
+  'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium outline-hidden transition-colors duration-150 motion-safe:active:scale-[0.97] focus-visible:[--tw-outline-style:solid] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orca-orange'
+
+const disabled = 'disabled:pointer-events-none disabled:opacity-50'
+
 export function Button({
   size = 'md',
   type = 'button',
@@ -16,17 +21,18 @@ export function Button({
   ...props
 }: {
   size?: keyof typeof sizes
-  color?: 'dark/light' | 'light' | 'brand'
+  color?: 'dark/light' | 'light'
 } & ComponentProps<'button'>) {
   return (
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium',
+        base,
+        disabled,
         color === 'dark/light' &&
-          'bg-olive-950 text-white hover:bg-olive-800 dark:bg-olive-300 dark:text-olive-950 dark:hover:bg-olive-200',
-        color === 'light' && 'hover bg-white text-olive-950 hover:bg-olive-100 dark:bg-olive-100 dark:hover:bg-white',
-        color === 'brand' && 'bg-orca-orange text-white hover:bg-orca-orange-hover',
+          'bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 dark:bg-olive-300 dark:text-olive-950 dark:hover:bg-olive-200 dark:active:bg-olive-400',
+        color === 'light' &&
+          'bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 dark:bg-olive-100 dark:hover:bg-white dark:active:bg-olive-200',
         sizes[size],
         className,
       )}
@@ -44,17 +50,17 @@ export function ButtonLink({
 }: {
   href: string
   size?: keyof typeof sizes
-  color?: 'dark/light' | 'light' | 'brand'
+  color?: 'dark/light' | 'light'
 } & Omit<ComponentProps<'a'>, 'href'>) {
   return (
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium',
+        base,
         color === 'dark/light' &&
-          'bg-olive-950 text-white hover:bg-olive-800 dark:bg-olive-300 dark:text-olive-950 dark:hover:bg-olive-200',
-        color === 'light' && 'hover bg-white text-olive-950 hover:bg-olive-100 dark:bg-olive-100 dark:hover:bg-white',
-        color === 'brand' && 'bg-orca-orange text-white hover:bg-orca-orange-hover',
+          'bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 dark:bg-olive-300 dark:text-olive-950 dark:hover:bg-olive-200 dark:active:bg-olive-400',
+        color === 'light' &&
+          'bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 dark:bg-olive-100 dark:hover:bg-white dark:active:bg-olive-200',
         sizes[size],
         className,
       )}
@@ -75,7 +81,9 @@ export function SoftButton({
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-olive-950/10 text-sm/7 font-medium text-olive-950 hover:bg-olive-950/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+        base,
+        disabled,
+        'bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/25',
         sizes[size],
         className,
       )}
@@ -97,7 +105,8 @@ export function SoftButtonLink({
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-olive-950/10 text-sm/7 font-medium text-olive-950 hover:bg-olive-950/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+        base,
+        'bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/25',
         sizes[size],
         className,
       )}
@@ -120,10 +129,14 @@ export function PlainButton({
     <button
       type={type}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium',
-        color === 'dark/light' && 'text-olive-950 hover:bg-olive-950/10 dark:text-white dark:hover:bg-white/10',
-        color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
-        color === 'brand' && 'text-orca-orange hover:bg-orca-orange/10',
+        base,
+        disabled,
+        'gap-2',
+        color === 'dark/light' &&
+          'text-olive-950 hover:bg-olive-950/10 active:bg-olive-950/15 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/15',
+        color === 'light' &&
+          'text-white hover:bg-white/15 active:bg-white/20 dark:hover:bg-white/10 dark:active:bg-white/15',
+        color === 'brand' && 'text-[#cc3a00] hover:bg-orca-orange/10 active:bg-orca-orange/15 dark:text-orca-orange',
         sizes[size],
         className,
       )}
@@ -147,10 +160,13 @@ export function PlainButtonLink({
     <Link
       href={href}
       className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium',
-        color === 'dark/light' && 'text-olive-950 hover:bg-olive-950/10 dark:text-white dark:hover:bg-white/10',
-        color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
-        color === 'brand' && 'text-orca-orange hover:bg-orca-orange/10',
+        base,
+        'gap-2',
+        color === 'dark/light' &&
+          'text-olive-950 hover:bg-olive-950/10 active:bg-olive-950/15 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/15',
+        color === 'light' &&
+          'text-white hover:bg-white/15 active:bg-white/20 dark:hover:bg-white/10 dark:active:bg-white/15',
+        color === 'brand' && 'text-[#cc3a00] hover:bg-orca-orange/10 active:bg-orca-orange/15 dark:text-orca-orange',
         sizes[size],
         className,
       )}

@@ -84,7 +84,7 @@ export function ContactForm({
         </p>
       )}
 
-      <Button color="brand" type="submit" disabled={isPending} className="justify-self-start">
+      <Button type="submit" disabled={isPending} className="justify-self-start">
         {isPending ? 'Sending…' : 'Send message'}
       </Button>
     </form>

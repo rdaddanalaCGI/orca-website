@@ -197,7 +197,7 @@ export default function Page() {
             Bring us a process that crosses systems, documents, teams and decisions. We&apos;ll show you where Orcaworks
             can fit.
           </Text>
-          <ButtonLink href="/contact" color="brand" size="lg">
+          <ButtonLink href="/contact" size="lg">
             Get a demo <ArrowNarrowRightIcon className="h-4 w-4" />
           </ButtonLink>
         </Container>

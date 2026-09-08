@@ -1,6 +1,6 @@
 # Colour System
 
-This documents the site's color tokens and the usage rules established for the template-level theming pass (global background, header, footer, cards, and menu hover states). All tokens live in `src/app/globals.css` under the `@theme` block and are consumed as Tailwind utilities (`bg-*`, `text-*`, etc.) — never hard-code a hex value in a component.
+This documents the site's color tokens and the usage rules established for the template-level theming pass (global background, header, footer, cards, menu hover states, and buttons). All tokens live in `src/app/globals.css` under the `@theme` block and are consumed as Tailwind utilities (`bg-*`, `text-*`, etc.) — never hard-code a hex value in a component.
 
 ## Tokens
 
@@ -105,12 +105,34 @@ Because these surfaces are always a dark color regardless of theme, their text/i
 
 ### 4. Brand accent — `#ff4800` (`--color-orca-orange`)
 
-Primary CTAs, active/selected nav state, eyebrow labels. Should remain a minority accent color, not a dominant surface. `--color-orca-orange-hover` currently has the same value — there is no separate, darker hover shade defined.
+Active/selected nav state, eyebrow labels, and the universal button focus ring (see **Buttons** below). **Not** used as a solid button fill anymore — see below. Should remain a minority accent color, not a dominant surface. `--color-orca-orange-hover` currently has the same value — there is no separate, darker hover shade defined.
 
 This same value is duplicated in two places that can't read `globals.css` directly, so update them alongside it if it ever changes again:
 
 - `src/app/(payload)/admin.css` — hardcoded `--color-orca-orange` / `--color-orca-orange-hover` for the Payload admin UI.
 - `src/app/ai-agent-handbook/handbook.css` and `src/app/enterprise-ai-safety-handbook/handbook.css` — `--nextra-primary-hue/-saturation/-lightness`, the HSL equivalent Nextra needs for handbook links/highlights. For `#ff4800` that's `17deg 100% 50%` (light) / `17deg 100% 54%` (dark).
+
+**Accessibility note:** `#ff4800` text on the light page background (`#f9feff`) measures only 3.34:1 contrast — it fails WCAG AA's 4.5:1 for normal text. Anywhere orange is used as _text_ on a light surface (not just buttons), check contrast before reusing it verbatim; see the `PlainButton`/`PlainButtonLink` fix below for the pattern (a darker shade in light mode, the full brand orange in dark mode where it already passes at 5.76:1).
+
+### 5. Buttons (`src/components/elements/button.tsx`)
+
+All six button components (`Button`, `ButtonLink`, `SoftButton`, `SoftButtonLink`, `PlainButton`, `PlainButtonLink`) share one `base` class string — hover/active/focus/transition behavior is defined once, not per variant, so they can't drift out of sync.
+
+**Solid CTAs — `Button`/`ButtonLink`, `color="dark/light"` (the default):**
+
+- Light mode: `bg-olive-950 text-white`, hovers to `olive-800`, presses to `olive-900`
+- Dark mode: `bg-olive-300 text-olive-950`, hovers to `olive-200`, presses to `olive-400`
+- This is now the **only** solid-fill button style used site-wide (header "Get started", every hero/CTA "Get a demo", pricing, contact form submit, gated-content forms, etc.). A `color="brand"` (solid orange fill) option used to exist on `Button`/`ButtonLink` but was removed — white text on `#ff4800` measured 3.40:1, failing WCAG AA. Do not reintroduce a solid-orange button; if a second visual weight is needed, use the existing `color="light"` (white pill, for use on dark/colored surfaces) instead.
+
+**Soft buttons — `SoftButton`/`SoftButtonLink`:** `bg-olive-950/10 text-olive-950` (light) / `bg-white/10 text-white` (dark), for a lower-emphasis filled button.
+
+**Text-only buttons — `PlainButton`/`PlainButtonLink`:** no fill at rest; a soft tint appears on hover/active. The `color="brand"` variant (orange text, e.g. footer/inline arrow links) uses `text-[#cc3a00] dark:text-orca-orange` — the darker light-mode shade exists specifically to clear the 4.5:1 contrast threshold against the page background; dark mode keeps the full brand orange since it already passes there.
+
+**Focus ring:** every button uses `focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orca-orange`, fixed brand-orange regardless of theme or button color — not `outline-current`, which goes invisible for white-on-dark buttons sitting on a light page (white ring on a near-white page = no visible ring). Orange gives ≥3:1 non-text contrast (WCAG 1.4.11) against both light and dark surroundings.
+
+**Tailwind v4 gotcha, if you touch focus styles here again:** `outline-hidden` and `focus-visible:outline*` both read/write the same `--tw-outline-style` custom property. `outline-hidden` sets it to `none` unconditionally, and a plain `focus-visible:outline-2` does _not_ reset it back — so the ring silently computes to `outline-style: none` even though width/color/offset all look correct in devtools. The fix baked into `base` is `focus-visible:[--tw-outline-style:solid]` alongside the other `focus-visible:outline-*` utilities. Keep that arbitrary-property utility if you ever rewrite `base`.
+
+**Active feedback:** `motion-safe:active:scale-[0.97]` on every button (respects `prefers-reduced-motion`).
 
 ## Dark mode pattern
 

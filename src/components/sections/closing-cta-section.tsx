@@ -13,7 +13,7 @@ export function ClosingCtaSection() {
           a governed AI application.
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink href="/contact" color="brand" size="lg">
+          <ButtonLink href="/contact" size="lg">
             Get a demo
           </ButtonLink>
           <Link href="/agentic-automation-platform" color="brand">

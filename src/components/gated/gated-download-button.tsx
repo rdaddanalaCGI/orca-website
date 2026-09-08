@@ -62,9 +62,7 @@ export function GatedDownloadButton({
   return (
     <div className="grid gap-4">
       {!showForm ? (
-        <Button color="brand" onClick={() => setShowForm(true)}>
-          {buttonLabel}
-        </Button>
+        <Button onClick={() => setShowForm(true)}>{buttonLabel}</Button>
       ) : (
         <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
           <LeadGateForm

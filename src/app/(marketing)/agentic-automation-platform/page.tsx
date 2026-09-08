@@ -74,7 +74,7 @@ export default function Page() {
               end-to-end, from blueprint to live, measurable outcomes.
             </Text>
             <div className="flex flex-wrap items-center gap-4">
-              <ButtonLink color="brand" href="/contact" size="md">
+              <ButtonLink href="/contact" size="md">
                 Get started
               </ButtonLink>
               <PlainButtonLink href="/blog" size="md">
@@ -466,7 +466,7 @@ export default function Page() {
         }
         cta={
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <ButtonLink color="brand" href="/contact" size="lg">
+            <ButtonLink href="/contact" size="lg">
               Meet an expert
             </ButtonLink>
             <PlainButtonLink href="/ai-agent-handbook" size="lg">

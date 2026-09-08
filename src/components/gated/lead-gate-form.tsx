@@ -96,7 +96,7 @@ export function LeadGateForm({
         </p>
       )}
 
-      <Button color="brand" type="submit" disabled={isPending} className="justify-self-start">
+      <Button type="submit" disabled={isPending} className="justify-self-start">
         {isPending ? 'Unlocking…' : 'Unlock the guide →'}
       </Button>
 

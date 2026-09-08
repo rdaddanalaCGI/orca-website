@@ -22,13 +22,12 @@ export default async function AiAgentHandbookLayout({
       <head>
         <ThemeScript />
         <UnlockScript />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="rgb(244,244,240)" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9feff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="rgb(12,12,9)" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap"
           rel="stylesheet"
         />
       </head>

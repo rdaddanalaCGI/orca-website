@@ -28,7 +28,7 @@ export default function ContactPage() {
               Tell us what you&apos;re building. We&apos;ll get back to you within one business day.
             </Text>
           </div>
-          <div className="rounded-3xl bg-olive-200 p-8 dark:bg-olive-900">
+          <div className="rounded-3xl bg-orca-mist p-8 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
             <ContactForm sourcePage="/contact" />
           </div>
         </div>

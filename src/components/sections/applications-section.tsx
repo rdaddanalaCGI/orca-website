@@ -84,7 +84,7 @@ function ApplicationCard({ application }: { application: Application }) {
   return (
     <NextLink href={application.href} className="group block h-full">
       <motion.div
-        className="flex h-full flex-col overflow-hidden rounded-lg bg-olive-950/2.5 ring-1 ring-olive-950/5 dark:bg-white/5 dark:ring-white/10"
+        className="flex h-full flex-col overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
         initial="rest"
         whileHover="hover"
         variants={cardVariants}

@@ -11,7 +11,7 @@ export function AnimatedCard({ children, index = 0 }: { children: ReactNode; ind
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
       whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.2 } }}
-      className="h-full rounded-3xl bg-olive-50 p-8 shadow-sm ring-1 ring-olive-950/10 dark:bg-olive-900 dark:ring-white/10"
+      className="h-full rounded-3xl bg-orca-mist p-8 shadow-sm ring-1 ring-olive-950/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
     >
       {children}
     </motion.div>

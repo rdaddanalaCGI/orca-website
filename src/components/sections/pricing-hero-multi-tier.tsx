@@ -27,7 +27,7 @@ export function Plan({
   return (
     <div
       className={clsx(
-        'flex flex-col justify-between gap-6 rounded-xl bg-olive-950/2.5 p-6 sm:items-start dark:bg-white/5',
+        'flex flex-col justify-between gap-6 rounded-xl bg-orca-mist p-6 sm:items-start dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
         className,
       )}
     >

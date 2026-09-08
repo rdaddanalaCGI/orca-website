@@ -5,7 +5,7 @@ import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon
 
 export function ClosingCtaSection() {
   return (
-    <section className="bg-olive-200/50 py-12 dark:bg-olive-900/50">
+    <section className="py-12">
       <Container className="flex flex-col items-start gap-6">
         <h2 className="font-display text-2xl/8 text-olive-950 dark:text-white">Start with one workflow.</h2>
         <p className="max-w-2xl text-base/7 text-olive-700 dark:text-olive-400">

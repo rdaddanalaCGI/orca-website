@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-display: 'Instrument Serif', serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Familjen Grotesk', sans-serif;
+  --font-sans: 'Familjen Grotesk', system-ui, sans-serif;
 
   --color-olive-50: oklch(98.8% 0.003 106.5);
   --color-olive-100: oklch(96.6% 0.005 106.5);
@@ -22,13 +22,14 @@
   --color-orca-orange-hover: #e6421b;
   --color-orca-mist: #edf8f9;
   --color-orca-teal-dark: #326367;
+  --color-page: #f9feff;
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-olive-100);
+    background-color: var(--color-page);
     --scroll-padding-top: 0;
     scroll-padding-top: var(--scroll-padding-top);
 

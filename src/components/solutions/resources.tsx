@@ -20,7 +20,7 @@ export async function SolutionResources({ resources }: { resources: SolutionReso
         {resources.items.map((item) => (
           <div
             key={item.id}
-            className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-olive-950/10 bg-white p-6 sm:p-8 dark:border-white/10 dark:bg-olive-900"
+            className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-olive-950/10 bg-orca-mist p-6 sm:p-8 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
           >
             <div className="flex flex-col gap-2">
               <Eyebrow variant="brand" className="text-xs/4 font-semibold tracking-wider uppercase">

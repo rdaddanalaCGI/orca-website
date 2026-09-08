@@ -41,7 +41,7 @@ function VerticalCard({ vertical, isDragging }: { vertical: Vertical; isDragging
   return (
     <NextLink
       href={vertical.href}
-      className="group block h-full overflow-hidden rounded-lg bg-olive-950/2.5 ring-1 ring-olive-950/5 select-none dark:bg-white/5 dark:ring-white/10"
+      className="group block h-full overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 select-none dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
       onClick={(e) => {
         if (isDragging) e.preventDefault()
       }}
@@ -195,7 +195,7 @@ export function VerticalsSection() {
   const [active, setActive] = useState(0)
 
   return (
-    <Section id="verticals" surface="mist">
+    <Section id="verticals">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:sticky lg:top-16 lg:col-span-4 lg:self-start">
           <div className="flex flex-col gap-6">

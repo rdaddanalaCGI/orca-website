@@ -59,14 +59,7 @@ export function FeatureTabs({ className }: { className?: string }) {
   const [active, setActive] = useState(0)
 
   return (
-    <section
-      className={[
-        'bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
+    <section className={className}>
       <Container className="flex flex-col gap-6 py-16">
         <h2 className="max-w-3xl text-[32px] leading-10 font-bold text-olive-950 dark:text-white">
           Govern every workflow. Orchestrate every agent.

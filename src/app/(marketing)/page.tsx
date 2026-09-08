@@ -113,7 +113,7 @@ export default async function Page() {
           <>
             <FeatureThreeColumnWithDemos
               demo={
-                <Screenshot wallpaper="blue" placement="bottom-right">
+                <Screenshot placement="bottom-right">
                   <div className="relative aspect-3/2 w-full">
                     <Image
                       src="/img/screenshots/1.webp"
@@ -141,7 +141,7 @@ export default async function Page() {
             />
             <FeatureThreeColumnWithDemos
               demo={
-                <Screenshot wallpaper="purple" placement="top-left">
+                <Screenshot placement="top-left">
                   <div className="relative aspect-3/2 w-full">
                     <Image
                       src="/img/screenshots/1.webp"
@@ -169,7 +169,7 @@ export default async function Page() {
             />
             <FeatureThreeColumnWithDemos
               demo={
-                <Screenshot wallpaper="brown" placement="bottom-left">
+                <Screenshot placement="bottom-left">
                   <div className="relative aspect-3/2 w-full">
                     <Image
                       src="/img/screenshots/1.webp"

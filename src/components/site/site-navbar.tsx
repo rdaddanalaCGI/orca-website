@@ -16,10 +16,7 @@ export function SiteNavbar() {
       id="navbar"
       links={
         <>
-          <NavbarLink
-            href="/agentic-automation-platform"
-            className="rounded-full px-3 py-1 transition-colors hover:bg-olive-950/10 dark:hover:bg-white/10"
-          >
+          <NavbarLink href="/agentic-automation-platform" className="px-3 py-1">
             Orca Agent Platform
           </NavbarLink>
           <AgenticApplicationsMenu />

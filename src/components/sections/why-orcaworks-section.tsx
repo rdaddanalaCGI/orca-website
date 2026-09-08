@@ -97,7 +97,7 @@ function BentoCardItem({ card, index }: { card: BentoCard; index: number }) {
 
   if (shouldReduceMotion) {
     return (
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-olive-950/5 dark:bg-olive-900 dark:ring-white/10">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-orca-mist shadow-sm ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
         {content}
       </div>
     )
@@ -113,7 +113,7 @@ function BentoCardItem({ card, index }: { card: BentoCard; index: number }) {
       variants={cardVariants}
       transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-olive-950/5 transition-shadow duration-300 group-hover:shadow-md dark:bg-olive-900 dark:ring-white/10">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-orca-mist shadow-sm ring-1 ring-olive-950/5 transition-shadow duration-300 group-hover:shadow-md dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
         {content}
       </div>
     </motion.div>
@@ -150,7 +150,7 @@ function BentoCtaCard({ index }: { index: number }) {
 
   if (shouldReduceMotion) {
     return (
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-olive-950/5 dark:bg-olive-900 dark:ring-white/10">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-orca-mist shadow-sm ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
         {content}
       </div>
     )
@@ -166,7 +166,7 @@ function BentoCtaCard({ index }: { index: number }) {
       variants={cardVariants}
       transition={{ duration: 0.5, delay, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-olive-950/5 transition-shadow duration-300 group-hover:shadow-md dark:bg-olive-900 dark:ring-white/10">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-orca-mist shadow-sm ring-1 ring-olive-950/5 transition-shadow duration-300 group-hover:shadow-md dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
         {content}
       </div>
     </motion.div>
@@ -177,7 +177,6 @@ export function WhyOrcaworksSection() {
   return (
     <Section
       id="why-orcaworks"
-      surface="mist"
       eyebrow="WHY ORCAWORKS"
       eyebrowVariant="brand"
       headline="One blueprint. From how the work operates to how the application runs."

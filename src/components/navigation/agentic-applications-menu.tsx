@@ -72,7 +72,7 @@ export function AgenticApplicationsMenu() {
     <Details>
       <summary
         className={clsx(
-          'flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-1 text-3xl/10 font-medium transition-colors hover:bg-olive-950/10 lg:text-sm/7 dark:hover:bg-white/10',
+          'flex cursor-pointer list-none items-center gap-2 px-3 py-1 text-3xl/10 font-medium transition-colors lg:text-sm/7',
           hasActive ? 'text-orca-orange' : 'text-olive-950 dark:text-white',
           'group-open:text-orca-orange hover:text-orca-orange',
         )}
@@ -80,7 +80,7 @@ export function AgenticApplicationsMenu() {
         AI Solutions
         <ChevronIcon className="h-2 w-1.5 rotate-90 transition-transform group-open:rotate-180" />
       </summary>
-      <div className="max-lg:mt-2 lg:fixed lg:inset-x-0 lg:top-[5.25rem] lg:z-20 lg:bg-olive-100 lg:py-8 lg:shadow-lg lg:ring-1 lg:ring-olive-950/10 dark:lg:bg-olive-950 dark:lg:ring-white/10">
+      <div className="max-lg:mt-2 lg:fixed lg:inset-x-0 lg:top-[5.25rem] lg:z-20 lg:bg-page lg:py-8 lg:shadow-lg lg:ring-1 lg:ring-olive-950/10 dark:lg:bg-olive-950 dark:lg:ring-white/10">
         <Container>
           {/* Desktop mega-menu */}
           <div className="hidden gap-8 lg:grid lg:grid-cols-12">
@@ -168,7 +168,7 @@ export function AgenticApplicationsMenu() {
                       key={item.id}
                       href={item.href}
                       onClick={(event) => handleApplicationClick(event, item.href)}
-                      className="group flex items-start justify-between gap-4 rounded-lg border border-olive-950/5 bg-olive-950/2.5 p-4 transition-colors hover:border-orca-orange/30 hover:bg-olive-950/5 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+                      className="group flex items-start justify-between gap-4 rounded-lg border border-olive-950/5 bg-orca-mist p-4 transition-colors hover:border-orca-orange/30 hover:bg-olive-950/5 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:hover:bg-white/10"
                     >
                       <div className="flex flex-col gap-1">
                         <span className="font-display text-lg/7 text-olive-950 dark:text-white">{item.title}</span>

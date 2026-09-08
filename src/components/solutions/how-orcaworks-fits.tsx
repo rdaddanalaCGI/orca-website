@@ -112,7 +112,7 @@ function BentoCard({ card, index }: { card: SolutionHowOrcaworksFitsCard; index:
       whileHover={shouldReduceMotion ? {} : { y: -3 }}
       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
       className={clsx(
-        'group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-olive-950/10 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md sm:p-8 dark:border-white/10 dark:bg-olive-900',
+        'group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-olive-950/10 bg-orca-mist p-6 shadow-sm transition-shadow duration-200 hover:shadow-md sm:p-8 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
         cardPositions[index],
       )}
     >

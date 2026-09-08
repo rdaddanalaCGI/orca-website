@@ -44,7 +44,7 @@ function InsightCard({ item, index }: { item: Insight; index: number }) {
     'group flex h-full flex-col overflow-hidden rounded-2xl shadow-sm',
     isFeatured
       ? 'bg-olive-950 text-white ring-1 ring-white/10'
-      : 'bg-white text-olive-950 ring-1 ring-olive-950/5 dark:bg-olive-900 dark:ring-white/10',
+      : 'bg-orca-mist text-olive-950 ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10',
   )
 
   const content = (

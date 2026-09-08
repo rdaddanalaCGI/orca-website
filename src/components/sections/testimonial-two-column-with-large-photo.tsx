@@ -18,7 +18,7 @@ export function TestimonialTwoColumnWithLargePhoto({
   return (
     <section className={clsx('py-16', className)} {...props}>
       <Container>
-        <figure className="grid grid-cols-1 gap-x-2 rounded-xl bg-olive-950/2.5 p-2 lg:grid-cols-2 dark:bg-white/5">
+        <figure className="grid grid-cols-1 gap-x-2 rounded-xl bg-orca-mist p-2 lg:grid-cols-2 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
           <div className="flex flex-col items-start justify-between gap-10 p-6 text-olive-950 sm:p-10 dark:text-white">
             <blockquote className="relative flex flex-col gap-4 text-2xl/9 text-pretty *:first:before:absolute *:first:before:inline *:first:before:-translate-x-full *:first:before:content-['“'] *:last:after:inline *:last:after:content-['”']">
               {quote}

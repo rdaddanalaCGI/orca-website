@@ -25,6 +25,11 @@ const getBaseConfig = (phase: string): NextConfig => {
           pathname: '/plus-assets/img/component-images/**',
         },
       ],
+      // Turbopack's dev-mode image optimizer can race and abort duplicate
+      // in-flight requests for the same file+width, leaving <Image>s stuck
+      // at naturalWidth 0. Serving raw files in dev sidesteps that; production
+      // builds still get full optimization.
+      unoptimized: isDev,
     },
     // Payload's Postgres/Drizzle stack loads native binaries that cannot be bundled.
     serverExternalPackages: ['payload', '@payloadcms/db-postgres', '@payloadcms/drizzle', 'drizzle-kit', 'esbuild'],

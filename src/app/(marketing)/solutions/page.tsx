@@ -53,7 +53,7 @@ export default function Page() {
           {logistics && (
             <div
               id={logistics.id}
-              className="group relative overflow-hidden rounded-2xl bg-olive-950/2.5 ring-1 ring-olive-950/5 transition-all duration-300 hover:ring-orca-orange/20 motion-reduce:transition-none lg:col-span-2 dark:bg-white/5 dark:ring-white/10"
+              className="group relative overflow-hidden rounded-2xl bg-orca-mist ring-1 ring-olive-950/5 transition-all duration-300 hover:ring-orca-orange/20 motion-reduce:transition-none lg:col-span-2 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
             >
               <div className="grid lg:grid-cols-2">
                 <div className="flex flex-col gap-5 p-6 sm:p-10">
@@ -111,7 +111,7 @@ export default function Page() {
               <div
                 id={solution.id}
                 key={solution.id}
-                className="group relative overflow-hidden rounded-2xl bg-olive-950/2.5 ring-1 ring-olive-950/5 transition-all duration-300 hover:ring-orca-orange/20 motion-reduce:transition-none dark:bg-white/5 dark:ring-white/10"
+                className="group relative overflow-hidden rounded-2xl bg-orca-mist ring-1 ring-olive-950/5 transition-all duration-300 hover:ring-orca-orange/20 motion-reduce:transition-none dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
               >
                 {solution.image && (
                   <div className="relative aspect-4/3 w-full overflow-hidden">
@@ -175,7 +175,7 @@ export default function Page() {
             <li key={`${application.vertical}-${application.id}`}>
               <NextLink
                 href={application.href}
-                className="group flex h-full flex-col gap-1 rounded-2xl border border-olive-950/5 bg-olive-950/2.5 p-5 transition-all duration-300 hover:border-orca-orange/20 hover:bg-olive-950/5 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+                className="group flex h-full flex-col gap-1 rounded-2xl border border-olive-950/5 bg-orca-mist p-5 transition-all duration-300 hover:border-orca-orange/20 hover:bg-olive-950/5 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:hover:bg-white/10"
               >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="font-display text-lg/7 text-olive-950 dark:text-white">
@@ -190,7 +190,7 @@ export default function Page() {
         </ul>
       </Section>
 
-      <section className="bg-orca-mist py-12 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+      <section className="py-12">
         <Container className="flex flex-col items-start gap-6">
           <Subheading>Not sure where to start? Start with one workflow.</Subheading>
           <Text className="max-w-2xl">

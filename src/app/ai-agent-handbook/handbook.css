@@ -22,11 +22,11 @@
   --nextra-primary-hue: 12deg;
   --nextra-primary-saturation: 100%;
   --nextra-primary-lightness: 56%;
-  /* Olive-100 as the Nextra page background. */
-  --nextra-bg: 244, 244, 240;
+  /* Site-wide background (#f9feff) as the Nextra page background. */
+  --nextra-bg: 249, 254, 255;
 
-  /* Inter for all handbook chrome and body copy (same as the marketing site). */
-  --x-font-sans: 'Inter', system-ui, sans-serif;
+  /* Familjen Grotesk for all handbook chrome and body copy (same as the marketing site). */
+  --x-font-sans: 'Familjen Grotesk', system-ui, sans-serif;
 
   /* Remap Nextra's cool gray neutrals onto the warm Oatmeal Olive scale so the
    * sidebar, TOC, borders, and code chrome sit on the same neutral foundation
@@ -62,7 +62,7 @@ html {
 }
 
 /* ---------------------------------------------------------------------------
- * Typography: editorial page title in Instrument Serif; everything else Inter.
+ * Typography: editorial page title and body copy in Familjen Grotesk.
  * ------------------------------------------------------------------------- */
 
 article h1 {

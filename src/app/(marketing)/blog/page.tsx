@@ -143,7 +143,7 @@ export default async function Page({ searchParams }: PageProps) {
             </div>
 
             <aside className="flex flex-col gap-8">
-              <div className="rounded-2xl bg-olive-200/50 p-6 dark:bg-olive-900/50">
+              <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Search</h2>
                 <form action="/blog" method="get" className="flex flex-col gap-3">
                   {categorySlug ? <input type="hidden" name="category" value={categorySlug} /> : null}
@@ -163,7 +163,7 @@ export default async function Page({ searchParams }: PageProps) {
                 </form>
               </div>
 
-              <div className="rounded-2xl bg-olive-200/50 p-6 dark:bg-olive-900/50">
+              <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Categories</h2>
                 <ul className="flex flex-col gap-2">
                   <li>
@@ -195,7 +195,7 @@ export default async function Page({ searchParams }: PageProps) {
                 </ul>
               </div>
 
-              <div className="rounded-2xl bg-olive-200/50 p-6 dark:bg-olive-900/50">
+              <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Expert Column</h2>
                 <NextLink
                   href="/expert-column/abhinav-somaraju"
@@ -205,7 +205,7 @@ export default async function Page({ searchParams }: PageProps) {
                 </NextLink>
               </div>
 
-              <div className="rounded-2xl bg-olive-200/50 p-6 dark:bg-olive-900/50">
+              <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Newsletter</h2>
                 <p className="text-sm text-olive-700 dark:text-olive-400">
                   Sign up for the latest news, updates, tips and advice.

@@ -6,17 +6,17 @@ This documents the site's color tokens and the usage rules established for the t
 
 ```css
 @theme {
-  --color-olive-50: #edf8f9;
-  --color-olive-100: #e9eeef;
-  --color-olive-200: #d4dedf;
-  --color-olive-300: #bfcecf;
-  --color-olive-400: #abbebf;
-  --color-olive-500: #96aeb0;
-  --color-olive-600: #829fa1;
-  --color-olive-700: #6e8f92;
-  --color-olive-800: #5a8083;
-  --color-olive-900: #467275;
-  --color-olive-950: #326367;
+  --color-olive-50: oklch(98.8% 0.003 106.5);
+  --color-olive-100: oklch(96.6% 0.005 106.5);
+  --color-olive-200: oklch(93% 0.007 106.5);
+  --color-olive-300: oklch(88% 0.011 106.6);
+  --color-olive-400: oklch(73.7% 0.021 106.9);
+  --color-olive-500: oklch(58% 0.031 107.3);
+  --color-olive-600: oklch(46.6% 0.025 107.3);
+  --color-olive-700: oklch(39.4% 0.023 107.4);
+  --color-olive-800: oklch(28.6% 0.016 107.4);
+  --color-olive-900: oklch(22.8% 0.013 107.4);
+  --color-olive-950: oklch(15.3% 0.006 107.1);
 
   --color-orca-orange: #ff4800;
   --color-orca-orange-hover: #ff4800;
@@ -37,25 +37,23 @@ This documents the site's color tokens and the usage rules established for the t
 
 ### Olive neutral scale (swatches + hex for design tools)
 
-The olive scale is defined directly in hex (previously it was generated from OKLCH — that's no longer the case, so don't recompute it from a lightness formula; these literal values are the source of truth):
+The olive scale is defined in OKLCH in code (for perceptually-even steps), but design tools like Figma/Photoshop/Illustrator want hex or RGB. These are the equivalent sRGB hex values, computed from the OKLCH definitions above — for design files, use the hex column directly:
 
-| Swatch                                                                                                                       | Token       | Hex       |
-| ---------------------------------------------------------------------------------------------------------------------------- | ----------- | --------- |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#edf8f9;border:1px solid #ccc"></span> | `olive-50`  | `#edf8f9` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#e9eeef;border:1px solid #ccc"></span> | `olive-100` | `#e9eeef` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#d4dedf;border:1px solid #ccc"></span> | `olive-200` | `#d4dedf` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#bfcecf;border:1px solid #ccc"></span> | `olive-300` | `#bfcecf` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#abbebf;border:1px solid #ccc"></span> | `olive-400` | `#abbebf` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#96aeb0;border:1px solid #ccc"></span> | `olive-500` | `#96aeb0` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#829fa1;border:1px solid #ccc"></span> | `olive-600` | `#829fa1` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#6e8f92;border:1px solid #ccc"></span> | `olive-700` | `#6e8f92` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#5a8083;border:1px solid #ccc"></span> | `olive-800` | `#5a8083` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#467275;border:1px solid #ccc"></span> | `olive-900` | `#467275` |
-| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#326367;border:1px solid #ccc"></span> | `olive-950` | `#326367` |
+| Swatch                                                                                                                       | Token       | OKLCH                      | Hex       |
+| ---------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------- | --------- |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#fbfbf9;border:1px solid #ccc"></span> | `olive-50`  | `oklch(98.8% 0.003 106.5)` | `#fbfbf9` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#f4f4f0;border:1px solid #ccc"></span> | `olive-100` | `oklch(96.6% 0.005 106.5)` | `#f4f4f0` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#e8e8e3;border:1px solid #ccc"></span> | `olive-200` | `oklch(93% 0.007 106.5)`   | `#e8e8e3` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#d8d8d0;border:1px solid #ccc"></span> | `olive-300` | `oklch(88% 0.011 106.6)`   | `#d8d8d0` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#abab9c;border:1px solid #ccc"></span> | `olive-400` | `oklch(73.7% 0.021 106.9)` | `#abab9c` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#7c7c67;border:1px solid #ccc"></span> | `olive-500` | `oklch(58% 0.031 107.3)`   | `#7c7c67` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#5b5b4b;border:1px solid #ccc"></span> | `olive-600` | `oklch(46.6% 0.025 107.3)` | `#5b5b4b` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#474739;border:1px solid #ccc"></span> | `olive-700` | `oklch(39.4% 0.023 107.4)` | `#474739` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#2b2b22;border:1px solid #ccc"></span> | `olive-800` | `oklch(28.6% 0.016 107.4)` | `#2b2b22` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#1d1d16;border:1px solid #ccc"></span> | `olive-900` | `oklch(22.8% 0.013 107.4)` | `#1d1d16` |
+| <span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:#0c0c09;border:1px solid #ccc"></span> | `olive-950` | `oklch(15.3% 0.006 107.1)` | `#0c0c09` |
 
-> **Note:** `olive-50` (`#edf8f9`) and `olive-950` (`#326367`) are now the _exact same values_ as `--color-orca-mist` and `--color-orca-teal-dark` respectively — the neutral scale's two ends were deliberately aligned with the brand teal. One consequence: **dark mode is no longer near-black.** `html`'s dark-mode background is `var(--color-olive-950)`, which is now a mid-tone teal (`#326367`), not the near-black it used to be. Any component relying on `dark:bg-olive-950`/`text-olive-950` for a "near-black" surface or text color will now render as this teal instead — check dark mode visually after any further palette change here.
-
-> **Note for design handoff:** the hex column above is the literal source of truth (copied straight from `globals.css`), so it's safe to build a Figma/Sketch color style library directly from it.
+> **Note for design handoff:** these hex values are a faithful conversion of the OKLCH source, but the codebase's source of truth is the OKLCH definition in `globals.css`. If a designer needs an exact swatch library (e.g. a Figma color style), use the hex column above rather than re-eyeballing screenshots.
 
 ## Usage rules
 
@@ -98,12 +96,12 @@ This includes:
 
 ### 3. Footer & decorative wallpaper — `#326367` (`--color-orca-teal-dark`)
 
-Fixed, theme-independent (same value in light and dark mode) — used for:
+Used for:
 
-- The site footer (`footer-with-newsletter-form-categories-and-social-icons.tsx`)
-- The `Wallpaper` component (`src/components/elements/wallpaper.tsx`), which backs the homepage screenshot cards and the `/agentic-automation-platform` hero. `Wallpaper` no longer takes a `color` prop — it always renders this teal.
+- The `Wallpaper` component (`src/components/elements/wallpaper.tsx`), which backs the homepage screenshot cards and the `/agentic-automation-platform` hero. `Wallpaper` no longer takes a `color` prop — it always renders this teal, in both light and dark mode.
+- The site footer (`footer-with-newsletter-form-categories-and-social-icons.tsx`) in **light mode only**. In dark mode the footer uses a distinct, darker `#141b1a` instead: `bg-orca-teal-dark dark:bg-[#141b1a]`.
 
-Because these surfaces are always this one dark color regardless of theme, their text/icons are hard-set to white/`white/70`/`white/60` rather than switching with `dark:`.
+Because these surfaces are always a dark color regardless of theme, their text/icons are hard-set to white/`white/70`/`white/60` rather than switching with `dark:`.
 
 ### 4. Brand accent — `#ff4800` (`--color-orca-orange`)
 
@@ -122,5 +120,3 @@ Most tokens don't need a dark-mode override (olive scale already flips via `dark
 - `--color-orca-mist` → `dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]` (cards)
 
 Copy this `color-mix` expression verbatim rather than approximating a new dark shade, so every mist surface site-wide stays visually consistent.
-
-> **Known side effect of the current olive palette:** now that `--color-olive-950` and `--color-orca-teal-dark` are the identical value (`#326367`), the `color-mix` above blends a color with itself and collapses to flat `#326367`. In practice this means every card that uses the mist/dark-card treatment now renders as the _exact same_ solid teal as the footer and the `Wallpaper` component in dark mode — there's currently no visual distinction between "a card surface" and "a footer/decorative surface" in dark mode. If that distinction matters, either give `olive-950` a value darker than `orca-teal-dark` again, or replace the `color-mix` card formula with a different dark surface color.

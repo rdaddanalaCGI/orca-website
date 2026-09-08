@@ -5,29 +5,18 @@ import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon
 
 export function ClosingCtaSection() {
   return (
-    <section className="py-12">
+    <section className="bg-olive-200/50 py-12 dark:bg-olive-900/50">
       <Container className="flex flex-col items-start gap-6">
-        <h2 className="font-display text-[2rem]/10 tracking-tight text-pretty text-olive-950 sm:text-5xl/14 dark:text-white">
-          Start with one workflow.
-        </h2>
+        <h2 className="font-display text-2xl/8 text-olive-950 dark:text-white">Start with one workflow.</h2>
         <p className="max-w-2xl text-base/7 text-olive-700 dark:text-olive-400">
           Bring us a workflow that crosses systems, documents, people and decisions. See how Orcaworks can turn it into
           a governed AI application.
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink
-            href="/contact"
-            color="brand"
-            size="lg"
-            className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive-950 dark:focus-visible:outline-white"
-          >
+          <ButtonLink href="/contact" color="brand" size="lg">
             Get a demo
           </ButtonLink>
-          <Link
-            href="/agentic-automation-platform"
-            color="brand"
-            className="rounded-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive-950 dark:focus-visible:outline-white"
-          >
+          <Link href="/agentic-automation-platform" color="brand">
             Explore the platform <ArrowNarrowRightIcon />
           </Link>
         </div>

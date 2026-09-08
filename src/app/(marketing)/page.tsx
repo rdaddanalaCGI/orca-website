@@ -62,7 +62,6 @@ export default async function Page() {
     <>
       <HeroCenteredWithDemo
         id="hero"
-        className="bg-orca-paper dark:bg-olive-950"
         eyebrow={
           <AnnouncementBadge
             href="/solutions"
@@ -93,7 +92,6 @@ export default async function Page() {
 
       <Features
         id="give-ai-context"
-        headerClassName="mx-auto max-w-4xl items-center text-center"
         headline="Governance starts with visibility and control."
         subheadline={
           <div className="flex flex-col gap-4">
@@ -115,7 +113,7 @@ export default async function Page() {
           <>
             <FeatureThreeColumnWithDemos
               demo={
-                <Screenshot wallpaper="teal" placement="bottom-right">
+                <Screenshot wallpaper="blue" placement="bottom-right">
                   <div className="relative aspect-3/2 w-full">
                     <Image
                       src="/img/screenshots/1.webp"
@@ -143,7 +141,7 @@ export default async function Page() {
             />
             <FeatureThreeColumnWithDemos
               demo={
-                <Screenshot wallpaper="teal" placement="top-left">
+                <Screenshot wallpaper="purple" placement="top-left">
                   <div className="relative aspect-3/2 w-full">
                     <Image
                       src="/img/screenshots/1.webp"
@@ -171,7 +169,7 @@ export default async function Page() {
             />
             <FeatureThreeColumnWithDemos
               demo={
-                <Screenshot wallpaper="teal" placement="bottom-left">
+                <Screenshot wallpaper="brown" placement="bottom-left">
                   <div className="relative aspect-3/2 w-full">
                     <Image
                       src="/img/screenshots/1.webp"

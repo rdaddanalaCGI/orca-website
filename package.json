@@ -77,8 +77,6 @@
     "prettier": "3.9.6",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-tailwindcss": "0.7.2",
-    "sass": "^1.103.1",
-    "tsx": "^4.23.13",
     "typescript": "5.9.3",
     "vitest": "4.1.11"
   }

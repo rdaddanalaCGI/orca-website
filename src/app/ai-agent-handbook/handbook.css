@@ -22,8 +22,8 @@
   --nextra-primary-hue: 12deg;
   --nextra-primary-saturation: 100%;
   --nextra-primary-lightness: 56%;
-  /* #f9feff as the Nextra page background, matching the site body background. */
-  --nextra-bg: 249, 254, 255;
+  /* Olive-100 as the Nextra page background. */
+  --nextra-bg: 244, 244, 240;
 
   /* Inter for all handbook chrome and body copy (same as the marketing site). */
   --x-font-sans: 'Inter', system-ui, sans-serif;

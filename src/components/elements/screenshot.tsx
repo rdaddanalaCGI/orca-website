@@ -9,7 +9,7 @@ export function Screenshot({
   className,
   ...props
 }: {
-  wallpaper: 'green' | 'blue' | 'purple' | 'brown' | 'mist' | 'teal'
+  wallpaper: 'green' | 'blue' | 'purple' | 'brown'
   placement: 'bottom' | 'bottom-left' | 'bottom-right' | 'top' | 'top-left' | 'top-right'
 } & Omit<ComponentProps<'div'>, 'color'>) {
   return (

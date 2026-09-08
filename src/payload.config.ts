@@ -21,16 +21,6 @@ const connectionString = env.DATABASE_URL ?? ''
 export default buildConfig({
   admin: {
     user: Users.slug,
-    meta: {
-      titleSuffix: '— Orcaworks',
-      icons: [{ url: '/favicon.ico', rel: 'icon' }],
-    },
-    components: {
-      graphics: {
-        Logo: '/src/components/admin/Logo#Logo',
-        Icon: '/src/components/admin/Icon#Icon',
-      },
-    },
   },
   collections: [Posts, Categories, PressReleases, Authors, Media, FormSubmissions, Leads, Users],
   db: postgresAdapter({

@@ -12,7 +12,6 @@ export function Section({
   cta,
   surface = 'neutral',
   eyebrowVariant = 'neutral',
-  headerClassName,
   className,
   children,
   ...props
@@ -23,7 +22,6 @@ export function Section({
   cta?: ReactNode
   surface?: 'neutral' | 'mist'
   eyebrowVariant?: 'neutral' | 'brand'
-  headerClassName?: string
 } & ComponentProps<'section'>) {
   return (
     <section
@@ -37,7 +35,7 @@ export function Section({
     >
       <Container className="flex flex-col gap-10 sm:gap-16">
         {headline && (
-          <div className={clsx('flex flex-col gap-6', headerClassName ?? 'max-w-2xl')}>
+          <div className="flex max-w-2xl flex-col gap-6">
             <div className="flex flex-col gap-2">
               {eyebrow && <Eyebrow variant={eyebrowVariant}>{eyebrow}</Eyebrow>}
               <Subheading>{headline}</Subheading>

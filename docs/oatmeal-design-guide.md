@@ -25,8 +25,8 @@ The design token layer lives in `src/app/globals.css`:
   --color-olive-900: oklch(22.8% 0.013 107.4);
   --color-olive-950: oklch(15.3% 0.006 107.1);
 
-  --color-orca-orange: #ff4b1f;
-  --color-orca-orange-hover: #e6421b;
+  --color-orca-orange: #ff4800;
+  --color-orca-orange-hover: #ff4800;
   --color-orca-mist: #edf8f9;
   --color-orca-teal-dark: #326367;
 }
@@ -45,8 +45,8 @@ The Orcaworks accent palette is intentionally limited. Olive must remain the dom
 
 | Token                                             | Value     | When to use                                                                                                        |
 | ------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| `text-orca-orange` / `bg-orca-orange`             | `#ff4b1f` | Primary CTAs, selected/active nav items, eyebrow labels, and high-value links. Never the dominant color on a page. |
-| `text-orca-orange-hover` / `bg-orca-orange-hover` | `#e6421b` | Hover/focus states for orange controls.                                                                            |
+| `text-orca-orange` / `bg-orca-orange`             | `#ff4800` | Primary CTAs, selected/active nav items, eyebrow labels, and high-value links. Never the dominant color on a page. |
+| `text-orca-orange-hover` / `bg-orca-orange-hover` | `#ff4800` | Same value as `orca-orange` — there is currently no distinct hover shade.                                          |
 | `bg-orca-mist`                                    | `#edf8f9` | One highlighted section surface per page, used sparingly for callouts or explanatory content.                      |
 | `text-orca-teal-dark`                             | `#326367` | Optional supporting accent. Currently used only to derive dark-mode Mist surfaces via `color-mix`.                 |
 

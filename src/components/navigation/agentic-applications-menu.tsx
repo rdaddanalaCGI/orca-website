@@ -123,7 +123,7 @@ export function AgenticApplicationsMenu() {
                           {isActive && (
                             <motion.div
                               layoutId="active-solution-row"
-                              className="absolute inset-0 -z-10 rounded-lg bg-olive-950/5 dark:bg-white/5"
+                              className="absolute inset-0 -z-10 rounded-lg bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
                               initial={false}
                               transition={
                                 shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }
@@ -168,7 +168,7 @@ export function AgenticApplicationsMenu() {
                       key={item.id}
                       href={item.href}
                       onClick={(event) => handleApplicationClick(event, item.href)}
-                      className="group flex items-start justify-between gap-4 rounded-lg border border-olive-950/5 bg-orca-mist p-4 transition-colors hover:border-orca-orange/30 hover:bg-olive-950/5 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:hover:bg-white/10"
+                      className="group flex items-start justify-between gap-4 rounded-lg border border-olive-950/5 bg-orca-mist p-4 transition-colors hover:border-orca-orange/30 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
                     >
                       <div className="flex flex-col gap-1">
                         <span className="font-display text-lg/7 text-olive-950 dark:text-white">{item.title}</span>

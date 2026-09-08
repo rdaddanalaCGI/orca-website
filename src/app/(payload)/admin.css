@@ -1,6 +1,6 @@
 /*
  * Orcaworks brand accent for the Payload admin panel, matching
- * --color-orca-orange (#ff4b1f) from globals.css.
+ * --color-orca-orange (#ff4800) from globals.css.
  *
  * Primary buttons (Login, Save, Publish, Create) don't use the
  * --theme-success-* scale despite the name -- they're driven by
@@ -12,8 +12,8 @@
 :root,
 html[data-theme='light'],
 html[data-theme='dark'] {
-  --color-orca-orange: #ff4b1f;
-  --color-orca-orange-hover: #e6421b;
+  --color-orca-orange: #ff4800;
+  --color-orca-orange-hover: #ff4800;
 
   --theme-success-50: #fef3f0;
   --theme-success-100: #fde3dd;

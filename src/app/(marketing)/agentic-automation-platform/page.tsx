@@ -31,6 +31,7 @@ export default function Page() {
     <>
       <HeroWithDemoOnBackground
         id="hero"
+        wallpaperStyle={{ backgroundImage: 'none', backgroundColor: '#326369' }}
         headline="The Control Plane for Agentic Execution"
         subheadline={
           <p>

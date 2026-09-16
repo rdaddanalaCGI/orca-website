@@ -37,8 +37,8 @@ function application(copy: ApplicationCopy, blueprint: ApplicationBlueprint): So
 
 export const legal: SolutionVertical = {
   id: 'legal',
-  name: 'Legal',
-  shortName: 'Legal',
+  name: 'Law Firms',
+  shortName: 'Law Firms',
   slug: 'legal',
   href,
   // Placeholder: no legal vertical image exists yet; design team to supply /img/verticals/legal.*

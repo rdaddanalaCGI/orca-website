@@ -13,7 +13,7 @@ export function Eyebrow({
     <div
       className={clsx(
         'text-sm/7 font-semibold',
-        variant === 'neutral' && 'text-olive-700 dark:text-olive-400',
+        variant === 'neutral' && 'text-olive-700 dark:text-frost',
         variant === 'brand' && 'text-orca-orange',
         className,
       )}

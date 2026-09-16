@@ -110,7 +110,7 @@ function ApplicationCard({ application }: { application: Application }) {
             {application.vertical}
           </div>
           <h3 className="font-display text-2xl/9 text-olive-950 dark:text-white">{application.name}</h3>
-          <p className="text-base/7 text-olive-700 dark:text-olive-400">{application.problem}</p>
+          <p className="text-base/7 text-olive-700 dark:text-frost">{application.problem}</p>
 
           <motion.div
             className="overflow-hidden"
@@ -119,7 +119,7 @@ function ApplicationCard({ application }: { application: Application }) {
           >
             <ul className="flex flex-col gap-2">
               {application.useCases.map((useCase) => (
-                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-olive-400">
+                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-frost">
                   <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
                   {useCase}
                 </li>
@@ -128,7 +128,7 @@ function ApplicationCard({ application }: { application: Application }) {
           </motion.div>
 
           <div className="mt-auto flex items-center justify-between gap-4">
-            <div className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-olive-400">
+            <div className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-frost">
               {application.count} USE CASES
             </div>
             <div className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 dark:text-white">

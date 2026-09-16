@@ -46,7 +46,7 @@ export function PricingSingleTierTwoColumn({
                   <span className="flex size-5 shrink-0 items-center justify-center rounded-xs bg-olive-950 dark:bg-olive-700">
                     <CheckmarkIcon className="size-3 stroke-white" />
                   </span>
-                  <p className="text-olive-700 dark:text-olive-400">{feature}</p>
+                  <p className="text-olive-700 dark:text-frost">{feature}</p>
                 </li>
               ))}
             </ul>

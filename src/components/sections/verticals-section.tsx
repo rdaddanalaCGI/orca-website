@@ -61,7 +61,7 @@ function VerticalCard({ vertical, isDragging }: { vertical: Vertical; isDragging
           {vertical.useCases.map((useCase) => (
             <span
               key={useCase}
-              className="rounded-full bg-olive-950/5 px-2.5 py-1 text-xs/5 font-medium text-olive-700 dark:bg-white/10 dark:text-olive-400"
+              className="rounded-full bg-olive-950/5 px-2.5 py-1 text-xs/5 font-medium text-olive-700 dark:bg-white/10 dark:text-frost"
             >
               {useCase}
             </span>

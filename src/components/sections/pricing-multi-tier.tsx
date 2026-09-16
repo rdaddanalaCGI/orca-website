@@ -42,8 +42,8 @@ export function Plan({
           <span className="text-olive-950 dark:text-white">{price}</span>
           {period && <span className="text-olive-500 dark:text-olive-500">{period}</span>}
         </p>
-        <div className="mt-4 flex flex-col gap-4 text-sm/6 text-olive-700 dark:text-olive-400">{subheadline}</div>
-        <ul className="mt-4 space-y-2 text-sm/6 text-olive-700 dark:text-olive-400">
+        <div className="mt-4 flex flex-col gap-4 text-sm/6 text-olive-700 dark:text-frost">{subheadline}</div>
+        <ul className="mt-4 space-y-2 text-sm/6 text-olive-700 dark:text-frost">
           {features.map((feature, index) => (
             <li key={index} className="flex gap-4">
               <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />

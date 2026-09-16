@@ -90,7 +90,7 @@ function renderBlock(node: LexicalNode, index: number): ReactNode {
   switch (node.type) {
     case 'paragraph':
       return (
-        <p key={index} className="text-base/7 text-olive-700 dark:text-olive-400">
+        <p key={index} className="text-base/7 text-olive-700 dark:text-frost">
           {children}
         </p>
       )
@@ -111,7 +111,7 @@ function renderBlock(node: LexicalNode, index: number): ReactNode {
       const ListTag = node.tag === 'ol' ? 'ol' : 'ul'
       const listStyle = node.tag === 'ol' ? 'list-decimal' : 'list-disc'
       return (
-        <ListTag key={index} className={`flex flex-col gap-2 pl-5 ${listStyle} text-olive-700 dark:text-olive-400`}>
+        <ListTag key={index} className={`flex flex-col gap-2 pl-5 ${listStyle} text-olive-700 dark:text-frost`}>
           {node.children?.map((child, i) => renderBlock(child, i))}
         </ListTag>
       )
@@ -122,7 +122,7 @@ function renderBlock(node: LexicalNode, index: number): ReactNode {
       return (
         <blockquote
           key={index}
-          className="border-l-4 border-olive-300 pl-4 text-lg/8 text-olive-700 italic dark:border-olive-700 dark:text-olive-400"
+          className="border-l-4 border-olive-300 pl-4 text-lg/8 text-olive-700 italic dark:border-olive-700 dark:text-frost"
         >
           {children}
         </blockquote>
@@ -142,10 +142,7 @@ function renderBlock(node: LexicalNode, index: number): ReactNode {
       return <tr key={index}>{node.children?.map((child, i) => renderBlock(child, i))}</tr>
     case 'tablecell':
       return (
-        <td
-          key={index}
-          className="border border-olive-300 p-2 text-olive-700 dark:border-olive-700 dark:text-olive-400"
-        >
+        <td key={index} className="border border-olive-300 p-2 text-olive-700 dark:border-olive-700 dark:text-frost">
           {children}
         </td>
       )

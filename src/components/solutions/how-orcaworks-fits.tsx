@@ -45,7 +45,7 @@ function SystemStackVisual({ items }: { items: string[] }) {
           {label}
         </div>
       ))}
-      <div className="mt-1 text-center text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-olive-400">
+      <div className="mt-1 text-center text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
         Systems of record
       </div>
     </div>

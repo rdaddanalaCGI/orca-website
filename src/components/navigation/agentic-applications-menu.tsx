@@ -101,7 +101,7 @@ export function AgenticApplicationsMenu() {
             </div>
 
             <div className="lg:col-span-3">
-              <span className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-olive-400">
+              <span className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-frost">
                 Industries
               </span>
               <ul className="mt-4 flex flex-col gap-1" role="list">
@@ -138,7 +138,7 @@ export function AgenticApplicationsMenu() {
                 <span className="text-xs/4 font-semibold tracking-wider text-orca-orange uppercase">
                   {active.shortName ?? active.name}
                 </span>
-                <span className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-olive-400">
+                <span className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-frost">
                   Featured applications
                 </span>
               </div>
@@ -163,7 +163,7 @@ export function AgenticApplicationsMenu() {
                           {item.title}
                         </span>
                         {item.description && (
-                          <span className="text-sm/6 text-olive-700 dark:text-olive-400">{item.description}</span>
+                          <span className="text-sm/6 text-olive-700 dark:text-frost">{item.description}</span>
                         )}
                       </div>
                       <ArrowNarrowRightIcon className="mt-0.5 h-4 w-4 shrink-0 transition-transform group-hover/app:translate-x-1" />
@@ -222,7 +222,7 @@ export function AgenticApplicationsMenu() {
                             <Link
                               href={item.href}
                               onClick={(event) => handleApplicationClick(event, item.href)}
-                              className="block text-sm/7 text-olive-700 hover:text-orca-orange dark:text-olive-400"
+                              className="block text-sm/7 text-olive-700 hover:text-orca-orange dark:text-frost"
                             >
                               {item.title}
                             </Link>

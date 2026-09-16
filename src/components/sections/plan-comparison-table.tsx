@@ -30,7 +30,7 @@ function FeatureGroup<Plan extends string>({
         <tr key={String(feature.name)} className="group">
           <th
             scope="row"
-            className="border-t border-olive-950/5 py-4 pr-3 font-normal text-olive-700 group-first:border-olive-950/10 dark:border-white/5 dark:text-olive-400 dark:group-first:border-white/10"
+            className="border-t border-olive-950/5 py-4 pr-3 font-normal text-olive-700 group-first:border-olive-950/10 dark:border-white/5 dark:text-frost dark:group-first:border-white/10"
           >
             {feature.name}
           </th>
@@ -43,7 +43,7 @@ function FeatureGroup<Plan extends string>({
             return (
               <td
                 key={plan}
-                className="border-t border-olive-950/5 px-3 py-4 text-center text-olive-700 group-first:border-olive-950/10 dark:border-white/10 dark:text-olive-400 dark:group-first:border-white/10"
+                className="border-t border-olive-950/5 px-3 py-4 text-center text-olive-700 group-first:border-olive-950/10 dark:border-white/10 dark:text-frost dark:group-first:border-white/10"
               >
                 {value === true ? (
                   <CheckmarkIcon aria-label="Included" className="stroke-olive-950 dark:stroke-white" />

@@ -12,7 +12,7 @@ export function Stat({
   return (
     <div className={clsx('rounded-xl bg-olive-950/2.5 p-6 dark:bg-white/5', className)} {...props}>
       <div className="text-2xl/10 tracking-tight text-olive-950 dark:text-white">{stat}</div>
-      <p className="mt-2 text-sm/7 text-olive-700 dark:text-olive-400">{text}</p>
+      <p className="mt-2 text-sm/7 text-olive-700 dark:text-frost">{text}</p>
     </div>
   )
 }
@@ -34,9 +34,7 @@ export function StatsThreeColumnWithDescription({
           <hr className="absolute inset-x-0 -top-16 border-t border-olive-950/10 dark:border-white/10" />
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Subheading>{heading}</Subheading>
-            <div className="flex max-w-xl flex-col gap-4 text-base/7 text-olive-700 dark:text-olive-400">
-              {description}
-            </div>
+            <div className="flex max-w-xl flex-col gap-4 text-base/7 text-olive-700 dark:text-frost">{description}</div>
           </div>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3">{children}</div>
         </div>

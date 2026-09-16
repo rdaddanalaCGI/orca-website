@@ -13,6 +13,10 @@ const base =
 
 const disabled = 'disabled:pointer-events-none disabled:opacity-50'
 
+// Shared dark-mode fill for every solid/soft button surface, so "primary",
+// "secondary", and "light" all read as one consistent button language in dark mode.
+const darkFill = 'dark:bg-frost dark:text-olive-950 dark:hover:bg-[#c0d9dc] dark:active:bg-[#b2c9cb]'
+
 export function Button({
   size = 'md',
   type = 'button',
@@ -29,10 +33,8 @@ export function Button({
       className={clsx(
         base,
         disabled,
-        color === 'dark/light' &&
-          'bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 dark:bg-olive-300 dark:text-olive-950 dark:hover:bg-olive-200 dark:active:bg-olive-400',
-        color === 'light' &&
-          'bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 dark:bg-olive-100 dark:hover:bg-white dark:active:bg-olive-200',
+        color === 'dark/light' && `bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 ${darkFill}`,
+        color === 'light' && `bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 ${darkFill}`,
         sizes[size],
         className,
       )}
@@ -57,10 +59,8 @@ export function ButtonLink({
       href={href}
       className={clsx(
         base,
-        color === 'dark/light' &&
-          'bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 dark:bg-olive-300 dark:text-olive-950 dark:hover:bg-olive-200 dark:active:bg-olive-400',
-        color === 'light' &&
-          'bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 dark:bg-olive-100 dark:hover:bg-white dark:active:bg-olive-200',
+        color === 'dark/light' && `bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 ${darkFill}`,
+        color === 'light' && `bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 ${darkFill}`,
         sizes[size],
         className,
       )}
@@ -83,7 +83,7 @@ export function SoftButton({
       className={clsx(
         base,
         disabled,
-        'bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/25',
+        `bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 ${darkFill}`,
         sizes[size],
         className,
       )}
@@ -106,7 +106,7 @@ export function SoftButtonLink({
       href={href}
       className={clsx(
         base,
-        'bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/25',
+        `bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 ${darkFill}`,
         sizes[size],
         className,
       )}

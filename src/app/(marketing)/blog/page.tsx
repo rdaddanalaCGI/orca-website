@@ -65,7 +65,7 @@ export default async function Page({ searchParams }: PageProps) {
         <Container className="flex flex-col gap-10 sm:gap-16">
           <div className="flex max-w-2xl flex-col gap-6">
             <Heading>Insights</Heading>
-            <p className="text-lg/8 text-pretty text-olive-700 dark:text-olive-400">
+            <p className="text-lg/8 text-pretty text-olive-700 dark:text-frost">
               Stay informed with the latest news, thought leadership, and AI innovations from Orcaworks.
             </p>
           </div>
@@ -98,13 +98,13 @@ export default async function Page({ searchParams }: PageProps) {
                             {post.title}
                           </NextLink>
                         </h3>
-                        <p className="text-sm text-olive-600 dark:text-olive-400">
+                        <p className="text-sm text-olive-600 dark:text-frost">
                           {formatDate(post.publishedDate)}
                           {cmsAuthorName(post.author) ? ` · ${cmsAuthorName(post.author)}` : null}
                           {post.readingTime ? ` · ${post.readingTime} min read` : null}
                         </p>
                         {post.excerpt ? (
-                          <p className="text-base/7 text-olive-700 dark:text-olive-400">{post.excerpt}</p>
+                          <p className="text-base/7 text-olive-700 dark:text-frost">{post.excerpt}</p>
                         ) : null}
                         <div className="mt-auto pt-2">
                           <NextLink
@@ -172,7 +172,7 @@ export default async function Page({ searchParams }: PageProps) {
                       className={`text-sm ${
                         !categorySlug
                           ? 'font-semibold text-orca-orange'
-                          : 'text-olive-700 hover:text-orca-orange dark:text-olive-400'
+                          : 'text-olive-700 hover:text-orca-orange dark:text-frost'
                       }`}
                     >
                       All
@@ -185,7 +185,7 @@ export default async function Page({ searchParams }: PageProps) {
                         className={`text-sm ${
                           category.slug === categorySlug
                             ? 'font-semibold text-orca-orange'
-                            : 'text-olive-700 hover:text-orca-orange dark:text-olive-400'
+                            : 'text-olive-700 hover:text-orca-orange dark:text-frost'
                         }`}
                       >
                         {category.name}
@@ -199,7 +199,7 @@ export default async function Page({ searchParams }: PageProps) {
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Expert Column</h2>
                 <NextLink
                   href="/expert-column/abhinav-somaraju"
-                  className="text-sm text-olive-700 hover:text-orca-orange dark:text-olive-400"
+                  className="text-sm text-olive-700 hover:text-orca-orange dark:text-frost"
                 >
                   Dr. Abhinav Somaraju
                 </NextLink>
@@ -207,7 +207,7 @@ export default async function Page({ searchParams }: PageProps) {
 
               <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Newsletter</h2>
-                <p className="text-sm text-olive-700 dark:text-olive-400">
+                <p className="text-sm text-olive-700 dark:text-frost">
                   Sign up for the latest news, updates, tips and advice.
                 </p>
               </div>

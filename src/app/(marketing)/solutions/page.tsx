@@ -59,9 +59,7 @@ export default function Page() {
                 <div className="flex flex-col gap-5 p-6 sm:p-10">
                   <h2 className="font-display text-2xl/8 text-olive-950 dark:text-white">{logistics.name}</h2>
                   {logistics.solutionsPage?.positioning && (
-                    <p className="text-base/7 text-olive-700 dark:text-olive-400">
-                      {logistics.solutionsPage.positioning}
-                    </p>
+                    <p className="text-base/7 text-olive-700 dark:text-frost">{logistics.solutionsPage.positioning}</p>
                   )}
                   <ul className="flex flex-col gap-2" role="list">
                     {getSolutionApplicationsForLanding(logistics)
@@ -127,9 +125,7 @@ export default function Page() {
                 <div className="flex flex-col gap-4 p-6 sm:p-8">
                   <h2 className="font-display text-2xl/8 text-olive-950 dark:text-white">{solution.name}</h2>
                   {solution.solutionsPage?.positioning && (
-                    <p className="text-base/7 text-olive-700 dark:text-olive-400">
-                      {solution.solutionsPage.positioning}
-                    </p>
+                    <p className="text-base/7 text-olive-700 dark:text-frost">{solution.solutionsPage.positioning}</p>
                   )}
                   <ul className="flex flex-col gap-2" role="list">
                     {applications.map((application) => (
@@ -183,7 +179,7 @@ export default function Page() {
                   </h3>
                   <ArrowNarrowRightIcon className="mt-1 h-4 w-4 shrink-0 text-orca-orange transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
                 </div>
-                <span className="text-sm/6 text-olive-700 dark:text-olive-400">{application.vertical}</span>
+                <span className="text-sm/6 text-olive-700 dark:text-frost">{application.vertical}</span>
               </NextLink>
             </li>
           ))}

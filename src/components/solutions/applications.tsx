@@ -159,7 +159,7 @@ export function SolutionApplications({
                   </div>
 
                   <div className="flex flex-col gap-4">
-                    <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-olive-400">
+                    <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
                       Workflow
                     </span>
                     <div className="flex flex-wrap items-center gap-2">
@@ -178,7 +178,7 @@ export function SolutionApplications({
 
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     <div className="flex flex-col gap-2">
-                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-olive-400">
+                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
                         Working context
                       </span>
                       <ul className="flex flex-col gap-1">
@@ -190,7 +190,7 @@ export function SolutionApplications({
                       </ul>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-olive-400">
+                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
                         Built for
                       </span>
                       <ul className="flex flex-col gap-1">
@@ -202,7 +202,7 @@ export function SolutionApplications({
                       </ul>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-olive-400">
+                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
                         Works across
                       </span>
                       <ul className="flex flex-col gap-1">

@@ -17,7 +17,7 @@ export function FooterCategory({ title, children, ...props }: { title: ReactNode
 
 export function FooterLink({ href, className, ...props }: { href: string } & Omit<ComponentProps<'a'>, 'href'>) {
   return (
-    <li className={clsx('text-olive-700 dark:text-olive-400', className)}>
+    <li className={clsx('text-olive-700 dark:text-frost', className)}>
       <Link href={href} {...props} />
     </li>
   )

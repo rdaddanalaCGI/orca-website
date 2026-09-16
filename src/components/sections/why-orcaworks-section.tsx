@@ -39,7 +39,7 @@ const cards: BentoCard[] = [
   },
   {
     eyebrow: 'GOVERNED EXECUTION',
-    heading: 'AI knows what to do—and when to hand off.',
+    heading: 'Your digital coworker knows what to do, and when to hand off.',
     text: 'Coordinate agents, system actions and human decisions in one governed workflow, with clear boundaries for what happens next.',
     image: 'https://tailwindcss.com/plus-assets/img/component-images/bento-01-network.png',
     darkImage: 'https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-network.png',

@@ -185,7 +185,7 @@ export function ApplicationsSection() {
       }
       cta={
         <PlainButtonLink href="/solutions" size="lg" className="self-start">
-          Explore All Applications <ArrowNarrowRightIcon />
+          Explore all applications <ArrowNarrowRightIcon />
         </PlainButtonLink>
       }
     >

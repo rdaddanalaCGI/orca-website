@@ -15,7 +15,7 @@ export function InsightsSection({ items }: { items: Insight[] }) {
       }
       cta={
         <PlainButtonLink href="/blog" size="lg" className="self-start">
-          Explore Insights <ArrowNarrowRightIcon />
+          Explore insights <ArrowNarrowRightIcon />
         </PlainButtonLink>
       }
     >

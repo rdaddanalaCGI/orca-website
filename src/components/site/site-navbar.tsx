@@ -43,14 +43,14 @@ export function SiteNavbar() {
         <>
           <ThemeToggle />
           <PlainButtonLink href="/" className="max-sm:hidden">
-            Log In
+            Log in
           </PlainButtonLink>
-          <ButtonLink href="/contact">Get Started</ButtonLink>
+          <ButtonLink href="/contact">Get started</ButtonLink>
         </>
       }
       mobileCta={
         <ButtonLink href="/contact" size="lg">
-          Get Started
+          Get started
         </ButtonLink>
       }
     />

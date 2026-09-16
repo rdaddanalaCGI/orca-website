@@ -11,7 +11,7 @@ export function ClosingCtaSection() {
           a governed AI application.
         </p>
         <ButtonLink href="/contact" size="lg">
-          Get a Demo
+          Get a demo
         </ButtonLink>
       </Container>
     </section>

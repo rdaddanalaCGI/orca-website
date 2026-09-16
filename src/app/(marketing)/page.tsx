@@ -81,11 +81,11 @@ export default async function Page() {
         cta={
           <div className="flex items-center gap-4">
             <ButtonLink href="/contact" size="lg">
-              Get a Demo
+              Get a demo
             </ButtonLink>
 
             <PlainButtonLink href="/agentic-automation-platform" size="lg">
-              See How It Works <ArrowNarrowRightIcon />
+              See how it works <ArrowNarrowRightIcon />
             </PlainButtonLink>
           </div>
         }
@@ -111,7 +111,7 @@ export default async function Page() {
                 </span>
               </Text>
               <PlainButtonLink href="/agentic-automation-platform" size="lg" className="self-start">
-                Explore The Platform <ArrowNarrowRightIcon />
+                Explore the platform <ArrowNarrowRightIcon />
               </PlainButtonLink>
             </div>
             <YouTubeEmbed videoId="M7lc1UVf-VE" title="Orcaworks governance overview (placeholder)" />

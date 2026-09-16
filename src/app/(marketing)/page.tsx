@@ -123,20 +123,20 @@ export default async function Page() {
               {
                 id: 'context',
                 ident: '01',
-                heading: 'Declare the context',
+                heading: 'Declare Agent Context',
                 copy: 'Bring together the data, documents, systems and relationships AI needs to understand the work.',
               },
               {
                 id: 'workflow',
                 ident: '02',
-                heading: 'Declare the workflow',
+                heading: 'Declare Agent Workflow',
                 copy: 'Define the actions, system calls, decisions and handoffs that move the work forward.',
               },
               {
                 id: 'interaction',
                 ident: '03',
-                heading: 'Declare the interaction',
-                copy: 'Define where people meet the agents — in the tools they already use — to review, approve or take over.',
+                heading: 'Declare Agent Interaction',
+                copy: 'Define where people interact with agents to review outputs, approve actions, or take control, all within the tools they already use.',
               },
             ]}
           />

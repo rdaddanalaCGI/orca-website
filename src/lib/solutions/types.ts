@@ -50,6 +50,7 @@ export type SolutionApplication = {
   categoryEyebrow?: string
   headline: string
   description: string
+  menuDescription?: string
   workflowSteps: string[]
   contextItems: string[]
   roles: string[]
@@ -64,7 +65,7 @@ export type SolutionApplication = {
 export type SolutionApplications = {
   eyebrow: string
   heading: string
-  intro: string
+  intro?: string
   defaultId?: string
   applications: SolutionApplication[]
 }

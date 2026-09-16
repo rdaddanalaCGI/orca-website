@@ -64,4 +64,4 @@ Public links must point to existing routes or valid hash anchors. Do not leave `
 
 ## Launch readiness note
 
-`/solutions/*` routes (including `/solutions`, `/solutions/insurance`, `/solutions/logistics-and-distribution`, `/solutions/credit-unions-specialty-lending`, `/solutions/clinical-research-organisations`, and `/solutions/architecture-construction-engineering`) are currently marked `noindex: true` while their content is being finalised. These pages will have their `noindex` flag removed and their final content published before the official website launch so they can be indexed.
+`/solutions/*` routes (including `/solutions`, `/solutions/insurance`, `/solutions/logistics-and-distribution`, `/solutions/specialty-commercial-lending-finance`, `/solutions/clinical-research-organisations`, and `/solutions/architecture-construction-engineering`) are currently marked `noindex: true` while their content is being finalised. These pages will have their `noindex` flag removed and their final content published before the official website launch so they can be indexed.

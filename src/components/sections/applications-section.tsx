@@ -19,13 +19,17 @@ type Application = {
 
 const applications: Application[] = [
   {
-    href: '/solutions/logistics-and-distribution#shipment-exceptions',
+    href: '/solutions/logistics-and-distribution#shipment-exception-resolution',
     vertical: 'LOGISTICS',
     name: 'Shipment Exception Resolution',
     problem:
-      'When a shipment goes off plan, operations teams chase updates across the TMS, carrier emails, PODs and warehouse systems before they can work out what happened and who needs to act.',
-    useCases: ['Reconcile carrier updates', 'Verify warehouse status', 'Reroute and notify customers'],
-    count: 6,
+      'When a load misses a pickup or the ETA slips, coordinators reconstruct the chronology across the TMS, carrier emails, PODs and the WMS before a planner can approve an expedite, reschedule or changed customer promise.',
+    useCases: [
+      'Flag missing milestones and contradictory proof',
+      'Request carrier evidence and assess customer impact',
+      'Planner approves recovery; TMS and customer updated',
+    ],
+    count: 8,
     image: '/img/verticals/logistics.jpeg',
   },
   {
@@ -39,13 +43,17 @@ const applications: Application[] = [
     image: '/img/verticals/insurance.jpeg',
   },
   {
-    href: '/solutions/credit-unions-specialty-lending#client-onboarding',
-    vertical: 'CREDIT UNIONS',
-    name: 'Client Onboarding & KYC',
+    href: '/solutions/specialty-commercial-lending-finance#closing-condition-orchestration',
+    vertical: 'SPECIALTY LENDING',
+    name: 'Closing Condition Orchestration',
     problem:
-      'Onboarding teams manually verify customer identity, source documents, risk signals and policy exceptions across KYC portals, email and internal systems before an account can be approved.',
-    useCases: ['Assemble KYC evidence', 'Flag missing documents', 'Route exceptions to compliance'],
-    count: 5,
+      'A credit approval is complete, but title, UCC, insurance, appraisal and counsel evidence live across different parties and systems before loan operations can clear the transaction to close.',
+    useCases: [
+      'Map evidence to each approval condition',
+      'Chase borrower, counsel and title items',
+      'Loan operations clears or holds the file',
+    ],
+    count: 8,
     image: '/img/verticals/fintech.jpeg',
   },
   {
@@ -59,17 +67,17 @@ const applications: Application[] = [
     image: '/img/verticals/healthtech.png',
   },
   {
-    href: '/solutions/architecture-construction-engineering#project-coordination',
+    href: '/solutions/architecture-construction-engineering#change-evidence-to-decision',
     vertical: 'ACE',
-    name: 'Project Coordination',
+    name: 'Change Evidence-to-Decision',
     problem:
-      'Project managers pull RFIs, submittals, field reports and schedule updates from email, project tools and shared drives before they can see what is blocked and who must act.',
+      'Project and commercial teams rebuild each potential change from the RFI, current and superseded drawings, site photos, subcontractor pricing and schedule before the PM can set a position and the owner can approve.',
     useCases: [
-      'Compile the daily field report',
-      'Track open RFIs and submittals',
-      'Route issues to the responsible party',
+      'Assemble RFI, revision, field and pricing evidence',
+      'Flag missing or superseded support',
+      'Route the position to the PM and owner',
     ],
-    count: 6,
+    count: 8,
     image: '/img/verticals/aec.jpeg',
   },
 ]

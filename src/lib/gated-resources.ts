@@ -59,7 +59,8 @@ export const downloadResources: Record<string, GatedResource> = {
     name: 'Logistics & Distribution — Use-Case Guide',
     canonicalPath: '/solutions/logistics-and-distribution',
     gateHeading: 'Explore the use-case guide',
-    gateDescription: 'Download the use-case guide for warehouse, freight and supplier workflows.',
+    gateDescription:
+      'Download the use-case guide for shipment, supplier, order, inventory, freight-audit and 3PL billing workflows.',
     pdf: { filename: 'ai-agent-handbook.pdf', title: 'Logistics & Distribution — Use-Case Guide' },
     analyticsId: 'logistics_use_case_guide',
   },
@@ -79,9 +80,31 @@ export const downloadResources: Record<string, GatedResource> = {
     name: 'Insurance — Use-Case Guide',
     canonicalPath: '/solutions/insurance',
     gateHeading: 'Explore the use-case guide',
-    gateDescription: 'Download the use-case guide for claims, underwriting and investigations.',
+    gateDescription:
+      'Download the use-case guide for medico-legal, construction PI, R&W/W&I, environmental, litigation-authority, subrogation, claims next-action and endorsement-exception workflows.',
     pdf: { filename: 'ai-agent-handbook.pdf', title: 'Insurance — Use-Case Guide' },
     analyticsId: 'insurance_use_case_guide',
+  },
+  'legal-executive-brief': {
+    id: 'legal-executive-brief',
+    type: 'vertical-guide',
+    name: 'Legal — Executive Brief',
+    canonicalPath: '/solutions/legal',
+    gateHeading: 'Get the 2-page brief',
+    gateDescription: 'Download the executive brief with practical starting points for governed AI.',
+    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Legal — Executive Brief' },
+    analyticsId: 'legal_executive_brief',
+  },
+  'legal-use-case-guide': {
+    id: 'legal-use-case-guide',
+    type: 'vertical-guide',
+    name: 'Legal — Use-Case Guide',
+    canonicalPath: '/solutions/legal',
+    gateHeading: 'Explore the use-case guide',
+    gateDescription:
+      'Download the use-case guide for intake, records, case assignment, stalled-case, closeout, scheduling, support and legal IT workflows.',
+    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Legal — Use-Case Guide' },
+    analyticsId: 'legal_use_case_guide',
   },
   'clinical-research-organisations-executive-brief': {
     id: 'clinical-research-organisations-executive-brief',
@@ -119,29 +142,31 @@ export const downloadResources: Record<string, GatedResource> = {
     name: 'Architecture, Construction & Engineering — Use-Case Guide',
     canonicalPath: '/solutions/architecture-construction-engineering',
     gateHeading: 'Explore the use-case guide',
-    gateDescription: 'Download the use-case guide for project coordination, document review and field coordination.',
+    gateDescription:
+      'Download the use-case guide for change evidence, closeout, plan-vs-actual, RFI, submittal, claims, pay-app and revision-impact workflows.',
     pdf: { filename: 'ai-agent-handbook.pdf', title: 'Architecture, Construction & Engineering — Use-Case Guide' },
     analyticsId: 'ace_use_case_guide',
   },
-  'credit-unions-specialty-lending-executive-brief': {
-    id: 'credit-unions-specialty-lending-executive-brief',
+  'specialty-commercial-lending-finance-executive-brief': {
+    id: 'specialty-commercial-lending-finance-executive-brief',
     type: 'vertical-guide',
-    name: 'Credit Unions & Specialty Lending — Executive Brief',
-    canonicalPath: '/solutions/credit-unions-specialty-lending',
+    name: 'Specialty Commercial Lending & Finance — Executive Brief',
+    canonicalPath: '/solutions/specialty-commercial-lending-finance',
     gateHeading: 'Get the 2-page brief',
     gateDescription: 'Download the executive brief with practical starting points for governed AI.',
-    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Credit Unions & Specialty Lending — Executive Brief' },
-    analyticsId: 'credit_unions_executive_brief',
+    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Specialty Commercial Lending & Finance — Executive Brief' },
+    analyticsId: 'specialty_lending_executive_brief',
   },
-  'credit-unions-specialty-lending-use-case-guide': {
-    id: 'credit-unions-specialty-lending-use-case-guide',
+  'specialty-commercial-lending-finance-use-case-guide': {
+    id: 'specialty-commercial-lending-finance-use-case-guide',
     type: 'vertical-guide',
-    name: 'Credit Unions & Specialty Lending — Use-Case Guide',
-    canonicalPath: '/solutions/credit-unions-specialty-lending',
+    name: 'Specialty Commercial Lending & Finance — Use-Case Guide',
+    canonicalPath: '/solutions/specialty-commercial-lending-finance',
     gateHeading: 'Explore the use-case guide',
-    gateDescription: 'Download the use-case guide for onboarding, KYC and fraud prevention.',
-    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Credit Unions & Specialty Lending — Use-Case Guide' },
-    analyticsId: 'credit_unions_use_case_guide',
+    gateDescription:
+      'Download the use-case guide for closing conditions, document reconciliation, covenant exceptions, renewals, portfolio, borrowing-base, deal-package and factoring workflows.',
+    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Specialty Commercial Lending & Finance — Use-Case Guide' },
+    analyticsId: 'specialty_lending_use_case_guide',
   },
 }
 

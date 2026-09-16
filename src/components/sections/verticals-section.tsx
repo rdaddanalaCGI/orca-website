@@ -23,11 +23,30 @@ type Vertical = {
 }
 
 const useCasesBySlug: Record<string, string[]> = {
-  'logistics-and-distribution': ['Exceptions', 'routing', 'warehouse tasks', 'freight audit'],
+  'logistics-and-distribution': [
+    'Shipment exceptions',
+    'supplier promises',
+    'order intake',
+    'inventory reconciliation',
+    'freight audit',
+  ],
   insurance: ['Claims', 'underwriting', 'servicing', 'investigations', 'evidence review'],
-  'credit-unions-specialty-lending': ['Onboarding', 'KYC', 'fraud', 'servicing', 'compliance operations'],
+  legal: ['Intake to retainer', 'records requests', 'case assignment', 'stalled cases', 'settlement closeout'],
+  'specialty-commercial-lending-finance': [
+    'Closing conditions',
+    'docs vs booking',
+    'covenant exceptions',
+    'annual reviews',
+    'borrowing base',
+  ],
   'clinical-research-organisations': ['Intake', 'prior authorization', 'care coordination', 'claims review'],
-  'architecture-construction-engineering': ['Project intake', 'document review', 'field coordination', 'approvals'],
+  'architecture-construction-engineering': [
+    'Change evidence',
+    'closeout readiness',
+    'plan-vs-actual',
+    'cross-platform RFIs',
+    'submittal readiness',
+  ],
 }
 
 const verticals: Vertical[] = solutions.map((solution) => ({

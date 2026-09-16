@@ -23,7 +23,7 @@ function getMenuItems(vertical: SolutionVertical) {
       id: app.id,
       href: app.href,
       title: app.shortLabel ?? app.title,
-      description: app.categoryEyebrow ?? app.category,
+      description: app.menuDescription,
     }))
   }
   if (vertical.featuredUseCases.length > 0) {
@@ -49,10 +49,13 @@ export function AgenticApplicationsMenu() {
   const router = useRouter()
   const shouldReduceMotion = useReducedMotion() ?? false
   const [activeId, setActiveId] = useState(solutions[0].id)
+  const [hoveredItemId, setHoveredItemId] = useState<string | null>(null)
   const [openMobileId, setOpenMobileId] = useState<string | null>(null)
   const [hashNonce, setHashNonce] = useState(0)
   const pendingHashRef = useRef<string | null>(null)
   const active = solutions.find((solution) => solution.id === activeId) ?? solutions[0]
+  const activeItems = getMenuItems(active)
+  const shownItemId = hoveredItemId ?? activeItems[0]?.id
   const executiveBrief = active.resources?.items.find((item) => item.eyebrow.toUpperCase() === '2-PAGE VERTICAL BRIEF')
   const hasActive = pathname.startsWith('/solutions')
 
@@ -62,6 +65,11 @@ export function AgenticApplicationsMenu() {
       pendingHashRef.current = null
     }
   }, [hashNonce])
+
+  function activateVertical(id: string) {
+    setActiveId(id)
+    setHoveredItemId(null)
+  }
 
   function handleApplicationClick(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
     const details = event.currentTarget.closest('details')
@@ -93,7 +101,7 @@ export function AgenticApplicationsMenu() {
         AI Solutions
         <ChevronIcon className="h-2 w-1.5 rotate-90 transition-transform group-open:rotate-180" />
       </summary>
-      <div className="max-lg:mt-2 lg:fixed lg:inset-x-0 lg:top-[5.25rem] lg:z-20 lg:bg-orca-page lg:py-8 lg:shadow-lg lg:ring-1 lg:ring-olive-950/10 dark:lg:bg-olive-950 dark:lg:ring-white/10">
+      <div className="max-lg:mt-2 lg:fixed lg:inset-x-0 lg:top-21 lg:z-20 lg:bg-orca-page lg:py-8 lg:shadow-lg lg:ring-1 lg:ring-olive-950/10 dark:lg:bg-olive-950 dark:lg:ring-white/10">
         <Container>
           {/* Desktop mega-menu */}
           <div className="hidden gap-8 lg:grid lg:grid-cols-12">
@@ -105,13 +113,22 @@ export function AgenticApplicationsMenu() {
                 </p>
                 <Text>Explore the industries and operational workflows where Orcaworks puts governed AI to work.</Text>
               </div>
-              <Link
-                href="/solutions"
-                onClick={closeMenu}
-                className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
-              >
-                Explore all solutions <ArrowNarrowRightIcon className="h-4 w-4" />
-              </Link>
+              <div className="flex flex-col items-start gap-3">
+                <Link
+                  href="/solutions"
+                  onClick={closeMenu}
+                  className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
+                >
+                  Explore all solutions <ArrowNarrowRightIcon className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/solutions#agentic-process-automation"
+                  onClick={closeMenu}
+                  className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
+                >
+                  Understand our process <ArrowNarrowRightIcon className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
 
             <div className="lg:col-span-3">
@@ -125,8 +142,8 @@ export function AgenticApplicationsMenu() {
                     <li key={vertical.id}>
                       <Link
                         href={vertical.href}
-                        onMouseEnter={() => setActiveId(vertical.id)}
-                        onFocus={() => setActiveId(vertical.id)}
+                        onMouseEnter={() => activateVertical(vertical.id)}
+                        onFocus={() => activateVertical(vertical.id)}
                         onClick={closeMenu}
                         className={clsx(
                           'group flex items-center justify-between py-2 text-sm/7 font-medium transition-colors',
@@ -165,25 +182,42 @@ export function AgenticApplicationsMenu() {
                   exit={shouldReduceMotion ? {} : { opacity: 0, x: -8 }}
                   transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.2 }}
                   className="flex flex-col"
+                  onMouseLeave={() => setHoveredItemId(null)}
                 >
-                  {getMenuItems(active).map((item) => (
-                    <Link
-                      key={item.id}
-                      href={item.href}
-                      onClick={(event) => handleApplicationClick(event, item.href)}
-                      className="group flex items-start justify-between gap-2 border-b border-olive-950/10 py-3 transition-colors last:border-b-0 dark:border-white/10"
-                    >
-                      <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-olive-950 transition-colors group-hover:text-orca-orange dark:text-white">
-                          {item.title}
-                        </span>
-                        {item.description && (
-                          <span className="text-xs/5 text-olive-700 dark:text-orca-frost">{item.description}</span>
-                        )}
-                      </div>
-                      <ArrowNarrowRightIcon className="mt-0.5 h-4 w-4 shrink-0 text-orca-orange transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  ))}
+                  {activeItems.map((item) => {
+                    const isShown = item.id === shownItemId && Boolean(item.description)
+                    return (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        onClick={(event) => handleApplicationClick(event, item.href)}
+                        onMouseEnter={() => setHoveredItemId(item.id)}
+                        onFocus={() => setHoveredItemId(item.id)}
+                        className="group -mx-2 flex items-start justify-between gap-2 rounded-lg px-2 py-3 transition-colors hover:bg-orca-mist dark:hover:bg-orca-teal-dark"
+                      >
+                        <div className="flex flex-col">
+                          <span className="font-medium text-olive-950 transition-colors group-hover:text-orca-orange dark:text-white">
+                            {item.title}
+                          </span>
+                          <AnimatePresence initial={false}>
+                            {isShown && (
+                              <motion.span
+                                key="description"
+                                initial={shouldReduceMotion ? {} : { opacity: 0, height: 0 }}
+                                animate={shouldReduceMotion ? {} : { opacity: 1, height: 'auto' }}
+                                exit={shouldReduceMotion ? {} : { opacity: 0, height: 0 }}
+                                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.15 }}
+                                className="overflow-hidden text-xs/5 text-olive-700 dark:text-orca-frost"
+                              >
+                                <span className="block pt-0.5">{item.description}</span>
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                        <ArrowNarrowRightIcon className="mt-1.5 h-4 w-4 shrink-0 text-orca-orange transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    )
+                  })}
                 </motion.div>
               </AnimatePresence>
               <Link
@@ -230,7 +264,14 @@ export function AgenticApplicationsMenu() {
             >
               Explore all solutions <ArrowNarrowRightIcon className="h-4 w-4" />
             </Link>
-            <ul className="flex flex-col" role="list">
+            <Link
+              href="/solutions#agentic-process-automation"
+              onClick={closeMenu}
+              className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
+            >
+              Understand our process <ArrowNarrowRightIcon className="h-4 w-4" />
+            </Link>
+            <ul className="mt-3 flex flex-col" role="list">
               {solutions.map((vertical) => {
                 const isOpen = openMobileId === vertical.id
                 return (

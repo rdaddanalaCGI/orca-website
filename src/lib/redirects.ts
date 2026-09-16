@@ -60,12 +60,23 @@ export function getRedirects(): Redirect[] {
     { source: '/ai-applications/ai-for-insurance/', destination: '/solutions/insurance', permanent: true },
     {
       source: '/ai-applications/ai-for-financial-services',
-      destination: '/solutions/credit-unions-specialty-lending',
+      destination: '/solutions/specialty-commercial-lending-finance',
       permanent: true,
     },
     {
       source: '/ai-applications/ai-for-financial-services/',
-      destination: '/solutions/credit-unions-specialty-lending',
+      destination: '/solutions/specialty-commercial-lending-finance',
+      permanent: true,
+    },
+    // Previous vertical slug -> renamed specialty lending vertical.
+    {
+      source: '/solutions/credit-unions-specialty-lending',
+      destination: '/solutions/specialty-commercial-lending-finance',
+      permanent: true,
+    },
+    {
+      source: '/solutions/credit-unions-specialty-lending/',
+      destination: '/solutions/specialty-commercial-lending-finance',
       permanent: true,
     },
     // Industries index and vertical redirects.

@@ -1,8 +1,9 @@
 import { architectureConstructionEngineering } from './architecture-construction-engineering'
 import { clinicalResearchOrganisations } from './clinical-research-organisations'
-import { creditUnionsSpecialtyLending } from './credit-unions-specialty-lending'
 import { insurance } from './insurance'
+import { legal } from './legal'
 import { logisticsAndDistribution } from './logistics-and-distribution'
+import { specialtyCommercialLendingFinance } from './specialty-commercial-lending-finance'
 import type { SolutionVertical } from './types'
 
 export * from './types'
@@ -10,9 +11,10 @@ export * from './types'
 export const solutions: SolutionVertical[] = [
   logisticsAndDistribution,
   insurance,
+  legal,
   clinicalResearchOrganisations,
   architectureConstructionEngineering,
-  creditUnionsSpecialtyLending,
+  specialtyCommercialLendingFinance,
 ]
 
 export const solutionSlugs = solutions.map((solution) => solution.slug)
@@ -38,6 +40,30 @@ export function getSolutionApplicationsForLanding(solution: SolutionVertical): A
     }))
   }
   return solution.featuredUseCases.map((useCase) => ({
+    id: useCase.id,
+    title: useCase.title,
+    shortLabel: useCase.shortLabel,
+    href: useCase.href,
+  }))
+}
+
+export type ExplorerApplication = ApplicationListItem & { category?: string }
+
+/**
+ * Applications for the /solutions industry explorer: category-aware when the
+ * vertical has a full application catalogue, featured use cases otherwise.
+ */
+export function getSolutionExplorerApplications(solution: SolutionVertical, limit = 5): ExplorerApplication[] {
+  if (solution.applications?.applications && solution.applications.applications.length > 0) {
+    return solution.applications.applications.slice(0, limit).map((app) => ({
+      id: app.id,
+      title: app.title,
+      shortLabel: app.shortLabel,
+      href: app.href,
+      category: app.categoryEyebrow ?? app.category,
+    }))
+  }
+  return solution.featuredUseCases.slice(0, limit).map((useCase) => ({
     id: useCase.id,
     title: useCase.title,
     shortLabel: useCase.shortLabel,

@@ -88,6 +88,15 @@ Never weaken a rule or delete a test to make a gate pass.
 - Treat Supabase Free as a temporary/shared test Postgres provider.
 - Long-term production target is AWS.
 - Production media must not use ephemeral local disk. Use S3-compatible storage.
+- `oraworksai.vercel.app` is a shared **test site**, not a production environment —
+  even though deployments use the Vercel production target. Any branch may be
+  deployed to it at any time; do not treat its state as release-managed.
+- "Deploy" means a **manual CLI deploy of local code** (`vercel --prod --yes` from
+  the repo root, per `docs/deployment.md`) — not a git push or CI-triggered release.
+- That host must **never serve indexable pages**: `APP_ENV` stays non-production
+  (`staging` or `preview`) there so every page emits `noindex, nofollow`. Crawling
+  stays allowed on purpose (see `docs/deployment.md` indexability table). Only the
+  real public domain ever gets `APP_ENV=production`.
 
 ## Security
 

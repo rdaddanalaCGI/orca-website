@@ -13,7 +13,7 @@ export function ClosingCtaSection() {
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <ButtonLink href="/contact" size="lg">
-            Get A Demo
+            Get a Demo
           </ButtonLink>
           <PlainButtonLink href="/agentic-automation-platform" size="lg">
             Explore The Platform <ArrowNarrowRightIcon />

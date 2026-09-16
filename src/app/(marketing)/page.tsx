@@ -81,7 +81,7 @@ export default async function Page() {
         cta={
           <div className="flex items-center gap-4">
             <ButtonLink href="/contact" size="lg">
-              Get A Demo
+              Get a Demo
             </ButtonLink>
 
             <PlainButtonLink href="/agentic-automation-platform" size="lg">

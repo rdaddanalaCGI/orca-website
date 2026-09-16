@@ -1,7 +1,6 @@
 import { DeclaredWorkAnimation } from '@/components/declared-work/declared-work-animation'
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
-import { Link } from '@/components/elements/link'
 import { Section } from '@/components/elements/section'
 import { Subheading } from '@/components/elements/subheading'
 import { Text } from '@/components/elements/text'
@@ -111,9 +110,9 @@ export default async function Page() {
                   </p>
                 </span>
               </Text>
-              <Link href="/agentic-automation-platform">
+              <PlainButtonLink href="/agentic-automation-platform" size="lg">
                 Explore the platform <ArrowNarrowRightIcon />
-              </Link>
+              </PlainButtonLink>
             </div>
             <YouTubeEmbed videoId="M7lc1UVf-VE" title="Orcaworks governance overview (placeholder)" />
           </div>

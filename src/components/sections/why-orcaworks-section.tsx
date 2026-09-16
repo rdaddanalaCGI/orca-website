@@ -1,7 +1,6 @@
 'use client'
 
-import { ButtonLink } from '@/components/elements/button'
-import { Link } from '@/components/elements/link'
+import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
 import { Section } from '@/components/elements/section'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { motion, useReducedMotion } from 'framer-motion'
@@ -156,9 +155,9 @@ function BentoCtaCard({ index }: { index: number }) {
         <ButtonLink href="/agentic-automation-platform" color="dark/light" size="lg">
           Explore the platform <ArrowNarrowRightIcon />
         </ButtonLink>
-        <Link href="/contact" color="brand">
+        <PlainButtonLink href="/contact" size="lg">
           Talk to us <ArrowNarrowRightIcon />
-        </Link>
+        </PlainButtonLink>
       </div>
     </div>
   )

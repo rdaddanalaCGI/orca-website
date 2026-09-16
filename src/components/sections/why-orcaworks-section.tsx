@@ -32,7 +32,7 @@ const cards: BentoCard[] = [
   },
   {
     eyebrow: 'CONNECTED CONTEXT',
-    heading: 'AI has the same view of the work as you.',
+    heading: 'Your digital coworker has the same view of the work as you.',
     text: 'Bring the right information together, preserve access controls, and give agents and users the same governed context.',
     image: 'https://tailwindcss.com/plus-assets/img/component-images/bento-01-speed.png',
     darkImage: 'https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-speed.png',

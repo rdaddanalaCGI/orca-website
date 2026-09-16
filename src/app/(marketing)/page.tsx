@@ -96,7 +96,9 @@ export default async function Page() {
         <div className="flex flex-col gap-10 sm:gap-16">
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col gap-6">
-              <Subheading>Governance starts with visibility and control.</Subheading>
+              <Subheading>
+                Governance Starts With Visibility & Control: Introducing the Agentic Blueprint as Code (ABC).
+              </Subheading>
               <Text className="text-pretty">
                 <span className="flex flex-col gap-4">
                   <p>

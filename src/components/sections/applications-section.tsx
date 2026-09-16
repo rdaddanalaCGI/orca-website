@@ -1,6 +1,6 @@
 'use client'
 
-import { Link } from '@/components/elements/link'
+import { PlainButtonLink } from '@/components/elements/button'
 import { Section } from '@/components/elements/section'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { motion } from 'framer-motion'
@@ -184,9 +184,9 @@ export function ApplicationsSection() {
         </>
       }
       cta={
-        <Link href="/solutions" color="brand">
+        <PlainButtonLink href="/solutions" size="lg" className="self-start">
           Explore all applications <ArrowNarrowRightIcon />
-        </Link>
+        </PlainButtonLink>
       }
     >
       <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">

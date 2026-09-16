@@ -153,10 +153,10 @@ function BentoCtaCard({ index }: { index: number }) {
       </p>
       <div className="flex flex-wrap items-center justify-center gap-4">
         <ButtonLink href="/agentic-automation-platform" color="dark/light" size="lg">
-          Explore the platform <ArrowNarrowRightIcon />
+          Explore The Platform <ArrowNarrowRightIcon />
         </ButtonLink>
         <PlainButtonLink href="/contact" size="lg">
-          Talk to us <ArrowNarrowRightIcon />
+          Talk To Us <ArrowNarrowRightIcon />
         </PlainButtonLink>
       </div>
     </div>

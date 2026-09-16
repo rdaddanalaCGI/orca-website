@@ -63,13 +63,13 @@ const applications: Application[] = [
     image: '/img/verticals/fintech.jpeg',
   },
   {
-    href: '/solutions/clinical-research-organisations#prior-authorization',
-    vertical: 'CLINICAL RESEARCH ORGANIZATIONS',
+    href: '/solutions/legal#intake-to-retainer',
+    vertical: 'LAW FIRMS',
     name: 'Prior Authorization',
     problem:
-      'Care coordinators collect clinical notes, patient history, payer policies and formulary rules from EHRs, faxes and portals before a prior authorization request can be submitted cleanly.',
+      'Legal teams collect client information, engagement documents, conflict checks, supporting evidence, and case history from forms, emails, document repositories, and intake systems before a new matter can be evaluated and opened.',
     useCases: ['Build the auth packet', 'Check coverage and formulary', 'Track status and appeal'],
-    count: 6,
+    count: 8,
     image: '/img/verticals/healthtech.png',
   },
   {

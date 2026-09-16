@@ -47,7 +47,7 @@ const cards: BentoCard[] = [
   {
     eyebrow: 'WHERE WORK HAPPENS',
     heading: 'Works where your teams already work.',
-    text: 'Bring governed workflows into Teams, Outlook, Chrome and your enterprise systems—without forcing people into another application.',
+    text: 'Bring governed workflows into Teams, Outlook, Chrome and your enterprise systems, without forcing people into another application.',
     image: 'https://tailwindcss.com/plus-assets/img/component-images/bento-01-integrations.png',
     darkImage: 'https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-integrations.png',
   },

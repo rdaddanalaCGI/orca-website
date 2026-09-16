@@ -96,7 +96,7 @@ export default async function Page() {
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col gap-6">
               <Subheading>
-                Governance Starts With Visibility & Control: Introducing the Agentic Blueprint as Code (ABC).
+                Governance starts with visibility & control: introducing the Agentic Blueprint as Code (ABC).
               </Subheading>
               <Text className="text-pretty">
                 <span className="flex flex-col gap-4">
@@ -122,19 +122,19 @@ export default async function Page() {
               {
                 id: 'context',
                 ident: '01',
-                heading: 'Declare Agent Context',
+                heading: 'Declare agent context',
                 copy: 'Bring together the data, documents, systems and relationships AI needs to understand the work.',
               },
               {
                 id: 'workflow',
                 ident: '02',
-                heading: 'Declare Agent Workflow',
+                heading: 'Declare agent workflow',
                 copy: 'Define the actions, system calls, decisions and handoffs that move the work forward.',
               },
               {
                 id: 'interaction',
                 ident: '03',
-                heading: 'Declare Agent Interaction',
+                heading: 'Declare agent interaction',
                 copy: 'Define where people interact with agents to review outputs, approve actions, or take control, all within the tools they already use.',
               },
             ]}

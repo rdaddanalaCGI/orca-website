@@ -19,7 +19,7 @@ const cards: BentoCard[] = [
   {
     eyebrow: 'OPERATING BLUEPRINT',
     heading: 'Define the whole application from one understanding of the work.',
-    text: 'Capture the business context, workflow, system actions, human decisions and experience together—so every part of the application is built from the same operating blueprint.',
+    text: 'Capture the business context, workflow, system actions, human decisions and experience together, so every part of the application is built from the same operating blueprint.',
     image: 'https://tailwindcss.com/plus-assets/img/component-images/bento-01-performance.png',
     darkImage: 'https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-performance.png',
   },

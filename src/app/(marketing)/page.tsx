@@ -110,7 +110,7 @@ export default async function Page() {
                   </p>
                 </span>
               </Text>
-              <PlainButtonLink href="/agentic-automation-platform" size="lg">
+              <PlainButtonLink href="/agentic-automation-platform" size="lg" className="self-start">
                 Explore the platform <ArrowNarrowRightIcon />
               </PlainButtonLink>
             </div>

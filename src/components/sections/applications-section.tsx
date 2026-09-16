@@ -105,21 +105,31 @@ function ApplicationCard({ application }: { application: Application }) {
             />
           </motion.div>
         </div>
-        <div className="flex flex-col gap-4 p-6 sm:p-8">
+        <div className="flex flex-col gap-3 p-5 sm:gap-4 sm:p-6 lg:p-8">
           <div className="text-xs/4 font-semibold tracking-wider text-orca-orange uppercase">
             {application.vertical}
           </div>
-          <h3 className="font-display text-2xl/9 text-olive-950 dark:text-white">{application.name}</h3>
-          <p className="text-base/7 text-olive-700 dark:text-frost">{application.problem}</p>
+          <h3 className="font-display text-xl/8 text-olive-950 sm:text-2xl/9 dark:text-white">{application.name}</h3>
+          <p className="text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">{application.problem}</p>
 
+          <div className="block lg:hidden">
+            <ul className="flex flex-col gap-2">
+              {application.useCases.map((useCase) => (
+                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-orca-frost">
+                  <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
+                  {useCase}
+                </li>
+              ))}
+            </ul>
+          </div>
           <motion.div
-            className="overflow-hidden"
+            className="hidden overflow-hidden lg:block"
             variants={useCaseVariants}
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <ul className="flex flex-col gap-2">
               {application.useCases.map((useCase) => (
-                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-frost">
+                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-orca-frost">
                   <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
                   {useCase}
                 </li>
@@ -128,7 +138,7 @@ function ApplicationCard({ application }: { application: Application }) {
           </motion.div>
 
           <div className="mt-auto flex items-center justify-between gap-4">
-            <div className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-frost">
+            <div className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-orca-frost">
               {application.count} USE CASES
             </div>
             <div className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 dark:text-white">
@@ -171,7 +181,7 @@ export function ApplicationsSection() {
         </Link>
       }
     >
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
         {applications.map((application, i) => (
           <div key={application.href} className={i === 0 ? 'lg:col-span-2' : ''}>
             <ApplicationCard application={application} />

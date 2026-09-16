@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <>
-      <section className="py-16 lg:py-24">
+      <section className="py-16">
         <Container className="flex max-w-3xl flex-col gap-6">
           <Eyebrow variant="brand">AI SOLUTIONS</Eyebrow>
           <Heading className="max-w-4xl">AI solutions built around how your industry works.</Heading>
@@ -48,7 +48,7 @@ export default function Page() {
         </Container>
       </section>
 
-      <Section id="industries" className="py-16 lg:py-24">
+      <Section id="industries" className="py-16">
         <div className="grid gap-6 lg:grid-cols-2">
           {logistics && (
             <div
@@ -59,7 +59,9 @@ export default function Page() {
                 <div className="flex flex-col gap-5 p-6 sm:p-10">
                   <h2 className="font-display text-2xl/8 text-olive-950 dark:text-white">{logistics.name}</h2>
                   {logistics.solutionsPage?.positioning && (
-                    <p className="text-base/7 text-olive-700 dark:text-frost">{logistics.solutionsPage.positioning}</p>
+                    <p className="text-base/7 text-olive-700 dark:text-orca-frost">
+                      {logistics.solutionsPage.positioning}
+                    </p>
                   )}
                   <ul className="flex flex-col gap-2" role="list">
                     {getSolutionApplicationsForLanding(logistics)
@@ -125,7 +127,9 @@ export default function Page() {
                 <div className="flex flex-col gap-4 p-6 sm:p-8">
                   <h2 className="font-display text-2xl/8 text-olive-950 dark:text-white">{solution.name}</h2>
                   {solution.solutionsPage?.positioning && (
-                    <p className="text-base/7 text-olive-700 dark:text-frost">{solution.solutionsPage.positioning}</p>
+                    <p className="text-base/7 text-olive-700 dark:text-orca-frost">
+                      {solution.solutionsPage.positioning}
+                    </p>
                   )}
                   <ul className="flex flex-col gap-2" role="list">
                     {applications.map((application) => (
@@ -164,14 +168,14 @@ export default function Page() {
         eyebrowVariant="brand"
         headline="Looking for a specific workflow?"
         subheadline="Find applications by the operational problem they solve, not only the industry they belong to."
-        className="py-16 lg:py-24"
+        className="py-16"
       >
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
           {crossIndustryApplications.map((application) => (
             <li key={`${application.vertical}-${application.id}`}>
               <NextLink
                 href={application.href}
-                className="group flex h-full flex-col gap-1 rounded-2xl border border-olive-950/5 bg-orca-mist p-5 transition-all duration-300 hover:border-orca-orange/20 hover:bg-olive-950/5 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:hover:bg-white/10"
+                className="group flex h-full flex-col gap-1 rounded-2xl border border-olive-950/5 bg-orca-mist p-5 transition-all duration-300 hover:border-orca-orange/20 hover:bg-orca-mist focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:hover:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_25%,var(--color-olive-950))]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="font-display text-lg/7 text-olive-950 dark:text-white">
@@ -179,14 +183,14 @@ export default function Page() {
                   </h3>
                   <ArrowNarrowRightIcon className="mt-1 h-4 w-4 shrink-0 text-orca-orange transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
                 </div>
-                <span className="text-sm/6 text-olive-700 dark:text-frost">{application.vertical}</span>
+                <span className="text-sm/6 text-olive-700 dark:text-orca-frost">{application.vertical}</span>
               </NextLink>
             </li>
           ))}
         </ul>
       </Section>
 
-      <section className="py-12">
+      <section className="py-16">
         <Container className="flex flex-col items-start gap-6">
           <Subheading>Not sure where to start? Start with one workflow.</Subheading>
           <Text className="max-w-2xl">

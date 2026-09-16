@@ -1,0 +1,60 @@
+import type { ComponentType, SVGProps } from 'react'
+
+import {
+  Boxes,
+  CircleAlert,
+  CircleCheck,
+  ClipboardList,
+  Database,
+  FileText,
+  Headphones,
+  History,
+  Image,
+  Layers,
+  MapPin,
+  Monitor,
+  Package,
+  ReceiptText,
+  Route,
+  Search,
+  Settings,
+  Shield,
+  Smartphone,
+  Truck,
+  User,
+  Users,
+  Warehouse,
+  Workflow,
+} from 'lucide-react'
+
+import type { BlueprintIconName } from './types'
+
+export type BlueprintIconComponent = ComponentType<SVGProps<SVGSVGElement>>
+
+export const blueprintIcons: Record<BlueprintIconName, BlueprintIconComponent> = {
+  database: Database,
+  package: Package,
+  'map-pin': MapPin,
+  history: History,
+  file: FileText,
+  shield: Shield,
+  search: Search,
+  user: User,
+  users: Users,
+  settings: Settings,
+  check: CircleCheck,
+  monitor: Monitor,
+  smartphone: Smartphone,
+  image: Image,
+  clipboard: ClipboardList,
+  warehouse: Warehouse,
+  layers: Layers,
+  route: Route,
+  network: Workflow,
+  headphones: Headphones,
+  boxes: Boxes,
+  truck: Truck,
+  receipt: ReceiptText,
+  'circle-alert': CircleAlert,
+  'circle-check': CircleCheck,
+}

@@ -8,7 +8,7 @@ import type { SolutionClosingCta } from '@/lib/solutions'
 
 export function SolutionClosingCta({ closingCta }: { closingCta: SolutionClosingCta }) {
   return (
-    <section className="py-24">
+    <section className="py-16">
       <Container className="flex flex-col items-center gap-10 text-center">
         <div className="flex max-w-3xl flex-col items-center gap-6">
           <Eyebrow variant="brand">{closingCta.eyebrow}</Eyebrow>

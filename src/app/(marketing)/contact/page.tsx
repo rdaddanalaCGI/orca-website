@@ -20,11 +20,11 @@ export default function ContactPage() {
           { name: 'Contact', path: '/contact' },
         ])}
       />
-      <Section className="py-16 sm:py-24">
+      <Section className="py-16">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
           <div>
             <Heading>Contact us</Heading>
-            <Text className="mt-6 text-lg/8 text-olive-600 dark:text-olive-300">
+            <Text className="mt-6 text-lg/8 text-olive-600 dark:text-orca-frost">
               Tell us what you&apos;re building. We&apos;ll get back to you within one business day.
             </Text>
           </div>

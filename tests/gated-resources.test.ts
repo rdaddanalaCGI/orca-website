@@ -1,6 +1,9 @@
+import { existsSync } from 'node:fs'
+import path from 'node:path'
+
 import { describe, expect, it } from 'vitest'
 
-import { findGatedResourceByPath, gatedResources, getGatedResource } from '@/lib/gated-resources'
+import { downloadResources, findGatedResourceByPath, gatedResources, getGatedResource } from '@/lib/gated-resources'
 import { staticRoutePaths } from '@/lib/routes'
 
 describe('gated resources registry', () => {
@@ -48,5 +51,16 @@ describe('gated resources registry', () => {
   it('returns null for unknown paths and resource ids', () => {
     expect(findGatedResourceByPath('/not-a-handbook')).toBeNull()
     expect(getGatedResource('not-real')).toBeNull()
+  })
+
+  it('has a PDF on disk for every configured download resource', () => {
+    const pdfDir = path.join(process.cwd(), 'private', 'pdfs')
+    const resources = Object.values(downloadResources)
+    const filenames = new Set(resources.map((r) => r.pdf?.filename).filter(Boolean))
+
+    for (const filename of filenames) {
+      const filePath = path.join(pdfDir, filename as string)
+      expect(existsSync(filePath), `Missing PDF file: ${filename}`).toBe(true)
+    }
   })
 })

@@ -72,16 +72,31 @@ function BentoCardItem({ card, index }: { card: BentoCard; index: number }) {
 
   const content = (
     <>
-      <div className="relative h-56 w-full overflow-hidden">
+      <div className="relative aspect-4/3 w-full overflow-hidden bg-orca-mist lg:aspect-auto lg:h-56 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
         {shouldReduceMotion ? (
           <>
-            <Image src={card.image} alt="" fill sizes={sizes} className="object-cover dark:hidden" />
-            <Image src={card.darkImage} alt="" fill sizes={sizes} className="object-cover not-dark:hidden" />
+            <Image src={card.image} alt="" fill sizes={sizes} className="object-contain lg:object-cover dark:hidden" />
+            <Image
+              src={card.darkImage}
+              alt=""
+              fill
+              sizes={sizes}
+              className="object-contain not-dark:hidden lg:object-cover"
+            />
           </>
         ) : (
-          <motion.div className="relative h-56 w-full overflow-hidden" variants={imageVariants}>
-            <Image src={card.image} alt="" fill sizes={sizes} className="object-cover dark:hidden" />
-            <Image src={card.darkImage} alt="" fill sizes={sizes} className="object-cover not-dark:hidden" />
+          <motion.div
+            className="relative aspect-4/3 w-full overflow-hidden bg-orca-mist lg:aspect-auto lg:h-56 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
+            variants={imageVariants}
+          >
+            <Image src={card.image} alt="" fill sizes={sizes} className="object-contain lg:object-cover dark:hidden" />
+            <Image
+              src={card.darkImage}
+              alt=""
+              fill
+              sizes={sizes}
+              className="object-contain not-dark:hidden lg:object-cover"
+            />
           </motion.div>
         )}
       </div>
@@ -90,7 +105,7 @@ function BentoCardItem({ card, index }: { card: BentoCard; index: number }) {
         <h3 className="font-display text-xl/8 text-olive-950 transition-colors duration-300 group-hover:text-orca-orange dark:text-white dark:group-hover:text-orca-orange">
           {card.heading}
         </h3>
-        <p className="text-base/6 text-olive-700 dark:text-frost">{card.text}</p>
+        <p className="text-base/6 text-olive-700 dark:text-orca-frost">{card.text}</p>
       </div>
     </>
   )
@@ -133,7 +148,7 @@ function BentoCtaCard({ index }: { index: number }) {
       <h3 className="max-w-2xl font-display text-2xl/8 text-olive-950 transition-colors duration-300 group-hover:text-orca-orange dark:text-white dark:group-hover:text-orca-orange">
         Move faster. Keep the work—and the controls—connected.
       </h3>
-      <p className="max-w-2xl text-base/7 text-olive-700 dark:text-frost">
+      <p className="max-w-2xl text-base/7 text-olive-700 dark:text-orca-frost">
         One shared blueprint keeps context, execution, governance and experience aligned from discovery through
         production, giving you a faster path to enterprise AI without sacrificing control.
       </p>
@@ -177,7 +192,7 @@ export function WhyOrcaworksSection() {
   return (
     <Section
       id="why-orcaworks"
-      eyebrow="WHY ORCAWORKS"
+      eyebrow="Understand Orcaworks"
       eyebrowVariant="brand"
       headline="One blueprint. From how the work operates to how the application runs."
       subheadline={

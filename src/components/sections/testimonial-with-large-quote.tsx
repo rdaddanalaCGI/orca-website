@@ -27,7 +27,7 @@ export function TestimonialLargeQuote({
               {img}
             </div>
             <p className="mt-4 text-center text-sm/6 font-semibold">{name}</p>
-            <p className="text-center text-sm/6 text-olive-700 dark:text-frost">{byline}</p>
+            <p className="text-center text-sm/6 text-olive-700 dark:text-orca-frost">{byline}</p>
           </figcaption>
         </figure>
       </Container>

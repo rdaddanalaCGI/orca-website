@@ -90,12 +90,17 @@ missing in `production`.
 
 `APP_ENV` controls search-engine indexability:
 
-| `APP_ENV`    | `robots.txt`  | Page metadata       |
-| ------------ | ------------- | ------------------- |
-| `local`      | `Disallow: /` | `noindex, nofollow` |
-| `preview`    | `Disallow: /` | `noindex, nofollow` |
-| `staging`    | `Disallow: /` | `noindex, nofollow` |
-| `production` | `Allow: /`    | indexable           |
+| `APP_ENV`    | `robots.txt`            | Page metadata       |
+| ------------ | ----------------------- | ------------------- |
+| `local`      | `Allow: /` (no sitemap) | `noindex, nofollow` |
+| `preview`    | `Allow: /` (no sitemap) | `noindex, nofollow` |
+| `staging`    | `Allow: /` (no sitemap) | `noindex, nofollow` |
+| `production` | `Allow: /` + sitemap    | indexable           |
+
+Non-production `Allow: /` still keeps `/admin` and `/api` disallowed. Public
+crawling is intentional there: crawlers must be able to fetch pages and files to
+see the `noindex` metadata/`X-Robots-Tag` headers. Do not blanket-disallow a
+non-production host while it needs de-indexing.
 
 Only ever set `APP_ENV=production` on the real public domain.
 

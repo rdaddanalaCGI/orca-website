@@ -33,6 +33,8 @@ test.describe('page delivery', () => {
     await page.goto('/')
 
     await expect(page.locator('h1')).toBeVisible()
+    // The "Declare the Work" animation is decorative; its pillar copy must be server-rendered HTML.
+    await expect(page.getByRole('heading', { name: 'Declare the interaction' })).toBeVisible()
     await context.close()
   })
 })
@@ -48,10 +50,26 @@ test.describe('SEO infrastructure', () => {
     }
   })
 
-  test('robots.txt disallows crawling in non-production environments', async ({ request }) => {
+  test('robots.txt allows public crawling in non-production environments', async ({ request }) => {
     const response = await request.get('/robots.txt')
     expect(response.status()).toBe(200)
-    expect(await response.text()).toContain('Disallow: /')
+
+    // Crawlers must be able to reach pages to read the noindex metadata, while
+    // private surfaces stay disallowed. There must be no blanket `Disallow: /`.
+    const directives = (await response.text())
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean)
+    expect(directives).toContain('Allow: /')
+    expect(directives).toContain('Disallow: /admin')
+    expect(directives).toContain('Disallow: /api')
+    expect(directives).not.toContain('Disallow: /')
+  })
+
+  test('downloadable documents are noindex in non-production environments', async ({ request }) => {
+    // No public PDF exists yet; a missing one still exercises the header rule.
+    const response = await request.get('/does-not-exist.pdf')
+    expect(response.headers()['x-robots-tag']).toContain('noindex')
   })
 
   test('non-production pages are noindex', async ({ page }) => {

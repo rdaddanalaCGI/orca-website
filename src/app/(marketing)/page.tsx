@@ -1,18 +1,20 @@
+import { DeclaredWorkAnimation } from '@/components/declared-work/declared-work-animation'
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
 import { Link } from '@/components/elements/link'
-import { Screenshot } from '@/components/elements/screenshot'
+import { Section } from '@/components/elements/section'
+import { Subheading } from '@/components/elements/subheading'
+import { Text } from '@/components/elements/text'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
+import { MeasuredValueSection } from '@/components/measured-value/measured-value-section'
 import { ApplicationsSection } from '@/components/sections/applications-section'
 import { ClosingCtaSection } from '@/components/sections/closing-cta-section'
-import { FeatureThreeColumnWithDemos, Features } from '@/components/sections/features-three-column-with-demos'
 import { HeroCenteredWithDemo } from '@/components/sections/hero-centered-with-demo'
 import { InsightsSection } from '@/components/sections/insights-section'
-import { VerticalsSection } from '@/components/sections/verticals-section'
 import { WhyOrcaworksSection } from '@/components/sections/why-orcaworks-section'
+import { YouTubeEmbed } from '@/components/youtube-embed'
 import { cmsImageUrl, getLatestPosts } from '@/lib/payload'
 import { createMetadata } from '@/lib/seo'
-import Image from 'next/image'
 
 export const metadata = createMetadata({
   path: '/',
@@ -90,120 +92,59 @@ export default async function Page() {
         }
       />
 
-      <Features
-        id="give-ai-context"
-        headline="Governance starts with visibility and control."
-        subheadline={
-          <div className="flex flex-col gap-4">
-            <p>
-              The Orcaworks Blueprint makes the context, workflow, actions and controls behind enterprise AI explicit —
-              so teams can see how it operates, review what it can do and govern it before it runs.
-            </p>
-            <p>
-              <strong>What you review is what runs.</strong>
-            </p>
+      <Section id="give-ai-context">
+        <div className="flex flex-col gap-10 sm:gap-16">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="flex flex-col gap-6">
+              <Subheading>Governance starts with visibility and control.</Subheading>
+              <Text className="text-pretty">
+                <span className="flex flex-col gap-4">
+                  <p>
+                    The Orcaworks Blueprint makes the context, workflow, actions and controls behind enterprise AI
+                    explicit — so teams can see how it operates, review what it can do and govern it before it runs.
+                  </p>
+                  <p>
+                    <strong className="text-olive-950 dark:text-white">What you review is what runs.</strong>
+                  </p>
+                </span>
+              </Text>
+              <Link href="/agentic-automation-platform">
+                Explore the platform <ArrowNarrowRightIcon />
+              </Link>
+            </div>
+            <YouTubeEmbed videoId="M7lc1UVf-VE" title="Orcaworks governance overview (placeholder)" />
           </div>
-        }
-        cta={
-          <Link href="/agentic-automation-platform">
-            Explore the platform <ArrowNarrowRightIcon />
-          </Link>
-        }
-        features={
-          <>
-            <FeatureThreeColumnWithDemos
-              demo={
-                <Screenshot placement="bottom-right">
-                  <div className="relative aspect-3/2 w-full">
-                    <Image
-                      src="/img/screenshots/1.webp"
-                      alt="Declare the context"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="bg-white/75 object-cover dark:hidden"
-                      style={{ objectPosition: 'right bottom' }}
-                    />
-                    <Image
-                      src="/img/screenshots/1-color-olive.webp"
-                      alt="Declare the context"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="bg-black/75 object-cover not-dark:hidden"
-                      style={{ objectPosition: 'right bottom' }}
-                    />
-                  </div>
-                </Screenshot>
-              }
-              headline="Declare the context"
-              subheadline={
-                <p>Bring together the data, documents, systems and relationships AI needs to understand the work.</p>
-              }
-            />
-            <FeatureThreeColumnWithDemos
-              demo={
-                <Screenshot placement="top-left">
-                  <div className="relative aspect-3/2 w-full">
-                    <Image
-                      src="/img/screenshots/1.webp"
-                      alt="Declare the workflow"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="bg-white/75 object-cover dark:hidden"
-                      style={{ objectPosition: 'left top' }}
-                    />
-                    <Image
-                      src="/img/screenshots/1-color-olive.webp"
-                      alt="Declare the workflow"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="bg-black/75 object-cover not-dark:hidden"
-                      style={{ objectPosition: 'left top' }}
-                    />
-                  </div>
-                </Screenshot>
-              }
-              headline="Declare the workflow"
-              subheadline={
-                <p>Make the actions, system calls, handoffs and workflow steps that move work forward explicit.</p>
-              }
-            />
-            <FeatureThreeColumnWithDemos
-              demo={
-                <Screenshot placement="bottom-left">
-                  <div className="relative aspect-3/2 w-full">
-                    <Image
-                      src="/img/screenshots/1.webp"
-                      alt="Declare the controls"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="bg-white/75 object-cover dark:hidden"
-                      style={{ objectPosition: 'left bottom' }}
-                    />
-                    <Image
-                      src="/img/screenshots/1-color-olive.webp"
-                      alt="Declare the controls"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="bg-black/75 object-cover not-dark:hidden"
-                      style={{ objectPosition: 'left bottom' }}
-                    />
-                  </div>
-                </Screenshot>
-              }
-              headline="Declare the controls"
-              subheadline={
-                <p>Build permissions, boundaries, approvals, evidence and human decisions directly into execution.</p>
-              }
-            />
-          </>
-        }
-      />
-
-      <VerticalsSection />
+          <div className="h-px w-full bg-olive-950/10 dark:bg-white/10" />
+          <DeclaredWorkAnimation
+            pillars={[
+              {
+                id: 'context',
+                ident: '01',
+                heading: 'Declare the context',
+                copy: 'Bring together the data, documents, systems and relationships AI needs to understand the work.',
+              },
+              {
+                id: 'workflow',
+                ident: '02',
+                heading: 'Declare the workflow',
+                copy: 'Define the actions, system calls, decisions and handoffs that move the work forward.',
+              },
+              {
+                id: 'interaction',
+                ident: '03',
+                heading: 'Declare the interaction',
+                copy: 'Define where people meet the agents — in the tools they already use — to review, approve or take over.',
+              },
+            ]}
+          />
+        </div>
+      </Section>
 
       <ApplicationsSection />
 
       <WhyOrcaworksSection />
+
+      <MeasuredValueSection />
 
       <InsightsSection items={insights} />
 

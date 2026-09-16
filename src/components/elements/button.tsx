@@ -8,15 +8,6 @@ const sizes = {
   lg: 'px-4 py-2',
 }
 
-const base =
-  'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium outline-hidden transition-colors duration-150 motion-safe:active:scale-[0.97] focus-visible:[--tw-outline-style:solid] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orca-orange'
-
-const disabled = 'disabled:pointer-events-none disabled:opacity-50'
-
-// Shared dark-mode fill for every solid/soft button surface, so "primary",
-// "secondary", and "light" all read as one consistent button language in dark mode.
-const darkFill = 'dark:bg-frost dark:text-olive-950 dark:hover:bg-[#c0d9dc] dark:active:bg-[#b2c9cb]'
-
 export function Button({
   size = 'md',
   type = 'button',
@@ -31,10 +22,11 @@ export function Button({
     <button
       type={type}
       className={clsx(
-        base,
-        disabled,
-        color === 'dark/light' && `bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 ${darkFill}`,
-        color === 'light' && `bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 ${darkFill}`,
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+        color === 'dark/light' &&
+          'bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 dark:bg-orca-frost dark:text-olive-950 dark:hover:bg-orca-frost-hover dark:active:bg-orca-frost-active',
+        color === 'light' &&
+          'bg-white text-olive-950 hover:bg-orca-mist active:bg-orca-mist dark:bg-orca-frost dark:text-olive-950 dark:hover:bg-orca-frost-hover dark:active:bg-orca-frost-active',
         sizes[size],
         className,
       )}
@@ -58,9 +50,11 @@ export function ButtonLink({
     <Link
       href={href}
       className={clsx(
-        base,
-        color === 'dark/light' && `bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 ${darkFill}`,
-        color === 'light' && `bg-white text-olive-950 hover:bg-olive-100 active:bg-olive-200 ${darkFill}`,
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none',
+        color === 'dark/light' &&
+          'bg-olive-950 text-white hover:bg-olive-800 active:bg-olive-900 dark:bg-orca-frost dark:text-olive-950 dark:hover:bg-orca-frost-hover dark:active:bg-orca-frost-active',
+        color === 'light' &&
+          'bg-white text-olive-950 hover:bg-orca-mist active:bg-orca-mist dark:bg-orca-frost dark:text-olive-950 dark:hover:bg-orca-frost-hover dark:active:bg-orca-frost-active',
         sizes[size],
         className,
       )}
@@ -81,9 +75,7 @@ export function SoftButton({
     <button
       type={type}
       className={clsx(
-        base,
-        disabled,
-        `bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 ${darkFill}`,
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-olive-950/10 text-sm/7 font-medium text-olive-950 transition-colors duration-150 hover:bg-olive-950/15 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none active:bg-olive-950/20 disabled:pointer-events-none disabled:opacity-50 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/25',
         sizes[size],
         className,
       )}
@@ -105,8 +97,7 @@ export function SoftButtonLink({
     <Link
       href={href}
       className={clsx(
-        base,
-        `bg-olive-950/10 text-olive-950 hover:bg-olive-950/15 active:bg-olive-950/20 ${darkFill}`,
+        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-olive-950/10 text-sm/7 font-medium text-olive-950 transition-colors duration-150 hover:bg-olive-950/15 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none active:bg-olive-950/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/25',
         sizes[size],
         className,
       )}
@@ -129,14 +120,10 @@ export function PlainButton({
     <button
       type={type}
       className={clsx(
-        base,
-        disabled,
-        'gap-2',
-        color === 'dark/light' &&
-          'text-olive-950 hover:bg-olive-950/10 active:bg-olive-950/15 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/15',
-        color === 'light' &&
-          'text-white hover:bg-white/15 active:bg-white/20 dark:hover:bg-white/10 dark:active:bg-white/15',
-        color === 'brand' && 'text-[#cc3a00] hover:bg-orca-orange/10 active:bg-orca-orange/15 dark:text-orca-orange',
+        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
+        color === 'dark/light' && 'text-olive-950 hover:bg-olive-950/10 dark:text-white dark:hover:bg-white/10',
+        color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
+        color === 'brand' && 'text-orca-link hover:bg-orca-orange/10 dark:text-orca-orange',
         sizes[size],
         className,
       )}
@@ -160,13 +147,10 @@ export function PlainButtonLink({
     <Link
       href={href}
       className={clsx(
-        base,
-        'gap-2',
-        color === 'dark/light' &&
-          'text-olive-950 hover:bg-olive-950/10 active:bg-olive-950/15 dark:text-white dark:hover:bg-white/10 dark:active:bg-white/15',
-        color === 'light' &&
-          'text-white hover:bg-white/15 active:bg-white/20 dark:hover:bg-white/10 dark:active:bg-white/15',
-        color === 'brand' && 'text-[#cc3a00] hover:bg-orca-orange/10 active:bg-orca-orange/15 dark:text-orca-orange',
+        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none',
+        color === 'dark/light' && 'text-olive-950 hover:bg-olive-950/10 dark:text-white dark:hover:bg-white/10',
+        color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
+        color === 'brand' && 'text-orca-link hover:bg-orca-orange/10 dark:text-orca-orange',
         sizes[size],
         className,
       )}

@@ -10,7 +10,7 @@ The design token layer lives in `src/app/globals.css`:
 @import 'tailwindcss';
 
 @theme {
-  --font-display: 'Instrument Serif', serif;
+  --font-display: 'Familjen Grotesk', sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
   --color-olive-50: oklch(98.8% 0.003 106.5);
@@ -25,8 +25,8 @@ The design token layer lives in `src/app/globals.css`:
   --color-olive-900: oklch(22.8% 0.013 107.4);
   --color-olive-950: oklch(15.3% 0.006 107.1);
 
-  --color-orca-orange: #ff4800;
-  --color-orca-orange-hover: #ff4800;
+  --color-orca-orange: #ff4b1f;
+  --color-orca-orange-hover: #e6421b;
   --color-orca-mist: #edf8f9;
   --color-orca-teal-dark: #326367;
 }
@@ -35,9 +35,9 @@ The design token layer lives in `src/app/globals.css`:
 - **Olive palette**: the primary neutral scale, used for the majority of backgrounds, body text, borders, and chrome.
 - **Orcaworks accent palette**: brand colors added for handbook and controlled marketing accents. Always reference them via `var(--color-*)` rather than hard-coding the hex value.
 - **Light background**: `olive-100`; **dark background**: `olive-950`.
-- **Font display**: `Instrument Serif` for headings; **font sans**: `Inter` for body text.
+- **Font display**: `Familjen Grotesk` for headings; **font sans**: `Inter` for body text.
 - **Dark mode**: enabled through `dark:` variants. The `html` element flips background automatically.
-- **Font preconnects**: `Instrument Serif` and `Inter` are loaded in `src/app/layout.tsx` from Google Fonts. If you change fonts, update both the `<head>` links and `--font-*` CSS variables.
+- **Font preconnects**: `Familjen Grotesk` and `Inter` are loaded in `src/app/layout.tsx` from Google Fonts. If you change fonts, update both the `<head>` links and `--font-*` CSS variables.
 
 ## 1.1 Brand color usage
 
@@ -45,8 +45,8 @@ The Orcaworks accent palette is intentionally limited. Olive must remain the dom
 
 | Token                                             | Value     | When to use                                                                                                        |
 | ------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| `text-orca-orange` / `bg-orca-orange`             | `#ff4800` | Primary CTAs, selected/active nav items, eyebrow labels, and high-value links. Never the dominant color on a page. |
-| `text-orca-orange-hover` / `bg-orca-orange-hover` | `#ff4800` | Same value as `orca-orange` — there is currently no distinct hover shade.                                          |
+| `text-orca-orange` / `bg-orca-orange`             | `#ff4b1f` | Primary CTAs, selected/active nav items, eyebrow labels, and high-value links. Never the dominant color on a page. |
+| `text-orca-orange-hover` / `bg-orca-orange-hover` | `#e6421b` | Hover/focus states for orange controls.                                                                            |
 | `bg-orca-mist`                                    | `#edf8f9` | One highlighted section surface per page, used sparingly for callouts or explanatory content.                      |
 | `text-orca-teal-dark`                             | `#326367` | Optional supporting accent. Currently used only to derive dark-mode Mist surfaces via `color-mix`.                 |
 

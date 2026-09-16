@@ -51,6 +51,12 @@ export function isSubmissionType(value: unknown): value is SubmissionType {
   return typeof value === 'string' && (SUBMISSION_TYPES as readonly string[]).includes(value)
 }
 
+export const newsletterSchema = z.object({
+  email: z.email('Enter a valid email address').max(256).toLowerCase(),
+  sourcePage: relativePath,
+  website: z.string().max(256).optional(),
+})
+
 export const leadGateSchema = z.object({
   firstName: z.string().trim().min(1, 'First name is required').max(128),
   workEmail: z.email('Enter a valid work email address').max(256).toLowerCase(),

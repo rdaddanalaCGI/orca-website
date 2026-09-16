@@ -43,10 +43,10 @@ export function Plan({
         </div>
         <p className="mt-1 inline-flex gap-1 text-base/7">
           <span className="text-olive-950 dark:text-white">{price}</span>
-          {period && <span className="text-olive-500 dark:text-olive-500">{period}</span>}
+          {period && <span className="text-olive-500 dark:text-orca-frost">{period}</span>}
         </p>
-        <div className="mt-4 flex flex-col gap-4 text-sm/6 text-olive-700 dark:text-frost">{subheadline}</div>
-        <ul className="mt-4 space-y-2 text-sm/6 text-olive-700 dark:text-frost">
+        <div className="mt-4 flex flex-col gap-4 text-sm/6 text-olive-700 dark:text-orca-frost">{subheadline}</div>
+        <ul className="mt-4 space-y-2 text-sm/6 text-olive-700 dark:text-orca-frost">
           {features.map((feature, index) => (
             <li key={index} className="flex gap-4">
               <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />

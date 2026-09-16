@@ -33,14 +33,14 @@ export default async function Page() {
           {docs.map((release) => (
             <li key={release.slug}>
               <NextLink href={`/press/${release.slug}`} className="group flex flex-col gap-2">
-                <span className="text-xs/6 font-semibold text-olive-600 dark:text-frost">
+                <span className="text-xs/6 font-semibold text-olive-600 dark:text-orca-frost">
                   {formatDate(release.publishedDate)}
                 </span>
                 <h3 className="font-display text-2xl/8 text-olive-950 group-hover:underline dark:text-white">
                   {release.title}
                 </h3>
                 {release.excerpt ? (
-                  <p className="text-base/7 text-olive-700 dark:text-frost">{release.excerpt}</p>
+                  <p className="text-base/7 text-olive-700 dark:text-orca-frost">{release.excerpt}</p>
                 ) : null}
               </NextLink>
             </li>

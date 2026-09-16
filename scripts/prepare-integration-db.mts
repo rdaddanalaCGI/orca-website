@@ -3,8 +3,11 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig, getPayload } from 'payload'
 
 import { Authors } from '../src/collections/Authors'
+import { Categories } from '../src/collections/Categories'
 import { FormSubmissions } from '../src/collections/FormSubmissions'
+import { Leads } from '../src/collections/Leads'
 import { Media } from '../src/collections/Media'
+import { NewsletterSubscribers } from '../src/collections/NewsletterSubscribers'
 import { Posts } from '../src/collections/Posts'
 import { PressReleases } from '../src/collections/PressReleases'
 import { Users } from '../src/collections/Users'
@@ -29,7 +32,7 @@ const config = buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Posts, PressReleases, Authors, Media, FormSubmissions, Users],
+  collections: [Posts, Categories, PressReleases, Authors, Media, FormSubmissions, Leads, NewsletterSubscribers, Users],
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL },
     push: true,

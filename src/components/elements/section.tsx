@@ -10,6 +10,7 @@ export function Section({
   headline,
   subheadline,
   cta,
+  surface = 'neutral',
   eyebrowVariant = 'neutral',
   className,
   children,
@@ -19,10 +20,19 @@ export function Section({
   headline?: ReactNode
   subheadline?: ReactNode
   cta?: ReactNode
+  surface?: 'neutral' | 'mist'
   eyebrowVariant?: 'neutral' | 'brand'
 } & ComponentProps<'section'>) {
   return (
-    <section className={clsx('py-16', className)} {...props}>
+    <section
+      className={clsx(
+        'py-16',
+        surface === 'mist' &&
+          'bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
+        className,
+      )}
+      {...props}
+    >
       <Container className="flex flex-col gap-10 sm:gap-16">
         {headline && (
           <div className="flex max-w-2xl flex-col gap-6">

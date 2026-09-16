@@ -57,7 +57,7 @@ export function LeadGateForm({
       <div>
         <p className="text-xs/4 font-semibold tracking-widest text-orca-orange uppercase">Ready to go deeper?</p>
         <h2 className="mt-2 text-2xl font-semibold text-olive-950 dark:text-white">{heading}</h2>
-        <p className="mt-2 text-sm/6 text-olive-700 dark:text-olive-200">{description}</p>
+        <p className="mt-2 text-sm/6 text-olive-700 dark:text-orca-frost">{description}</p>
       </div>
 
       <TextField
@@ -100,7 +100,7 @@ export function LeadGateForm({
         {isPending ? 'Unlocking…' : 'Unlock the guide →'}
       </Button>
 
-      <p className="text-xs/4 text-olive-600 dark:text-olive-300">
+      <p className="text-xs/4 text-olive-600 dark:text-orca-frost">
         One registration unlocks all Orcaworks guides and handbooks.
       </p>
     </form>

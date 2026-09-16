@@ -1,5 +1,8 @@
 allowBuilds:
   esbuild: true
   unrs-resolver: true
+overrides:
+  '@xmldom/xmldom': ^0.9.12
+  js-yaml: ^4.3.2
 patchedDependencies:
   nextra-theme-docs@4.6.1: patches/nextra-theme-docs@4.6.1.patch

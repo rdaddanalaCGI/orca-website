@@ -15,14 +15,19 @@ export function Feature({
   cta: ReactNode
 } & Omit<ComponentProps<'div'>, 'children'>) {
   return (
-    <div className={clsx('rounded-lg bg-olive-950/2.5 p-2 dark:bg-white/5', className)}>
+    <div
+      className={clsx(
+        'rounded-lg bg-orca-mist p-2 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
+        className,
+      )}
+    >
       <div className="relative overflow-hidden rounded-sm dark:after:absolute dark:after:inset-0 dark:after:rounded-sm dark:after:outline-1 dark:after:-outline-offset-1 dark:after:outline-white/10">
         {demo}
       </div>
       <div className="flex flex-col gap-4 p-6 sm:p-10 lg:p-6">
         <div>
           <h3 className="text-base/8 font-medium text-olive-950 dark:text-white">{headline}</h3>
-          <div className="mt-2 flex flex-col gap-4 text-sm/7 text-olive-700 dark:text-frost">{subheadline}</div>
+          <div className="mt-2 flex flex-col gap-4 text-sm/7 text-olive-700 dark:text-orca-frost">{subheadline}</div>
         </div>
         {cta}
       </div>

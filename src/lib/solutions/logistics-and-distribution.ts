@@ -1,3 +1,11 @@
+import {
+  accessorialReviewBlueprint,
+  billingReadyBlueprint,
+  countVarianceBlueprint,
+  shortPickBlueprint,
+  supplierSpecChangeBlueprint,
+} from '@/lib/blueprints/logistics-and-distribution'
+
 import type { SolutionVertical } from './types'
 
 export const logisticsAndDistribution: SolutionVertical = {
@@ -85,6 +93,7 @@ Orcaworks turns the WMS exception into a governed case. Assemble the SKU/locatio
         ],
         roles: ['Warehouse Supervisor', 'Inventory Control', 'Control Desk'],
         systems: ['WMS', 'ERP', 'RF / Mobile', 'Physical Inventory Evidence'],
+        blueprint: shortPickBlueprint,
         cta: { label: 'Explore this application →', href: '/contact', type: 'contact' },
       },
       {
@@ -118,6 +127,7 @@ Orcaworks assembles the evidence around the variance, explains the recent source
         ],
         roles: ['Inventory Control', 'Warehouse Supervisor'],
         systems: ['WMS', 'ERP', 'RF / Mobile', 'Count Evidence'],
+        blueprint: countVarianceBlueprint,
         cta: { label: 'Explore this application →', href: '/contact', type: 'contact' },
       },
       {
@@ -152,6 +162,7 @@ Orcaworks gives the product-data steward a complete change case instead of a col
         ],
         roles: ['Product-Data Steward', 'Item-Master Steward', 'Supplier/Onboarding Team', 'Data Governance'],
         systems: ['PIM/MDM', 'ERP', 'WMS', 'E-commerce', 'Supplier Documents'],
+        blueprint: supplierSpecChangeBlueprint,
         cta: { label: 'Explore this application →', href: '/contact', type: 'contact' },
       },
       {
@@ -185,6 +196,7 @@ Orcaworks moves the freight object from an operational state to a financial-read
         ],
         roles: ['Billing / AR', 'Back Office', 'Transportation Operations'],
         systems: ['TMS', 'ERP / Billing / AR', 'Document Repository', 'Email'],
+        blueprint: billingReadyBlueprint,
         cta: { label: 'Explore this application →', href: '/contact', type: 'contact' },
       },
       {
@@ -220,6 +232,7 @@ Orcaworks gives the AP/freight-audit user a freight case, not just an extracted 
         ],
         roles: ['Carrier AP', 'Freight-Audit Analyst', 'Billing Coordinator', 'Transportation Operations'],
         systems: ['TMS', 'ERP / AP', 'Documents / Email', 'Telemetry / Gate Evidence'],
+        blueprint: accessorialReviewBlueprint,
         cta: { label: 'Explore this application →', href: '/contact', type: 'contact' },
       },
     ],

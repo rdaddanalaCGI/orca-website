@@ -6,7 +6,7 @@ import { Container } from '../elements/container'
 
 export function FooterLink({ href, className, ...props }: { href: string } & Omit<ComponentProps<'a'>, 'href'>) {
   return (
-    <li className={clsx('text-olive-700 dark:text-frost', className)}>
+    <li className={clsx('text-white/80 transition-colors hover:text-orca-orange dark:text-orca-frost', className)}>
       <Link href={href} {...props} />
     </li>
   )
@@ -26,7 +26,7 @@ export function SocialLink({
       href={href}
       target="_blank"
       aria-label={name}
-      className={clsx('text-olive-950 *:size-6 dark:text-white', className)}
+      className={clsx('text-white transition-colors *:size-6 hover:text-orca-orange dark:text-white', className)}
       {...props}
     />
   )
@@ -44,8 +44,8 @@ export function FooterWithLinksAndSocialIcons({
   fineprint: ReactNode
 } & ComponentProps<'footer'>) {
   return (
-    <footer className={clsx('pt-16', className)} {...props}>
-      <div className="bg-olive-950/2.5 py-16 text-olive-950 dark:bg-white/5 dark:text-white">
+    <footer className={clsx('pt-10', className)} {...props}>
+      <div className="bg-orca-teal-dark pt-10 pb-12 text-white dark:bg-orca-footer-dark">
         <Container className="flex flex-col gap-10 text-center text-sm/7">
           <div className="flex flex-col gap-6">
             <nav>
@@ -53,7 +53,7 @@ export function FooterWithLinksAndSocialIcons({
             </nav>
             {socialLinks && <div className="flex items-center justify-center gap-10">{socialLinks}</div>}
           </div>
-          <div className="text-olive-600 dark:text-olive-500">{fineprint}</div>
+          <div className="text-white/70 dark:text-orca-frost/80">{fineprint}</div>
         </Container>
       </div>
     </footer>

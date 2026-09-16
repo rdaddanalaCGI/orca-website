@@ -28,9 +28,26 @@ export function getRedirects(): Redirect[] {
     // Example migration redirects.
     // Replace with entries from .local/urls/required-urls.csv during migration.
     { source: '/old-insurance-page', destination: '/about', permanent: true },
-    // AI Solutions navigation migration.
+    // AI Applications index and navigation migration.
+    { source: '/ai-applications', destination: '/solutions', permanent: true },
+    { source: '/ai-applications/', destination: '/solutions', permanent: true },
     {
       source: '/ai-applications/ai-for-logistics-and-transportation',
+      destination: '/solutions/logistics-and-distribution',
+      permanent: true,
+    },
+    {
+      source: '/ai-applications/ai-for-logistics-and-transportation/',
+      destination: '/solutions/logistics-and-distribution',
+      permanent: true,
+    },
+    {
+      source: '/ai-applications/ai-for-operations-teams',
+      destination: '/solutions/logistics-and-distribution',
+      permanent: true,
+    },
+    {
+      source: '/ai-applications/ai-for-operations-teams/',
       destination: '/solutions/logistics-and-distribution',
       permanent: true,
     },
@@ -40,13 +57,27 @@ export function getRedirects(): Redirect[] {
       permanent: true,
     },
     { source: '/ai-applications/ai-for-insurance', destination: '/solutions/insurance', permanent: true },
+    { source: '/ai-applications/ai-for-insurance/', destination: '/solutions/insurance', permanent: true },
     {
       source: '/ai-applications/ai-for-financial-services',
       destination: '/solutions/credit-unions-specialty-lending',
       permanent: true,
     },
     {
+      source: '/ai-applications/ai-for-financial-services/',
+      destination: '/solutions/credit-unions-specialty-lending',
+      permanent: true,
+    },
+    // Industries index and vertical redirects.
+    { source: '/industries', destination: '/solutions', permanent: true },
+    { source: '/industries/', destination: '/solutions', permanent: true },
+    {
       source: '/industries/agentic-ai-life-sciences-biotech',
+      destination: '/solutions/clinical-research-organisations',
+      permanent: true,
+    },
+    {
+      source: '/industries/agentic-ai-life-sciences-biotech/',
       destination: '/solutions/clinical-research-organisations',
       permanent: true,
     },
@@ -55,5 +86,25 @@ export function getRedirects(): Redirect[] {
       destination: '/solutions/architecture-construction-engineering',
       permanent: true,
     },
+    {
+      source: '/industries/agentic-ai-automation-for-architecture-engineering/',
+      destination: '/solutions/architecture-construction-engineering',
+      permanent: true,
+    },
+    {
+      source: '/industries/agentic-ai-automation-for-facilities-management',
+      destination: '/solutions/facilities-management',
+      permanent: true,
+    },
+    {
+      source: '/industries/agentic-ai-automation-for-facilities-management/',
+      destination: '/solutions/facilities-management',
+      permanent: true,
+    },
+    // Expert/meeting and demo redirects.
+    { source: '/meet-an-expert', destination: '/expert-column/abhinav-somaraju', permanent: true },
+    { source: '/meet-an-expert/', destination: '/expert-column/abhinav-somaraju', permanent: true },
+    { source: '/see-orca-in-action', destination: '/contact', permanent: true },
+    { source: '/see-orca-in-action/', destination: '/contact', permanent: true },
   ]
 }

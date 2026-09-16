@@ -41,7 +41,7 @@ If `DATABASE_URL` is unavailable during build, the sitemap falls back to static 
 
 ## Robots
 
-`src/app/robots.ts` blocks everything except `APP_ENV=production`. Only set `APP_ENV=production` on the real public domain.
+`src/app/robots.ts` only emits a sitemap for `APP_ENV=production`. Every other environment still allows crawling of public routes (so search engines can read the `noindex` page metadata and `X-Robots-Tag` file headers) but keeps `/admin` and `/api` disallowed. Only set `APP_ENV=production` on the real public domain.
 
 ## Redirects
 

@@ -33,6 +33,8 @@ export type SolutionProblems = {
   cards: SolutionProblemCard[]
 }
 
+import type { ApplicationBlueprint } from '@/lib/blueprints/types'
+
 export type SolutionApplicationCta = {
   label: string
   href: string
@@ -53,6 +55,7 @@ export type SolutionApplication = {
   roles: string[]
   systems: string[]
   cta: SolutionApplicationCta
+  blueprint?: ApplicationBlueprint
   featured?: boolean
   demoAvailable?: boolean
   badge?: string

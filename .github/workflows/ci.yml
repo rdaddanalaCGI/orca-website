@@ -22,6 +22,21 @@ jobs:
   quality:
     name: Lint, typecheck, unit tests, build
     runs-on: ubuntu-latest
+    # Pages query Payload during prerender, so the build needs a live database.
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: orcaworks
+          POSTGRES_PASSWORD: orcaworks
+          POSTGRES_DB: orcaworks_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
 
@@ -38,6 +53,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Real gated PDFs are gitignored and provisioned per environment.
+      - name: Provision placeholder gated PDFs
+        run: node scripts/prepare-test-pdfs.mjs
+
       - name: Format check
         run: pnpm format:check
 
@@ -50,11 +69,18 @@ jobs:
       - name: Unit tests
         run: pnpm test
 
+      - name: Prepare test database schema
+        run: pnpm exec tsx scripts/prepare-integration-db.mts
+        env:
+          APP_ENV: preview
+          DATABASE_URL: postgresql://orcaworks:orcaworks@localhost:5432/orcaworks_test
+
       - name: Build
         run: pnpm build
         env:
           APP_ENV: preview
           NEXT_PUBLIC_SITE_URL: https://preview.example.com
+          DATABASE_URL: postgresql://orcaworks:orcaworks@localhost:5432/orcaworks_test
 
   integration:
     name: DB-backed integration tests
@@ -98,6 +124,20 @@ jobs:
     name: End-to-end tests
     runs-on: ubuntu-latest
     needs: quality
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: orcaworks
+          POSTGRES_PASSWORD: orcaworks
+          POSTGRES_DB: orcaworks_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
 
@@ -112,6 +152,16 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # Real gated PDFs are gitignored and provisioned per environment.
+      - name: Provision placeholder gated PDFs
+        run: node scripts/prepare-test-pdfs.mjs
+
+      - name: Prepare test database schema
+        run: pnpm exec tsx scripts/prepare-integration-db.mts
+        env:
+          APP_ENV: preview
+          DATABASE_URL: postgresql://orcaworks:orcaworks@localhost:5432/orcaworks_test
+
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
 
@@ -119,6 +169,7 @@ jobs:
         run: pnpm test:e2e
         env:
           APP_ENV: preview
+          DATABASE_URL: postgresql://orcaworks:orcaworks@localhost:5432/orcaworks_test
 
       - uses: actions/upload-artifact@v4
         if: failure()

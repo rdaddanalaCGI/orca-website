@@ -18,19 +18,22 @@
   --color-olive-900: oklch(22.8% 0.013 107.4);
   --color-olive-950: oklch(15.3% 0.006 107.1);
 
-  --color-orca-orange: #ff4800;
-  --color-orca-orange-hover: #ff4800;
+  --color-orca-page: #f9feff;
   --color-orca-mist: #edf8f9;
+  --color-orca-orange: #ff4800;
+  --color-orca-frost: #d1ecef;
+  --color-orca-frost-hover: #c0d9dc;
+  --color-orca-frost-active: #b2c9cb;
+  --color-orca-link: #cc3a00;
   --color-orca-teal-dark: #326367;
-  --color-page: #f9feff;
-  --color-frost: #d1ecef;
+  --color-orca-footer-dark: #141b1a;
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-page);
+    background-color: var(--color-orca-page);
     --scroll-padding-top: 0;
     scroll-padding-top: var(--scroll-padding-top);
 

@@ -54,7 +54,7 @@ export function SolutionProblems({ problems }: { problems: SolutionProblems }) {
                             key={term}
                             className={clsx(
                               'rounded-full bg-olive-950/5 px-2.5 py-1 text-xs/5 font-medium text-olive-700',
-                              'dark:bg-white/10 dark:text-frost',
+                              'dark:bg-white/10 dark:text-orca-frost',
                             )}
                           >
                             {term}

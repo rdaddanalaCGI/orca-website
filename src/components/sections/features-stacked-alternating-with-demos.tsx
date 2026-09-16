@@ -17,7 +17,7 @@ export function Feature({
   return (
     <div
       className={clsx(
-        'group grid grid-flow-dense grid-cols-1 gap-2 rounded-lg bg-olive-950/2.5 p-2 lg:grid-cols-2 dark:bg-white/5',
+        'group grid grid-flow-dense grid-cols-1 gap-2 rounded-lg bg-orca-mist p-2 lg:grid-cols-2 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
         className,
       )}
     >

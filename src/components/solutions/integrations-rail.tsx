@@ -125,7 +125,7 @@ export function SolutionIntegrationsRail({ integrations }: { integrations: Solut
       <div className="flex flex-col gap-6">
         <div className="flex max-w-3xl flex-col gap-3">
           <h3 className="font-display text-2xl text-olive-950 dark:text-white">{integrations.heading}</h3>
-          <p className="text-base/7 text-olive-700 dark:text-olive-300">{integrations.intro}</p>
+          <p className="text-base/7 text-olive-700 dark:text-orca-frost">{integrations.intro}</p>
         </div>
         <LogoMarquee />
       </div>

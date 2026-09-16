@@ -9,7 +9,7 @@ function Label({ htmlFor, children, required }: { htmlFor: string; children: str
     <label htmlFor={htmlFor} className="text-sm/6 font-medium text-olive-950 dark:text-white">
       {children}
       {required && (
-        <span aria-hidden="true" className="ml-0.5 text-olive-600 dark:text-olive-300">
+        <span aria-hidden="true" className="ml-0.5 text-olive-600 dark:text-orca-frost">
           *
         </span>
       )}

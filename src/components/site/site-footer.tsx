@@ -1,3 +1,4 @@
+import { NewsletterForm } from '@/components/forms/newsletter-form'
 import { GitHubIcon } from '@/components/icons/social/github-icon'
 import { XIcon } from '@/components/icons/social/x-icon'
 import { YouTubeIcon } from '@/components/icons/social/youtube-icon'
@@ -5,7 +6,6 @@ import {
   FooterCategory,
   FooterLink,
   FooterWithNewsletterFormCategoriesAndSocialIcons,
-  NewsletterForm,
   SocialLink,
 } from '@/components/sections/footer-with-newsletter-form-categories-and-social-icons'
 
@@ -22,7 +22,7 @@ export function SiteFooter() {
               enterprise-grade agentic AI.
             </p>
           }
-          action="/"
+          sourcePage="/"
         />
       }
       links={

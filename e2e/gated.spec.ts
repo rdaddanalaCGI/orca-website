@@ -42,6 +42,25 @@ test.describe('gated content', () => {
     expect(response.status()).toBe(404)
   })
 
+  test('download route serves the PDF after the gate is unlocked', async ({ page }) => {
+    const email = `e2e-download-${Date.now()}@example.com`
+
+    await page.goto(gatedBuildRoute)
+
+    await page.getByLabel('First name').fill('E2E')
+    await page.getByLabel('Work email').fill(email)
+    await page.getByLabel('Company').fill('TestCo')
+    await page.getByRole('button', { name: /unlock the guide/i }).click()
+
+    await expect(page.getByText("You're in.")).toBeVisible({ timeout: 20_000 })
+
+    // Use the page's request context so the unlock cookie is sent.
+    const response = await page.request.get('/api/downloads/ai-agent-handbook', { maxRedirects: 0 })
+    expect(response.status()).toBe(200)
+    expect(response.headers()['content-type']).toBe('application/pdf')
+    expect(response.headers()['content-disposition']).toContain('attachment')
+  })
+
   test('submitting the gate form reveals content and the PDF download CTA', async ({ page }) => {
     const email = `e2e-gated-${Date.now()}@example.com`
 

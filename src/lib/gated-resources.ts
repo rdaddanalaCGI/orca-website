@@ -34,7 +34,7 @@ export const gatedResources: Record<string, GatedResource> = {
     gatedPathPrefixes: ['/enterprise-ai-safety-handbook/build', '/enterprise-ai-safety-handbook/scale'],
     gateHeading: 'Unlock Build + Scale',
     gateDescription: 'Get the implementation guidance, frameworks and the complete PDF.',
-    pdf: { filename: 'enterprise-ai-safety-handbook.pdf', title: 'Enterprise AI Safety Handbook' },
+    pdf: { filename: 'ai-agent-handbook.pdf', title: 'Enterprise AI Safety Handbook' },
     analyticsId: 'enterprise_ai_safety_handbook',
   },
 }

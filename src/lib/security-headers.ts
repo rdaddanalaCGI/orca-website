@@ -31,6 +31,7 @@ export function createSecurityHeaders({ isDev }: { isDev: boolean }): SecurityHe
     "font-src 'self' data: https://fonts.gstatic.com",
     "img-src 'self' data: blob: https:",
     "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
+    "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

@@ -20,7 +20,7 @@ export function TeamMember({
       </div>
       <div>
         <p className="font-semibold text-olive-950 dark:text-white">{name}</p>
-        <p className="text-olive-700 dark:text-frost">{byline}</p>
+        <p className="text-olive-700 dark:text-orca-frost">{byline}</p>
       </div>
     </li>
   )

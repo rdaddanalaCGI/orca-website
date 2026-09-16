@@ -11,7 +11,7 @@ export function Stat({
   return (
     <div className={clsx('border-l border-olive-950/20 pl-6 dark:border-white/20', className)} {...props}>
       <div className="text-2xl/10 tracking-tight text-olive-950 dark:text-white">{stat}</div>
-      <p className="mt-2 text-sm/7 text-olive-700 dark:text-frost">{text}</p>
+      <p className="mt-2 text-sm/7 text-olive-700 dark:text-orca-frost">{text}</p>
     </div>
   )
 }

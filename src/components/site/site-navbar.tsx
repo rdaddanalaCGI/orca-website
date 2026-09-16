@@ -16,9 +16,7 @@ export function SiteNavbar() {
       id="navbar"
       links={
         <>
-          <NavbarLink href="/agentic-automation-platform" className="px-3 py-1">
-            Orca Agent Platform
-          </NavbarLink>
+          <NavbarLink href="/agentic-automation-platform">Orca Agent Platform</NavbarLink>
           <AgenticApplicationsMenu />
           <ResourcesMenu />
         </>
@@ -49,6 +47,11 @@ export function SiteNavbar() {
           </PlainButtonLink>
           <ButtonLink href="/contact">Get started</ButtonLink>
         </>
+      }
+      mobileCta={
+        <ButtonLink href="/contact" size="lg">
+          Get started
+        </ButtonLink>
       }
     />
   )

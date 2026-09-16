@@ -21,7 +21,7 @@ export function NavbarLink({
       href={href}
       aria-current={isActive ? 'page' : undefined}
       className={clsx(
-        'group inline-flex items-center justify-between gap-2 text-3xl/10 font-medium transition-colors lg:text-sm/7',
+        'group inline-flex items-center justify-between gap-2 text-xl/8 font-medium transition-colors lg:text-sm/7',
         isActive ? 'text-orca-orange' : 'text-olive-950 dark:text-white',
         'hover:text-orca-orange',
         className,
@@ -46,28 +46,30 @@ export function NavbarWithLogoActionsAndCenteredLinks({
   links,
   logo,
   actions,
+  mobileCta,
   className,
   ...props
 }: {
   links: ReactNode
   logo: ReactNode
   actions: ReactNode
+  mobileCta?: ReactNode
 } & ComponentProps<'header'>) {
   return (
-    <header className={clsx('sticky top-0 z-10 bg-page dark:bg-olive-950', className)} {...props}>
+    <header className={clsx('sticky top-0 z-10 bg-orca-page dark:bg-olive-950', className)} {...props}>
       <style>{`:root { --scroll-padding-top: 5.25rem }`}</style>
       <nav>
-        <div className="mx-auto flex h-(--scroll-padding-top) max-w-7xl items-center gap-4 px-6 lg:px-10">
+        <div className="mx-auto flex h-(--scroll-padding-top) max-w-7xl items-center gap-3 px-4 lg:gap-4 lg:px-10">
           <div className="flex flex-1 items-center">{logo}</div>
           <div className="flex gap-8 max-lg:hidden">{links}</div>
-          <div className="flex flex-1 items-center justify-end gap-4">
-            <div className="flex shrink-0 items-center gap-5">{actions}</div>
+          <div className="flex flex-1 items-center justify-end gap-3 lg:gap-4">
+            <div className="flex shrink-0 items-center gap-3 lg:gap-5">{actions}</div>
 
             <button
               command="show-modal"
               commandfor="mobile-menu"
               aria-label="Toggle menu"
-              className="inline-flex rounded-full p-1.5 text-olive-950 hover:bg-olive-950/10 lg:hidden dark:text-white dark:hover:bg-white/10"
+              className="inline-flex rounded-full p-2.5 text-olive-950 hover:text-orca-orange lg:hidden dark:text-white"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="size-6">
                 <path
@@ -82,13 +84,13 @@ export function NavbarWithLogoActionsAndCenteredLinks({
 
         <ElDialog className="lg:hidden">
           <dialog id="mobile-menu" className="backdrop:bg-transparent">
-            <ElDialogPanel className="fixed inset-0 bg-page px-6 py-6 lg:px-10 dark:bg-olive-950">
+            <ElDialogPanel className="fixed inset-0 bg-orca-page px-4 py-4 lg:px-10 dark:bg-olive-950">
               <div className="flex justify-end">
                 <button
                   command="close"
                   commandfor="mobile-menu"
                   aria-label="Toggle menu"
-                  className="inline-flex rounded-full p-1.5 text-olive-950 hover:bg-olive-950/10 dark:text-white dark:hover:bg-white/10"
+                  className="inline-flex rounded-full p-2.5 text-olive-950 hover:text-orca-orange dark:text-white"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +105,7 @@ export function NavbarWithLogoActionsAndCenteredLinks({
                 </button>
               </div>
               <div
-                className="mt-6 flex flex-col gap-6"
+                className="mt-4 flex flex-col gap-4"
                 onClick={(event) => {
                   const target = event.target as HTMLElement
                   if (target.closest('a[href]')) {
@@ -113,6 +115,7 @@ export function NavbarWithLogoActionsAndCenteredLinks({
               >
                 {links}
               </div>
+              {mobileCta ? <div className="mt-6 flex flex-col gap-3">{mobileCta}</div> : null}
             </ElDialogPanel>
           </dialog>
         </ElDialog>

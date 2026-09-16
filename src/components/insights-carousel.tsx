@@ -110,14 +110,14 @@ function InsightCard({ item, index }: { item: Insight; index: number }) {
 
   if (shouldReduceMotion) {
     return (
-      <NextLink href={item.href} className="w-[75%] shrink-0 snap-start sm:w-[46%] lg:w-[35%]">
+      <NextLink href={item.href} className="w-full shrink-0 snap-center px-3 sm:w-[46%] lg:w-[35%]">
         <div className={cardClass}>{content}</div>
       </NextLink>
     )
   }
 
   return (
-    <NextLink href={item.href} className="w-[75%] shrink-0 snap-start sm:w-[46%] lg:w-[35%]">
+    <NextLink href={item.href} className="w-full shrink-0 snap-center px-3 sm:w-[46%] lg:w-[35%]">
       <motion.div
         className={cardClass}
         initial={{ opacity: 0, y: 20 }}
@@ -168,7 +168,7 @@ export function InsightsCarousel({ items }: { items: Insight[] }) {
     <div className="relative">
       <div
         ref={trackRef}
-        className="flex w-max snap-x snap-mandatory gap-6 overflow-x-auto overscroll-x-contain scroll-smooth"
+        className="flex w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth"
       >
         {items.map((item, i) => (
           <InsightCard key={item.href} item={item} index={i} />
@@ -178,7 +178,7 @@ export function InsightsCarousel({ items }: { items: Insight[] }) {
         <button
           type="button"
           onClick={() => scrollBy(-1)}
-          className="absolute top-1/2 left-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-olive-950 shadow-sm ring-1 ring-olive-950/10 backdrop-blur-sm hover:bg-white dark:bg-olive-950/90 dark:text-white dark:ring-white/10 dark:hover:bg-olive-900"
+          className="absolute top-1/2 left-2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-olive-950 shadow-sm ring-1 ring-olive-950/10 backdrop-blur-sm hover:bg-white sm:flex dark:bg-olive-950/90 dark:text-white dark:ring-white/10 dark:hover:bg-olive-900"
           aria-label="Scroll left"
         >
           <ChevronIcon className="h-4 w-4" />
@@ -188,13 +188,33 @@ export function InsightsCarousel({ items }: { items: Insight[] }) {
         <button
           type="button"
           onClick={() => scrollBy(1)}
-          className="absolute top-1/2 right-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-olive-950 shadow-sm ring-1 ring-olive-950/10 backdrop-blur-sm hover:bg-white dark:bg-olive-950/90 dark:text-white dark:ring-white/10 dark:hover:bg-olive-900"
+          className="absolute top-1/2 right-2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-olive-950 shadow-sm ring-1 ring-olive-950/10 backdrop-blur-sm hover:bg-white sm:flex dark:bg-olive-950/90 dark:text-white dark:ring-white/10 dark:hover:bg-olive-900"
           aria-label="Scroll right"
         >
           <ChevronIcon className="h-4 w-4 rotate-180" />
         </button>
       )}
-      <div className="mt-6 h-1 w-full max-w-7xl overflow-hidden rounded-full bg-olive-200/50">
+      <div className="mt-4 flex justify-center gap-4 sm:hidden">
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          disabled={!canScrollLeft}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-olive-950 shadow-sm ring-1 ring-olive-950/10 backdrop-blur-sm hover:bg-white disabled:opacity-40 dark:bg-olive-950/90 dark:text-white dark:ring-white/10 dark:hover:bg-olive-900"
+          aria-label="Scroll left"
+        >
+          <ChevronIcon className="h-4 w-4" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          disabled={!canScrollRight}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-olive-950 shadow-sm ring-1 ring-olive-950/10 backdrop-blur-sm hover:bg-white disabled:opacity-40 dark:bg-olive-950/90 dark:text-white dark:ring-white/10 dark:hover:bg-olive-900"
+          aria-label="Scroll right"
+        >
+          <ChevronIcon className="h-4 w-4 rotate-180" />
+        </button>
+      </div>
+      <div className="mt-4 h-1 w-full max-w-7xl overflow-hidden rounded-full bg-olive-200/50 sm:mt-6">
         <motion.div
           className="h-full w-full origin-left bg-orca-orange"
           animate={{ scaleX: progress }}

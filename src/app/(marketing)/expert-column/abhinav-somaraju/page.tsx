@@ -15,7 +15,7 @@ export default function Page() {
     <section className="py-16">
       <Container className="flex max-w-3xl flex-col gap-6">
         <Heading>Expert Column</Heading>
-        <p className="text-lg/8 text-pretty text-olive-700 dark:text-frost">
+        <p className="text-lg/8 text-pretty text-olive-700 dark:text-orca-frost">
           Contributions and perspectives from <strong>Dr. Abhinav Somaraju</strong> on agentic AI, enterprise
           automation, and building safe, effective AI systems.
         </p>

@@ -1,5 +1,6 @@
 import NextLink from 'next/link'
 
+import { Button } from '@/components/elements/button'
 import { Container } from '@/components/elements/container'
 import { Heading } from '@/components/elements/heading'
 import { Text } from '@/components/elements/text'
@@ -65,7 +66,7 @@ export default async function Page({ searchParams }: PageProps) {
         <Container className="flex flex-col gap-10 sm:gap-16">
           <div className="flex max-w-2xl flex-col gap-6">
             <Heading>Insights</Heading>
-            <p className="text-lg/8 text-pretty text-olive-700 dark:text-frost">
+            <p className="text-lg/8 text-pretty text-olive-700 dark:text-orca-frost">
               Stay informed with the latest news, thought leadership, and AI innovations from Orcaworks.
             </p>
           </div>
@@ -98,18 +99,18 @@ export default async function Page({ searchParams }: PageProps) {
                             {post.title}
                           </NextLink>
                         </h3>
-                        <p className="text-sm text-olive-600 dark:text-frost">
+                        <p className="text-sm text-olive-600 dark:text-orca-frost">
                           {formatDate(post.publishedDate)}
                           {cmsAuthorName(post.author) ? ` · ${cmsAuthorName(post.author)}` : null}
                           {post.readingTime ? ` · ${post.readingTime} min read` : null}
                         </p>
                         {post.excerpt ? (
-                          <p className="text-base/7 text-olive-700 dark:text-frost">{post.excerpt}</p>
+                          <p className="text-base/7 text-olive-700 dark:text-orca-frost">{post.excerpt}</p>
                         ) : null}
                         <div className="mt-auto pt-2">
                           <NextLink
                             href={`/blog/${post.slug}`}
-                            className="inline-flex items-center text-sm font-medium text-orca-orange hover:text-orca-orange-hover hover:underline"
+                            className="inline-flex items-center text-sm font-medium text-orca-link hover:text-orca-orange hover:underline dark:text-orca-orange"
                           >
                             Read More
                           </NextLink>
@@ -154,12 +155,7 @@ export default async function Page({ searchParams }: PageProps) {
                     placeholder="Search insights"
                     className="rounded-lg border border-olive-300 bg-white px-4 py-2 text-sm text-olive-950 placeholder:text-olive-500 focus:border-orca-orange focus:outline-none dark:border-olive-700 dark:bg-olive-950 dark:text-white"
                   />
-                  <button
-                    type="submit"
-                    className="rounded-lg bg-orca-orange px-4 py-2 text-sm font-medium text-white hover:bg-orca-orange-hover"
-                  >
-                    Search
-                  </button>
+                  <Button type="submit">Search</Button>
                 </form>
               </div>
 
@@ -172,7 +168,7 @@ export default async function Page({ searchParams }: PageProps) {
                       className={`text-sm ${
                         !categorySlug
                           ? 'font-semibold text-orca-orange'
-                          : 'text-olive-700 hover:text-orca-orange dark:text-frost'
+                          : 'text-olive-700 hover:text-orca-orange dark:text-orca-frost'
                       }`}
                     >
                       All
@@ -185,7 +181,7 @@ export default async function Page({ searchParams }: PageProps) {
                         className={`text-sm ${
                           category.slug === categorySlug
                             ? 'font-semibold text-orca-orange'
-                            : 'text-olive-700 hover:text-orca-orange dark:text-frost'
+                            : 'text-olive-700 hover:text-orca-orange dark:text-orca-frost'
                         }`}
                       >
                         {category.name}
@@ -199,7 +195,7 @@ export default async function Page({ searchParams }: PageProps) {
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Expert Column</h2>
                 <NextLink
                   href="/expert-column/abhinav-somaraju"
-                  className="text-sm text-olive-700 hover:text-orca-orange dark:text-frost"
+                  className="text-sm text-olive-700 hover:text-orca-orange dark:text-orca-frost"
                 >
                   Dr. Abhinav Somaraju
                 </NextLink>
@@ -207,7 +203,7 @@ export default async function Page({ searchParams }: PageProps) {
 
               <div className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
                 <h2 className="mb-4 font-display text-xl text-olive-950 dark:text-white">Newsletter</h2>
-                <p className="text-sm text-olive-700 dark:text-frost">
+                <p className="text-sm text-olive-700 dark:text-orca-frost">
                   Sign up for the latest news, updates, tips and advice.
                 </p>
               </div>

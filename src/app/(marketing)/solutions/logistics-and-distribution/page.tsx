@@ -4,15 +4,17 @@ import { VerticalPage } from '@/components/solutions/vertical-page'
 import { createMetadata } from '@/lib/seo'
 import { getSolutionBySlug } from '@/lib/solutions'
 
+const solution = getSolutionBySlug('logistics-and-distribution')
+
 export const metadata = createMetadata({
-  title: 'Logistics & Distribution',
-  description: 'AI solutions for Logistics & Distribution — content coming soon.',
+  title: solution?.name ?? 'Logistics & Distribution',
+  description:
+    solution?.solutionsPage?.positioning ?? solution?.hero?.subheadline ?? 'AI solutions for Logistics & Distribution.',
   path: '/solutions/logistics-and-distribution',
   noindex: true,
 })
 
 export default function Page() {
-  const solution = getSolutionBySlug('logistics-and-distribution')
   if (!solution) notFound()
   return <VerticalPage solution={solution} />
 }

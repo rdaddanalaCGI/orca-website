@@ -18,12 +18,9 @@ export function ContactForm({
 
   if (state?.status === 'success') {
     return (
-      <div
-        className="rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-        role="status"
-      >
+      <div className="rounded-2xl bg-orca-page p-6 dark:bg-olive-800" role="status">
         <p className="font-medium text-olive-950 dark:text-white">Thanks for reaching out.</p>
-        <p className="mt-1 text-sm/6 text-olive-700 dark:text-olive-200">
+        <p className="mt-1 text-sm/6 text-olive-700 dark:text-orca-frost">
           We&apos;ve received your message and will reply within one business day.
         </p>
       </div>

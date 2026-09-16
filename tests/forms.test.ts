@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { rateLimit, resetRateLimitStore } from '@/lib/rate-limit'
-import { contactSchema, demoSchema, isSubmissionType, partnerSchema } from '@/lib/schemas'
+import { contactSchema, demoSchema, isSubmissionType, newsletterSchema, partnerSchema } from '@/lib/schemas'
 
 const validContact = {
   name: 'Ada Lovelace',
@@ -45,6 +45,24 @@ describe('form validation', () => {
   it('guards submission types', () => {
     expect(isSubmissionType('contact')).toBe(true)
     expect(isSubmissionType('arbitrary')).toBe(false)
+  })
+
+  it('accepts a valid newsletter subscription', () => {
+    expect(newsletterSchema.safeParse({ email: 'ada@example.com' }).success).toBe(true)
+  })
+
+  it('rejects a malformed newsletter email', () => {
+    expect(newsletterSchema.safeParse({ email: 'not-an-email' }).success).toBe(false)
+  })
+
+  it('rejects absolute URLs in newsletter sourcePage', () => {
+    expect(
+      newsletterSchema.safeParse({ email: 'ada@example.com', sourcePage: 'https://evil.example.com' }).success,
+    ).toBe(false)
+  })
+
+  it('accepts a relative newsletter sourcePage', () => {
+    expect(newsletterSchema.safeParse({ email: 'ada@example.com', sourcePage: '/' }).success).toBe(true)
   })
 })
 

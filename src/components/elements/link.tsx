@@ -16,9 +16,9 @@ export function Link({
     <NextLink
       href={href}
       className={clsx(
-        'inline-flex items-center gap-2 text-sm/7 font-medium',
+        'inline-flex items-center gap-2 text-sm/7 font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:ring-offset-2 focus-visible:outline-none',
         color === 'neutral' && 'text-olive-950 dark:text-white',
-        color === 'brand' && 'text-orca-orange hover:text-orca-orange-hover',
+        color === 'brand' && 'text-orca-link hover:underline dark:text-orca-orange',
         className,
       )}
       {...props}

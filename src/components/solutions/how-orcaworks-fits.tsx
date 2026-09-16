@@ -40,12 +40,12 @@ function SystemStackVisual({ items }: { items: string[] }) {
       {items.map((label) => (
         <div
           key={label}
-          className="rounded-lg border border-olive-950/10 bg-olive-50 px-4 py-2 text-center text-sm/6 font-medium text-olive-950 dark:border-white/10 dark:bg-olive-950 dark:text-white"
+          className="rounded-lg border border-olive-950/10 bg-orca-mist px-4 py-2 text-center text-sm/6 font-medium text-olive-950 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:text-white"
         >
           {label}
         </div>
       ))}
-      <div className="mt-1 text-center text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
+      <div className="mt-1 text-center text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
         Systems of record
       </div>
     </div>
@@ -55,7 +55,7 @@ function SystemStackVisual({ items }: { items: string[] }) {
 function BlueprintVisual({ items }: { items: string[] }) {
   return (
     <div className="flex w-full max-w-[20rem] flex-col items-center gap-4">
-      <div className="rounded-xl border border-olive-950/10 bg-olive-50 px-5 py-2.5 text-center text-sm/6 font-semibold text-olive-950 dark:border-white/10 dark:bg-olive-950 dark:text-white">
+      <div className="rounded-xl border border-olive-950/10 bg-orca-mist px-5 py-2.5 text-center text-sm/6 font-semibold text-olive-950 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:text-white">
         Operating Blueprint
       </div>
       <ArrowNarrowRightIcon className="h-5 w-5 rotate-90 text-orca-orange" />
@@ -112,7 +112,7 @@ function BentoCard({ card, index }: { card: SolutionHowOrcaworksFitsCard; index:
       whileHover={shouldReduceMotion ? {} : { y: -3 }}
       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
       className={clsx(
-        'group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-olive-950/10 bg-orca-mist p-6 shadow-sm transition-shadow duration-200 hover:shadow-md sm:p-8 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
+        'group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-olive-950/10 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md sm:p-8 dark:border-white/10 dark:bg-olive-900',
         cardPositions[index],
       )}
     >
@@ -126,7 +126,7 @@ function BentoCard({ card, index }: { card: SolutionHowOrcaworksFitsCard; index:
           {card.eyebrow}
         </Eyebrow>
         <h3 className="font-display text-xl/7 text-olive-950 dark:text-white">{card.heading}</h3>
-        <p className="text-sm/6 text-olive-700 dark:text-olive-300">{card.body}</p>
+        <p className="text-sm/6 text-olive-700 dark:text-orca-frost">{card.body}</p>
       </div>
       {hasVisual && !visualOnTop && (
         <div className="mt-6 flex items-center justify-center">
@@ -147,7 +147,7 @@ export function HowOrcaworksFitsSection({ fits }: { fits: SolutionHowOrcaworksFi
       eyebrowVariant="brand"
       headline={fits.heading}
       subheadline={fits.intro}
-      className="py-24"
+      className="py-16"
     >
       <motion.div
         initial={shouldReduceMotion ? 'visible' : 'hidden'}

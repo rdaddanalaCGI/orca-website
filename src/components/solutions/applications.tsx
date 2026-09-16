@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import { ButtonLink } from '@/components/elements/button'
 import { Container } from '@/components/elements/container'
 import { Eyebrow } from '@/components/elements/eyebrow'
-import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { clsx } from 'clsx/lite'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
@@ -14,6 +13,9 @@ import type {
   SolutionApplications as SolutionApplicationsData,
   SolutionIntegrations,
 } from '@/lib/solutions'
+
+import { ApplicationBlueprintPanel } from '@/components/application-blueprint/application-blueprint-panel'
+import { WorkflowStepper } from '@/components/application-blueprint/workflow-stepper'
 
 import { SolutionIntegrationsRail } from './integrations-rail'
 
@@ -78,28 +80,49 @@ export function SolutionApplications({
   const categories = groupByCategory(applications.applications)
 
   return (
-    <section
-      id="applications"
-      className="scroll-mt-28 bg-orca-mist py-24 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-    >
+    <section id="applications" className="scroll-mt-28 py-16">
       <Container>
-        <div className="rounded-2xl border border-olive-950/10 dark:border-white/10">
+        <div className="rounded-2xl border border-olive-950/10 bg-orca-mist dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
           <div className="grid grid-cols-1 lg:grid-cols-12">
-            <div className="border-b border-olive-950/10 p-8 lg:sticky lg:top-28 lg:col-span-4 lg:self-start lg:border-r lg:border-b-0 dark:border-white/10">
-              <div className="flex flex-col gap-4">
+            <div className="border-b border-olive-950/10 p-5 sm:p-8 lg:sticky lg:top-28 lg:col-span-4 lg:self-start lg:border-r lg:border-b-0 dark:border-white/10">
+              <div className="flex flex-col gap-3 sm:gap-4">
                 <Eyebrow variant="brand">{applications.eyebrow}</Eyebrow>
-                <h2 className="font-display text-3xl text-olive-950 sm:text-4xl dark:text-white">
+                <h2 className="font-display text-2xl text-olive-950 sm:text-3xl lg:text-4xl dark:text-white">
                   Application Explorer
                 </h2>
-                <p className="text-base/7 text-olive-700 dark:text-olive-300">{applications.intro}</p>
+                <p className="text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">{applications.intro}</p>
               </div>
 
-              <nav aria-label="Applications" className="mt-8">
-                <div className="flex flex-col gap-8">
+              <nav aria-label="Applications" className="mt-6 sm:mt-8">
+                {/* Mobile: horizontal scrollable tabs */}
+                <div className="-mx-5 flex scroll-px-5 gap-1 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:hidden">
+                  {applications.applications.map((app) => {
+                    const isActive = app.id === active.id
+                    return (
+                      <button
+                        key={app.id}
+                        type="button"
+                        onClick={() => handleSelect(app.id)}
+                        aria-current={isActive ? 'true' : undefined}
+                        className={clsx(
+                          'shrink-0 snap-start rounded-lg px-3 py-2 font-display text-sm/6 whitespace-nowrap transition-colors',
+                          isActive
+                            ? 'font-semibold text-olive-950 dark:text-white'
+                            : 'text-olive-700 hover:text-olive-950 dark:text-orca-frost dark:hover:text-white',
+                        )}
+                      >
+                        {app.shortLabel ?? app.title}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                {/* Desktop: category list */}
+                <div className="hidden lg:flex lg:flex-col lg:gap-8">
                   {categories.map(([category, apps]) => (
-                    <div key={category} className="flex flex-col gap-4">
+                    <div key={category} className="flex flex-col gap-3 sm:gap-4">
                       <Eyebrow variant="brand">{category}</Eyebrow>
-                      <ul className="flex flex-col gap-2" role="list">
+                      <ul className="flex flex-col gap-1 sm:gap-2" role="list">
                         {apps.map((app) => {
                           const isActive = app.id === active.id
                           return (
@@ -109,10 +132,10 @@ export function SolutionApplications({
                                 onClick={() => handleSelect(app.id)}
                                 aria-current={isActive ? 'true' : undefined}
                                 className={clsx(
-                                  'group relative w-full rounded-lg px-4 py-3 text-left transition-colors',
+                                  'group relative w-full rounded-lg px-3 py-2.5 text-left transition-colors sm:px-4 sm:py-3',
                                   isActive
                                     ? 'font-semibold text-olive-950 dark:text-white'
-                                    : 'text-olive-700 hover:text-olive-950 dark:text-olive-300 dark:hover:text-white',
+                                    : 'text-olive-700 hover:text-olive-950 dark:text-orca-frost dark:hover:text-white',
                                 )}
                               >
                                 {isActive && (
@@ -126,7 +149,9 @@ export function SolutionApplications({
                                     }
                                   />
                                 )}
-                                <span className="block font-display text-lg">{app.shortLabel ?? app.title}</span>
+                                <span className="block font-display text-base sm:text-lg">
+                                  {app.shortLabel ?? app.title}
+                                </span>
                               </button>
                             </li>
                           )
@@ -138,7 +163,7 @@ export function SolutionApplications({
               </nav>
             </div>
 
-            <div className="p-8 lg:col-span-8">
+            <div className="p-5 sm:p-8 lg:col-span-8">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={active.id}
@@ -146,74 +171,77 @@ export function SolutionApplications({
                   animate={{ opacity: 1, x: 0 }}
                   exit={shouldReduceMotion ? {} : { opacity: 0, x: -12 }}
                   transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="flex flex-col gap-8"
+                  className="flex flex-col gap-6 sm:gap-8"
                 >
                   <div className="flex flex-col gap-4">
                     <Eyebrow variant="brand">{active.categoryEyebrow ?? active.category}</Eyebrow>
                     <h3 className="font-display text-3xl text-olive-950 sm:text-4xl dark:text-white">
                       {active.headline}
                     </h3>
-                    <p className="text-base/7 whitespace-pre-line text-olive-700 dark:text-olive-300">
+                    <p className="text-base/7 whitespace-pre-line text-olive-700 dark:text-orca-frost">
                       {active.description}
                     </p>
                   </div>
 
-                  <div className="flex flex-col gap-4">
-                    <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
-                      Workflow
-                    </span>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {active.workflowSteps.map((step, i) => (
-                        <div key={step} className="flex items-center gap-2">
-                          <span className="shrink-0 rounded-full border border-olive-950/20 px-3 py-1 text-sm/6 whitespace-nowrap text-olive-950 dark:border-white/20 dark:text-white">
-                            {step}
-                          </span>
-                          {i < active.workflowSteps.length - 1 && (
-                            <ArrowNarrowRightIcon className="h-4 w-4 shrink-0 text-orca-orange" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  {active.blueprint ? (
+                    <ApplicationBlueprintPanel blueprint={active.blueprint} />
+                  ) : (
+                    <>
+                      <div className="flex flex-col gap-4">
+                        <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                          Workflow
+                        </span>
+                        <WorkflowStepper
+                          workflow={{
+                            title: active.shortLabel ?? active.title,
+                            steps: active.workflowSteps.map((step, i) => ({
+                              id: `${active.id}-step-${i}`,
+                              title: step,
+                            })),
+                          }}
+                        />
+                      </div>
 
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                    <div className="flex flex-col gap-2">
-                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
-                        Working context
-                      </span>
-                      <ul className="flex flex-col gap-1">
-                        {active.contextItems.map((item) => (
-                          <li key={item} className="text-sm/6 text-olive-700 dark:text-olive-300">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
-                        Built for
-                      </span>
-                      <ul className="flex flex-col gap-1">
-                        {active.roles.map((role) => (
-                          <li key={role} className="text-sm/6 text-olive-700 dark:text-olive-300">
-                            {role}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-frost">
-                        Works across
-                      </span>
-                      <ul className="flex flex-col gap-1">
-                        {active.systems.map((system) => (
-                          <li key={system} className="text-sm/6 text-olive-700 dark:text-olive-300">
-                            {system}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                        <div className="flex flex-col gap-2">
+                          <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                            Working context
+                          </span>
+                          <ul className="flex flex-col gap-1">
+                            {active.contextItems.map((item) => (
+                              <li key={item} className="text-sm/6 text-olive-700 dark:text-orca-frost">
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                            Built for
+                          </span>
+                          <ul className="flex flex-col gap-1">
+                            {active.roles.map((role) => (
+                              <li key={role} className="text-sm/6 text-olive-700 dark:text-orca-frost">
+                                {role}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                            Works across
+                          </span>
+                          <ul className="flex flex-col gap-1">
+                            {active.systems.map((system) => (
+                              <li key={system} className="text-sm/6 text-olive-700 dark:text-orca-frost">
+                                {system}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </>
+                  )}
 
                   <ButtonLink
                     href={active.cta.href}

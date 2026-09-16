@@ -25,7 +25,7 @@ export default defineConfig({
       APP_ENV: 'preview',
       NEXT_PUBLIC_SITE_URL: baseURL,
       PORT: `${PORT}`,
-      DATABASE_URL: 'postgresql://orcaworks:orcaworks@localhost:5434/orcaworks',
+      DATABASE_URL: process.env.DATABASE_URL ?? 'postgresql://orcaworks:orcaworks@localhost:5434/orcaworks',
     },
   },
 })

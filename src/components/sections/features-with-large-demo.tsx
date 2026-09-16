@@ -19,7 +19,7 @@ export function Feature({
         {icon && <div className="size-3.25 h-lh">{icon}</div>}
         <h3 className="font-semibold">{headline}</h3>
       </div>
-      <div className="flex flex-col gap-4 text-olive-700 dark:text-frost">{subheadline}</div>
+      <div className="flex flex-col gap-4 text-olive-700 dark:text-orca-frost">{subheadline}</div>
     </div>
   )
 }
@@ -35,7 +35,7 @@ export function FeaturesWithLargeDemo({
   return (
     <Section {...props}>
       <div className="flex flex-col gap-14">
-        <div className="flex flex-col gap-32">{demo}</div>
+        <div className="flex flex-col gap-16">{demo}</div>
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">{features}</div>
       </div>
     </Section>

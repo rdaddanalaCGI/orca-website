@@ -9,9 +9,15 @@ export function Stat({
   ...props
 }: { stat: ReactNode; text: ReactNode } & ComponentProps<'div'>) {
   return (
-    <div className={clsx('rounded-xl bg-olive-950/2.5 p-6 dark:bg-white/5', className)} {...props}>
+    <div
+      className={clsx(
+        'rounded-xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
+        className,
+      )}
+      {...props}
+    >
       <div className="text-2xl/10 tracking-tight text-olive-950 dark:text-white">{stat}</div>
-      <p className="mt-2 text-sm/7 text-olive-700 dark:text-frost">{text}</p>
+      <p className="mt-2 text-sm/7 text-olive-700 dark:text-orca-frost">{text}</p>
     </div>
   )
 }

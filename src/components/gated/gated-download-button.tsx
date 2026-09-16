@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { Button } from '@/components/elements/button'
+import { Button, ButtonLink } from '@/components/elements/button'
 import { trackEvent } from '@/lib/analytics'
 import { getDownloadResource } from '@/lib/gated-resources'
 
@@ -36,26 +36,23 @@ export function GatedDownloadButton({
 
   const buttonLabel = label ?? 'Download complete PDF ↓'
 
-  const buttonLinkClasses =
-    'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-orca-orange px-3 py-1 text-sm/7 font-medium text-white hover:bg-orca-orange-hover'
-
   if (unlocked) {
     return (
-      <a
-        className={buttonLinkClasses}
+      <ButtonLink
         href={`/api/downloads/${resourceId}`}
+        size="md"
         onClick={() => trackEvent('gated_pdf_download', eventParams)}
       >
         {buttonLabel}
-      </a>
+      </ButtonLink>
     )
   }
 
   if (lockedBehavior === 'anchor') {
     return (
-      <a className={buttonLinkClasses} href="#lead-gate">
+      <ButtonLink href="#lead-gate" size="md">
         {buttonLabel}
-      </a>
+      </ButtonLink>
     )
   }
 

@@ -92,7 +92,7 @@ export function GateReveal({
       {unlocked && showSuccess && (
         <div className="mt-6 rounded-2xl bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
           <p className="font-medium text-olive-950 dark:text-white">You&apos;re in.</p>
-          <p className="mt-1 text-sm/6 text-olive-700 dark:text-olive-200">Enjoy the full guide below.</p>
+          <p className="mt-1 text-sm/6 text-olive-700 dark:text-orca-frost">Enjoy the full guide below.</p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button type="button" onClick={() => setShowSuccess(false)} className="justify-self-start">
               Continue reading online

@@ -7,6 +7,7 @@ import { Categories } from './collections/Categories'
 import { FormSubmissions } from './collections/FormSubmissions'
 import { Leads } from './collections/Leads'
 import { Media } from './collections/Media'
+import { NewsletterSubscribers } from './collections/NewsletterSubscribers'
 import { Posts } from './collections/Posts'
 import { PressReleases } from './collections/PressReleases'
 import { Users } from './collections/Users'
@@ -22,7 +23,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Posts, Categories, PressReleases, Authors, Media, FormSubmissions, Leads, Users],
+  collections: [Posts, Categories, PressReleases, Authors, Media, FormSubmissions, Leads, NewsletterSubscribers, Users],
   db: postgresAdapter({
     pool: { connectionString },
   }),

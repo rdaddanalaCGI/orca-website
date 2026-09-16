@@ -22,7 +22,7 @@ export default async function AiAgentHandbookLayout({
       <head>
         <ThemeScript />
         <UnlockScript />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9feff" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="rgb(249,254,255)" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="rgb(12,12,9)" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

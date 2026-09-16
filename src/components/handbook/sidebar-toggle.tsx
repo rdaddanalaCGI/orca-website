@@ -16,7 +16,7 @@ export function HandbookSidebarToggle() {
         type="button"
         aria-expanded={hasMenu}
         onClick={() => setMenu((open) => !open)}
-        className="flex w-full items-center gap-2 px-6 py-2.5 text-sm font-medium text-olive-700 dark:text-olive-300"
+        className="flex w-full items-center gap-2 px-6 py-2.5 text-sm font-medium text-olive-700 dark:text-orca-frost"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="size-4">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

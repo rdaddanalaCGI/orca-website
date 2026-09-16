@@ -3,6 +3,7 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 
 import nextra from 'nextra'
 
+import { isIndexable } from '@/lib/env'
 import { getRedirects } from '@/lib/redirects'
 import { createSecurityHeaders } from '@/lib/security-headers'
 
@@ -25,11 +26,6 @@ const getBaseConfig = (phase: string): NextConfig => {
           pathname: '/plus-assets/img/component-images/**',
         },
       ],
-      // Turbopack's dev-mode image optimizer can race and abort duplicate
-      // in-flight requests for the same file+width, leaving <Image>s stuck
-      // at naturalWidth 0. Serving raw files in dev sidesteps that; production
-      // builds still get full optimization.
-      unoptimized: isDev,
     },
     // Payload's Postgres/Drizzle stack loads native binaries that cannot be bundled.
     serverExternalPackages: ['payload', '@payloadcms/db-postgres', '@payloadcms/drizzle', 'drizzle-kit', 'esbuild'],
@@ -45,7 +41,19 @@ const getBaseConfig = (phase: string): NextConfig => {
       return getRedirects()
     },
     async headers() {
-      return [{ source: '/:path*', headers: createSecurityHeaders({ isDev }) }]
+      const entries = [{ source: '/:path*', headers: createSecurityHeaders({ isDev }) }]
+
+      // File responses are not covered by page metadata, so non-production
+      // builds mark downloadable documents noindex via X-Robots-Tag. This is
+      // intentionally gated on isIndexable so a production build never emits it.
+      if (!isIndexable) {
+        entries.push({
+          source: '/:file(.*\\.(?:pdf|doc|docx|xls|xlsx|ppt|pptx|csv|zip|epub))',
+          headers: [{ key: 'X-Robots-Tag', value: 'noindex' }],
+        })
+      }
+
+      return entries
     },
   } as unknown as NextConfig
 }

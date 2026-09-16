@@ -24,8 +24,9 @@ hello
   })
 
   it('detects Slack tokens', () => {
-    // Built from parts so this fixture isn't a literal, scannable token shape.
-    const fakeToken = ['xoxb', '0'.repeat(12), '0'.repeat(12), '0'.repeat(22) + 'ZZ'].join('-')
+    // Built at runtime so the literal token pattern never appears in source
+    // (GitHub push protection flags it as a live credential otherwise).
+    const fakeToken = ['xoxb', '123456789012', '123456789012', 'AbCdEfGhIjKlMnOpQrStUvWx'].join('-')
     const content = `SLACK_TOKEN=${fakeToken}`
 
     expect(scanContent(content)).toHaveLength(1)

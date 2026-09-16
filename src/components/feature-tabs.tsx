@@ -1,5 +1,6 @@
 'use client'
 
+import { clsx } from 'clsx/lite'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Container } from './elements/container'
@@ -51,10 +52,6 @@ const tabs = [
   },
 ]
 
-const panelStyle = {
-  borderColor: 'rgba(10, 9, 9, 0.34)',
-}
-
 export function FeatureTabs({ className }: { className?: string }) {
   const [active, setActive] = useState(0)
 
@@ -73,21 +70,19 @@ export function FeatureTabs({ className }: { className?: string }) {
         </h2>
 
         <div className="flex flex-col gap-0">
-          <div
-            className="rounded-sm border bg-orca-mist p-2.5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            style={panelStyle}
-          >
-            <div className="grid grid-cols-2 divide-x divide-[rgba(10,9,9,0.34)] bg-orca-mist md:grid-cols-3 lg:grid-cols-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+          <div className="rounded-sm border border-olive-950/10 bg-orca-mist p-2.5 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+            <div className="flex overflow-x-auto overscroll-x-contain scroll-smooth border-olive-950/10 bg-orca-mist dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
               {tabs.map((tab, i) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setActive(i)}
-                  className={`flex h-full w-full items-center justify-center gap-1.5 px-4 py-2 text-center text-base transition-colors ${
+                  className={clsx(
+                    'flex shrink-0 items-center justify-center gap-1.5 px-4 py-3 text-center text-sm whitespace-nowrap transition-colors sm:text-base',
                     active === i
-                      ? 'bg-orca-orange text-white'
-                      : 'text-olive-700 hover:bg-orca-orange/10 hover:text-olive-950 dark:text-frost dark:hover:text-white'
-                  }`}
+                      ? 'bg-orca-orange text-white' /* deliberate WCAG AA exception: ~3.40:1 on Frost, design sign-off */
+                      : 'text-olive-700 hover:bg-orca-orange/10 hover:text-olive-950 dark:text-orca-frost dark:hover:text-white',
+                  )}
                 >
                   {tab.title}
                   <ChevronIcon className="h-2 w-2 rotate-90" />
@@ -96,17 +91,11 @@ export function FeatureTabs({ className }: { className?: string }) {
             </div>
           </div>
 
-          <div
-            className="rounded-sm border bg-orca-mist p-6 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            style={panelStyle}
-          >
+          <div className="rounded-sm border border-olive-950/10 bg-orca-mist p-6 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
             <Text>{tabs[active].description}</Text>
           </div>
 
-          <div
-            className="rounded-sm border bg-orca-mist p-0 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            style={panelStyle}
-          >
+          <div className="rounded-sm border border-olive-950/10 bg-orca-mist p-0 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
             <Image
               key={tabs[active].image}
               src={tabs[active].image}

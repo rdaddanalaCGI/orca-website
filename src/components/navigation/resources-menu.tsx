@@ -23,7 +23,7 @@ export function ResourcesMenu() {
     <Details className="relative">
       <summary
         className={clsx(
-          'flex cursor-pointer list-none items-center gap-2 px-3 py-1 text-3xl/10 font-medium transition-colors lg:text-sm/7',
+          'flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-1 text-xl/8 font-medium transition-colors lg:text-sm/7',
           hasActive ? 'text-orca-orange' : 'text-olive-950 dark:text-white',
           'group-open:text-orca-orange hover:text-orca-orange',
         )}
@@ -31,7 +31,7 @@ export function ResourcesMenu() {
         Resources
         <ChevronIcon className="h-2 w-1.5 rotate-90" />
       </summary>
-      <div className="max-lg:mt-2 lg:absolute lg:top-full lg:left-1/2 lg:z-20 lg:mt-2 lg:w-56 lg:-translate-x-1/2 lg:rounded-xl lg:bg-page lg:p-4 lg:shadow-lg lg:ring-1 lg:ring-olive-950/10 dark:lg:bg-olive-950 dark:lg:ring-white/10">
+      <div className="max-lg:mt-2 lg:absolute lg:top-full lg:left-1/2 lg:z-20 lg:mt-2 lg:w-56 lg:-translate-x-1/2 lg:rounded-xl lg:bg-orca-page lg:p-4 lg:shadow-lg lg:ring-1 lg:ring-olive-950/10 dark:lg:bg-olive-950 dark:lg:ring-white/10">
         <ul className="flex flex-col gap-2 text-sm/7" role="list">
           {links.map((link) => (
             <li key={link.href}>

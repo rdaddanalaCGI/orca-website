@@ -68,7 +68,7 @@ export default async function Page() {
           <AnnouncementBadge
             href="/solutions"
             text="AI that works the way your enterprise works."
-            cta="Explore applications"
+            cta="Explore applications."
           />
         }
         headline="Enterprise AI that you can read."

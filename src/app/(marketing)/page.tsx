@@ -74,9 +74,9 @@ export default async function Page() {
         headline="Enterprise AI You Can Read."
         subheadline={
           <p>
-            See what your AI knows, what it can do, how work moves and where people stay in control. Orcaworks makes the
-            operating definition behind enterprise AI explicit and declarative — so your teams can understand it, govern
-            it and change it before it runs.
+            Orcaworks turns AI deployments into a human-readable blueprint. This AI Manifest becomes the single source
+            of truth for how AI operates across your organization, enabling leaders to understand, govern, and audit AI
+            without tracing dozens of disconnected systems.
           </p>
         }
         cta={

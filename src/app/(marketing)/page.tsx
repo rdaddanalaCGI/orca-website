@@ -71,7 +71,7 @@ export default async function Page() {
             cta="Explore applications."
           />
         }
-        headline="Enterprise AI that you can read."
+        headline="Enterprise AI You Can Read."
         subheadline={
           <p>
             See what your AI knows, what it can do, how work moves and where people stay in control. Orcaworks makes the

@@ -102,8 +102,9 @@ export default async function Page() {
               <Text className="text-pretty">
                 <span className="flex flex-col gap-4">
                   <p>
-                    The Orcaworks Blueprint makes the context, workflow, actions and controls behind enterprise AI
-                    explicit — so teams can see how it operates, review what it can do and govern it before it runs.
+                    Your business logic is encoded into the Agentic Blueprint as Code (ABC). This Blueprint makes the
+                    context, workflow, actions and controls behind enterprise AI explicit, so that teams can see how it
+                    operates, review what it can do and govern it before it runs.
                   </p>
                   <p>
                     <strong className="text-olive-950 dark:text-white">What you review is what runs.</strong>

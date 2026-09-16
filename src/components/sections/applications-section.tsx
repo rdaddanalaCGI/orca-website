@@ -105,7 +105,7 @@ function ApplicationCard({ application }: { application: Application }) {
         transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
       >
         {application.pattern ? (
-          <div className="relative flex aspect-video w-full items-start overflow-hidden bg-[url(/img/patterns/network-mesh.svg)] bg-cover bg-center p-5 sm:p-6 lg:p-8">
+          <div className="relative flex aspect-video w-full items-start overflow-hidden bg-[url(/img/patterns/network-mesh.jpg)] bg-cover bg-center p-5 sm:p-6 lg:p-8">
             <span className="font-display text-2xl/8 text-olive-950 sm:text-3xl/9">{application.pattern}</span>
           </div>
         ) : (

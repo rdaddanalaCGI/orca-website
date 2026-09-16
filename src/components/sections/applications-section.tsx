@@ -3,6 +3,7 @@
 import { PlainButtonLink } from '@/components/elements/button'
 import { Section } from '@/components/elements/section'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
+import { clsx } from 'clsx/lite'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import NextLink from 'next/link'
@@ -14,7 +15,9 @@ type Application = {
   problem: string
   useCases: string[]
   count: number
-  image: string
+  image?: string
+  /** Cards without a dedicated photo yet use the decorative network-mesh background instead. */
+  pattern?: boolean
 }
 
 const applications: Application[] = [
@@ -40,7 +43,7 @@ const applications: Application[] = [
       'Adjusters have to piece together claim data, correspondence, medical records and supporting evidence across multiple systems before they can make a defensible decision.',
     useCases: ['Build the claim evidence pack', 'Identify missing evidence', 'Prepare issues for adjuster review'],
     count: 7,
-    image: '/img/verticals/insurance.jpeg',
+    pattern: true,
   },
   {
     href: '/solutions/specialty-commercial-lending-finance#closing-condition-orchestration',
@@ -92,38 +95,65 @@ function ApplicationCard({ application }: { application: Application }) {
   return (
     <NextLink href={application.href} className="group block h-full">
       <motion.div
-        className="flex h-full flex-col overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
+        className={clsx(
+          'flex h-full flex-col overflow-hidden rounded-lg ring-1 ring-olive-950/5 dark:ring-white/10',
+          application.pattern
+            ? 'bg-[url(/img/patterns/network-mesh.svg)] bg-cover bg-center'
+            : 'bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
+        )}
         initial="rest"
         whileHover="hover"
         variants={cardVariants}
         transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <div className="relative aspect-video w-full overflow-hidden">
-          <motion.div
-            className="relative h-full w-full"
-            variants={imageVariants}
-            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <Image
-              src={application.image}
-              alt={application.name}
-              fill
-              sizes="(max-width: 1024px) 100vw, 33vw"
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
+        {!application.pattern && (
+          <div className="relative aspect-video w-full overflow-hidden">
+            <motion.div
+              className="relative h-full w-full"
+              variants={imageVariants}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <Image
+                src={application.image!}
+                alt={application.name}
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
+        )}
         <div className="flex flex-col gap-3 p-5 sm:gap-4 sm:p-6 lg:p-8">
           <div className="text-xs/4 font-semibold tracking-wider text-orca-orange uppercase">
             {application.vertical}
           </div>
-          <h3 className="font-display text-xl/8 text-olive-950 sm:text-2xl/9 dark:text-white">{application.name}</h3>
-          <p className="text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">{application.problem}</p>
+          <h3
+            className={clsx(
+              'font-display text-xl/8 sm:text-2xl/9',
+              application.pattern ? 'text-olive-950' : 'text-olive-950 dark:text-white',
+            )}
+          >
+            {application.name}
+          </h3>
+          <p
+            className={clsx(
+              'text-sm/6 sm:text-base/7',
+              application.pattern ? 'text-olive-700' : 'text-olive-700 dark:text-orca-frost',
+            )}
+          >
+            {application.problem}
+          </p>
 
           <div className="block lg:hidden">
             <ul className="flex flex-col gap-2">
               {application.useCases.map((useCase) => (
-                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-orca-frost">
+                <li
+                  key={useCase}
+                  className={clsx(
+                    'flex items-start gap-2 text-sm/6',
+                    application.pattern ? 'text-olive-700' : 'text-olive-700 dark:text-orca-frost',
+                  )}
+                >
                   <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
                   {useCase}
                 </li>
@@ -137,7 +167,13 @@ function ApplicationCard({ application }: { application: Application }) {
           >
             <ul className="flex flex-col gap-2">
               {application.useCases.map((useCase) => (
-                <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-orca-frost">
+                <li
+                  key={useCase}
+                  className={clsx(
+                    'flex items-start gap-2 text-sm/6',
+                    application.pattern ? 'text-olive-700' : 'text-olive-700 dark:text-orca-frost',
+                  )}
+                >
                   <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
                   {useCase}
                 </li>
@@ -146,10 +182,20 @@ function ApplicationCard({ application }: { application: Application }) {
           </motion.div>
 
           <div className="mt-auto flex items-center justify-between gap-4">
-            <div className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-orca-frost">
+            <div
+              className={clsx(
+                'text-xs/4 font-semibold tracking-wider uppercase',
+                application.pattern ? 'text-olive-700' : 'text-olive-700 dark:text-orca-frost',
+              )}
+            >
               {application.count} USE CASES
             </div>
-            <div className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 dark:text-white">
+            <div
+              className={clsx(
+                'inline-flex items-center gap-2 text-sm/7 font-medium',
+                application.pattern ? 'text-olive-950' : 'text-olive-950 dark:text-white',
+              )}
+            >
               Explore guide
               <motion.span variants={arrowVariants} transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}>
                 <ArrowNarrowRightIcon className="h-4 w-4" />
@@ -157,7 +203,7 @@ function ApplicationCard({ application }: { application: Application }) {
             </div>
           </div>
 
-          <div className="h-0.5 bg-olive-950/10 dark:bg-white/10">
+          <div className={clsx('h-0.5', application.pattern ? 'bg-olive-950/10' : 'bg-olive-950/10 dark:bg-white/10')}>
             <motion.div
               className="h-full bg-orca-orange"
               variants={lineVariants}

@@ -58,7 +58,7 @@ const applications: Application[] = [
   },
   {
     href: '/solutions/clinical-research-organisations#prior-authorization',
-    vertical: 'CRO',
+    vertical: 'CLINICAL RESEARCH ORGANIZATIONS',
     name: 'Prior Authorization',
     problem:
       'Care coordinators collect clinical notes, patient history, payer policies and formulary rules from EHRs, faxes and portals before a prior authorization request can be submitted cleanly.',
@@ -68,7 +68,7 @@ const applications: Application[] = [
   },
   {
     href: '/solutions/architecture-construction-engineering#change-evidence-to-decision',
-    vertical: 'ACE',
+    vertical: 'ARCHITECTURE, CONSTRUCTION & ENGINEERING',
     name: 'Change Evidence-to-Decision',
     problem:
       'Project and commercial teams rebuild each potential change from the RFI, current and superseded drawings, site photos, subcontractor pricing and schedule before the PM can set a position and the owner can approve.',

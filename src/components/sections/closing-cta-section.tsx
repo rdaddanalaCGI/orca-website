@@ -1,6 +1,5 @@
-import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
+import { ButtonLink } from '@/components/elements/button'
 import { Container } from '@/components/elements/container'
-import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 
 export function ClosingCtaSection() {
   return (
@@ -11,14 +10,9 @@ export function ClosingCtaSection() {
           Bring us a workflow that crosses systems, documents, people and decisions. See how Orcaworks can turn it into
           a governed AI application.
         </p>
-        <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink href="/contact" size="lg">
-            Get a Demo
-          </ButtonLink>
-          <PlainButtonLink href="/agentic-automation-platform" size="lg">
-            Explore The Platform <ArrowNarrowRightIcon />
-          </PlainButtonLink>
-        </div>
+        <ButtonLink href="/contact" size="lg">
+          Get a Demo
+        </ButtonLink>
       </Container>
     </section>
   )

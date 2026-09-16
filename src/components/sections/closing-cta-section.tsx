@@ -1,6 +1,5 @@
-import { ButtonLink } from '@/components/elements/button'
+import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
 import { Container } from '@/components/elements/container'
-import { Link } from '@/components/elements/link'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 
 export function ClosingCtaSection() {
@@ -16,9 +15,9 @@ export function ClosingCtaSection() {
           <ButtonLink href="/contact" size="lg">
             Get a demo
           </ButtonLink>
-          <Link href="/agentic-automation-platform" color="brand">
+          <PlainButtonLink href="/agentic-automation-platform" size="lg">
             Explore the platform <ArrowNarrowRightIcon />
-          </Link>
+          </PlainButtonLink>
         </div>
       </Container>
     </section>

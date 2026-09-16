@@ -197,7 +197,7 @@ export function WhyOrcaworksSection() {
       headline="One blueprint. From how the work operates to how the application runs."
       subheadline={
         <>
-          Orcaworks captures context, workflow, controls and user experience together—so applications can be delivered
+          Orcaworks captures context, workflow, controls and user experience together, so applications can be delivered
           faster, stay aligned with the business and remain governed as AI takes on more work.
         </>
       }

@@ -146,7 +146,7 @@ function BentoCtaCard({ index }: { index: number }) {
         FROM BLUEPRINT TO PRODUCTION
       </span>
       <h3 className="max-w-2xl font-display text-2xl/8 text-olive-950 transition-colors duration-300 group-hover:text-orca-orange dark:text-white dark:group-hover:text-orca-orange">
-        Move faster. Keep the work—and the controls—connected.
+        Move faster. Keep the work and the controls, connected.
       </h3>
       <p className="max-w-2xl text-base/7 text-olive-700 dark:text-orca-frost">
         One shared blueprint keeps context, execution, governance and experience aligned from discovery through

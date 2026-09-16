@@ -51,7 +51,7 @@ function RoiModel() {
         <div className="mt-8 flex flex-col gap-4 font-mono text-sm/6 text-olive-950 dark:text-white">
           <EquationLine value="25 people" />
           <Operator>×</Operator>
-          <EquationLine value="30 min / day" />
+          <EquationLine value="30 mins/day" />
           <Operator>×</Operator>
           <EquationLine value="250 working days" />
         </div>
@@ -64,7 +64,7 @@ function RoiModel() {
           <span className="font-display text-5xl font-medium tracking-tight text-olive-950 sm:text-6xl lg:text-7xl dark:text-white">
             3,125
           </span>
-          <span className="font-mono text-base/6 text-olive-700 dark:text-orca-frost">hours / year</span>
+          <span className="font-mono text-base/6 text-olive-700 dark:text-orca-frost">hours/year</span>
         </div>
       </div>
 

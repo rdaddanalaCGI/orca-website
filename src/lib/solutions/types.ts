@@ -15,6 +15,8 @@ export type SolutionCta = {
 export type SolutionHero = {
   eyebrow: string
   headline: string
+  /** Shorter sector-operations phrase shown as the card headline on the home page. */
+  shortHeadline?: string
   subheadline: string
   primaryCta: SolutionCta
   secondaryCta?: SolutionCta
@@ -144,6 +146,7 @@ export type SolutionVertical = {
   href: string
   description?: string
   image?: string
+  hiddenFromMenu?: boolean
   solutionsPage?: SolutionVerticalSolutionsPage
   hero?: SolutionHero
   problems?: SolutionProblems

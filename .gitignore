@@ -3,6 +3,12 @@
 # local reference material
 /.local/
 
+# Payload local upload storage (media collection staticDir)
+/media/
+
+# Python bytecode cache
+__pycache__/
+
 # private PDFs (gated downloads, provided per environment)
 /private/pdfs/*.pdf
 

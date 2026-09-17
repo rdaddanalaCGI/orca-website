@@ -1,10 +1,11 @@
 'use client'
 
-import { Fragment, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 
 import { ButtonLink } from '@/components/elements/button'
 import { Container } from '@/components/elements/container'
-import { Eyebrow } from '@/components/elements/eyebrow'
+import { ChevronIcon } from '@/components/icons/chevron-icon'
+import { Details } from '@/components/navigation/details'
 import { clsx } from 'clsx/lite'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
@@ -53,7 +54,7 @@ export function SolutionApplications({
       if (applications.applications.some((app) => app.id === id)) {
         const section = document.getElementById('applications')
         if (section) {
-          requestAnimationFrame(() => section.scrollIntoView())
+          requestAnimationFrame(() => requestAnimationFrame(() => section.scrollIntoView()))
         }
       }
     }
@@ -66,8 +67,74 @@ export function SolutionApplications({
     }
   }, [applications.applications, defaultId])
 
+  const tabsRef = useRef<HTMLDivElement>(null)
+  const activeTabRef = useRef<HTMLButtonElement>(null)
+  const [tabsFade, setTabsFade] = useState({ left: false, right: false })
+
+  const categories = groupByCategory(applications.applications)
   const active = applications.applications.find((app) => app.id === selectedId) ?? applications.applications[0]
+  const activeCategoryIndex = Math.max(
+    0,
+    categories.findIndex(([, apps]) => apps.some((app) => app.id === active?.id)),
+  )
+  const activeCategory = categories[activeCategoryIndex]?.[0] ?? ''
+
+  const updateTabsFade = useCallback(() => {
+    const el = tabsRef.current
+    if (!el) return
+    setTabsFade({
+      left: el.scrollLeft > 1,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
+    })
+  }, [])
+
+  useEffect(() => {
+    const strip = tabsRef.current
+    const tab = activeTabRef.current
+    if (!strip || !tab) return
+    const left = tab.offsetLeft - (strip.clientWidth - tab.offsetWidth) / 2
+    strip.scrollTo({ left, behavior: shouldReduceMotion ? 'auto' : 'smooth' })
+  }, [selectedId, shouldReduceMotion])
+
+  useEffect(() => {
+    const el = tabsRef.current
+    if (!el) return
+    updateTabsFade()
+    const observer = new ResizeObserver(updateTabsFade)
+    observer.observe(el)
+    for (const child of el.children) observer.observe(child)
+    return () => observer.disconnect()
+  }, [selectedId, updateTabsFade])
+
+  const prevCategoryRef = useRef('')
+  useEffect(() => {
+    const el = tabsRef.current
+    const isNewCategory = prevCategoryRef.current !== activeCategory
+    prevCategoryRef.current = activeCategory
+    if (!el || shouldReduceMotion || !isNewCategory) return
+    let settle: number | undefined
+    const nudge = window.setTimeout(() => {
+      if (el.scrollWidth <= el.clientWidth + 1) return
+      el.scrollBy({ left: 40, behavior: 'smooth' })
+      settle = window.setTimeout(() => el.scrollBy({ left: -40, behavior: 'smooth' }), 500)
+    }, 400)
+    return () => {
+      window.clearTimeout(nudge)
+      window.clearTimeout(settle)
+    }
+  }, [activeCategory, shouldReduceMotion])
+
   if (!active) return null
+
+  const activeCategoryApps = categories[activeCategoryIndex]?.[1] ?? []
+  const tabsScrollable = tabsFade.left || tabsFade.right
+  const tabsMask = tabsFade.left
+    ? tabsFade.right
+      ? 'linear-gradient(to right, transparent 0, black 20px, black calc(100% - 20px), transparent 100%)'
+      : 'linear-gradient(to right, transparent 0, black 20px)'
+    : tabsFade.right
+      ? 'linear-gradient(to right, black calc(100% - 20px), transparent 100%)'
+      : undefined
 
   const handleSelect = (id: string) => {
     const app = applications.applications.find((a) => a.id === id)
@@ -77,212 +144,211 @@ export function SolutionApplications({
     }
   }
 
-  const categories = groupByCategory(applications.applications)
+  const handleCategorySelect = (event: MouseEvent<HTMLElement>, index: number) => {
+    const details = event.currentTarget.closest('details')
+    if (details) details.open = false
+    const first = categories[index]?.[1]?.[0]
+    if (!first || index === activeCategoryIndex) return
+    handleSelect(first.id)
+  }
+
+  const scrollTabs = (direction: 1 | -1) => {
+    tabsRef.current?.scrollBy({
+      left: direction * 160,
+      behavior: shouldReduceMotion ? 'auto' : 'smooth',
+    })
+  }
 
   return (
     <section id="applications" className="scroll-mt-28 py-16">
       <Container>
         <div className="rounded-2xl border border-olive-950/10 bg-orca-mist dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
-          <div className="grid grid-cols-1 lg:grid-cols-12">
-            <div className="border-b border-olive-950/10 p-5 sm:p-8 lg:sticky lg:top-(--scroll-padding-top) lg:col-span-4 lg:flex lg:max-h-[calc(100dvh-var(--scroll-padding-top)-2rem)] lg:flex-col lg:self-start lg:border-r lg:border-b-0 dark:border-white/10">
-              <div className="flex flex-col gap-3 sm:gap-4 lg:shrink-0">
-                <Eyebrow variant="brand">{applications.eyebrow}</Eyebrow>
-                <h2 className="font-display text-2xl text-olive-950 sm:text-3xl lg:text-4xl dark:text-white">
-                  Application Explorer
-                </h2>
-                <p className="text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">
-                  Select an application to explore its governed workflow.
-                </p>
-              </div>
+          <div className="sticky top-(--scroll-padding-top) z-20 flex flex-col gap-5 rounded-t-2xl border-b border-olive-950/10 bg-orca-mist px-5 py-5 sm:px-8 sm:py-6 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-x-10 lg:gap-y-5 dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+            <h2 className="font-display text-2xl text-orca-orange sm:text-3xl lg:text-4xl">Application Explorer</h2>
 
-              <nav aria-label="Applications" className="mt-6 sm:mt-8 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
-                {/* Mobile: horizontal scrollable tabs */}
-                <div className="-mx-5 flex scroll-px-5 gap-1 overflow-x-auto px-5 pb-3 sm:-mx-8 sm:scroll-px-8 sm:px-8 lg:hidden">
-                  {applications.applications.map((app) => {
+            <div className="flex max-w-full flex-col items-start gap-2 lg:items-end">
+              <Details className="relative">
+                <summary className="flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-1 text-sm/7 font-medium text-olive-950 transition-colors group-open:text-orca-orange hover:text-orca-orange focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none dark:text-white">
+                  {categories[activeCategoryIndex]?.[0]}
+                  <ChevronIcon
+                    className="h-2 w-1.5 rotate-90 transition-transform group-open:-rotate-90"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <div className="absolute top-full left-0 z-30 mt-2 w-56 rounded-xl bg-orca-page p-4 shadow-lg ring-1 ring-olive-950/10 lg:right-0 lg:left-auto dark:bg-olive-950 dark:ring-white/10">
+                  <ul className="flex flex-col gap-2 text-sm/7" role="list">
+                    {categories.map(([category], index) => (
+                      <li key={category}>
+                        <button
+                          type="button"
+                          onClick={(event) => handleCategorySelect(event, index)}
+                          aria-current={index === activeCategoryIndex ? 'true' : undefined}
+                          className={clsx(
+                            'block w-full cursor-pointer text-left transition-colors focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none',
+                            index === activeCategoryIndex
+                              ? 'text-orca-orange'
+                              : 'text-olive-950 hover:text-orca-orange dark:text-white',
+                          )}
+                        >
+                          {category}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Details>
+
+              <div className="flex max-w-full items-center gap-1">
+                {tabsScrollable && (
+                  <button
+                    type="button"
+                    onClick={() => scrollTabs(-1)}
+                    aria-label="Scroll applications back"
+                    className="shrink-0 cursor-pointer rounded-full p-1.5 text-olive-400 transition-colors hover:text-orca-orange focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none dark:text-orca-frost/60"
+                  >
+                    <ChevronIcon className="h-2 w-1.5 rotate-180" aria-hidden="true" />
+                  </button>
+                )}
+                <div
+                  ref={tabsRef}
+                  onScroll={updateTabsFade}
+                  style={{ maskImage: tabsMask, WebkitMaskImage: tabsMask }}
+                  className="relative flex max-w-56 snap-x snap-proximity scrollbar-none gap-1 overflow-x-auto sm:max-w-64"
+                >
+                  {activeCategoryApps.map((app) => {
                     const isActive = app.id === active.id
                     return (
                       <button
                         key={app.id}
                         type="button"
+                        ref={isActive ? activeTabRef : undefined}
                         onClick={() => handleSelect(app.id)}
                         aria-current={isActive ? 'true' : undefined}
+                        aria-controls="application-explorer-detail"
                         className={clsx(
-                          'shrink-0 cursor-pointer snap-start rounded-lg px-3 py-2 font-display text-sm/6 whitespace-nowrap transition-colors',
+                          'relative shrink-0 cursor-pointer snap-center px-2.5 py-1.5 font-display text-sm/6 whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none',
                           isActive
                             ? 'font-semibold text-olive-950 dark:text-white'
-                            : 'text-olive-700 hover:text-olive-950 dark:text-orca-frost dark:hover:text-white',
+                            : 'text-olive-500 hover:text-olive-950 dark:text-orca-frost/70 dark:hover:text-white',
                         )}
                       >
                         {app.shortLabel ?? app.title}
+                        {isActive && (
+                          <motion.span
+                            layoutId="active-application-indicator"
+                            className="absolute inset-x-2.5 bottom-0 h-0.5 bg-orca-orange"
+                            transition={
+                              shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 30 }
+                            }
+                          />
+                        )}
                       </button>
                     )
                   })}
                 </div>
-
-                {/* Desktop: category list */}
-                <ul className="hidden lg:flex lg:flex-col lg:gap-2" role="list">
-                  {categories.map(([category, apps], categoryIndex) => (
-                    <Fragment key={category}>
-                      <li
-                        className={clsx(
-                          'mb-2',
-                          categoryIndex > 0 && 'mt-6',
-                          apps.some((app) => app.id === active.id) &&
-                            'lg:sticky lg:top-0 lg:z-20 lg:bg-orca-mist lg:pb-1 lg:dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]',
-                        )}
-                      >
-                        <Eyebrow variant="brand">{category}</Eyebrow>
-                      </li>
-                      {apps.map((app) => {
-                        const isActive = app.id === active.id
-                        return (
-                          <li key={app.id} className={clsx(isActive && 'lg:sticky lg:top-8 lg:z-10')}>
-                            <button
-                              type="button"
-                              onClick={() => handleSelect(app.id)}
-                              aria-current={isActive ? 'true' : undefined}
-                              className={clsx(
-                                'group relative flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left transition-colors sm:px-4 sm:py-3',
-                                isActive
-                                  ? 'bg-white font-semibold text-olive-950 shadow-sm ring-1 ring-olive-950/10 dark:bg-olive-800 dark:text-white dark:ring-white/10'
-                                  : 'bg-white/50 text-olive-700 ring-1 ring-olive-950/10 hover:bg-white hover:text-olive-950 dark:bg-white/5 dark:text-orca-frost dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white',
-                              )}
-                            >
-                              {isActive && (
-                                <motion.div
-                                  layoutId="active-application-indicator"
-                                  className="absolute top-0 left-0 h-full w-1 rounded-l-lg bg-orca-orange"
-                                  transition={
-                                    shouldReduceMotion
-                                      ? { duration: 0 }
-                                      : { type: 'spring', stiffness: 400, damping: 30 }
-                                  }
-                                />
-                              )}
-                              <span className="font-display text-base sm:text-lg">{app.shortLabel ?? app.title}</span>
-                              <svg
-                                viewBox="0 0 16 16"
-                                fill="none"
-                                aria-hidden="true"
-                                className={clsx(
-                                  'size-4 shrink-0 transition-colors',
-                                  isActive
-                                    ? 'text-orca-orange'
-                                    : 'text-olive-400 group-hover:text-orca-orange dark:text-orca-frost/50',
-                                )}
-                              >
-                                <path
-                                  d="M6 3.5L10.5 8L6 12.5"
-                                  stroke="currentColor"
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </button>
-                          </li>
-                        )
-                      })}
-                    </Fragment>
-                  ))}
-                </ul>
-              </nav>
+                {tabsScrollable && (
+                  <button
+                    type="button"
+                    onClick={() => scrollTabs(1)}
+                    aria-label="Scroll applications forward"
+                    className="shrink-0 cursor-pointer rounded-full p-1.5 text-olive-400 transition-colors hover:text-orca-orange focus-visible:ring-2 focus-visible:ring-orca-orange focus-visible:outline-none dark:text-orca-frost/60"
+                  >
+                    <ChevronIcon className="h-2 w-1.5" aria-hidden="true" />
+                  </button>
+                )}
+              </div>
             </div>
+          </div>
 
-            <div className="p-5 sm:p-8 lg:col-span-8">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={active.id}
-                  initial={shouldReduceMotion ? {} : { opacity: 0, x: 12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={shouldReduceMotion ? {} : { opacity: 0, x: -12 }}
-                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="flex flex-col gap-6 sm:gap-8"
+          <div id="application-explorer-detail" className="p-5 sm:p-8">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={active.id}
+                initial={shouldReduceMotion ? {} : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
+                transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                className="flex flex-col gap-6 sm:gap-8"
+              >
+                <div className="flex flex-col gap-3 sm:gap-4">
+                  <h3 className="font-display text-3xl text-olive-950 sm:text-4xl dark:text-white">
+                    {active.headline}
+                  </h3>
+                  <p className="max-w-3xl text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">
+                    {active.description.split('\n\n')[0]}
+                  </p>
+                </div>
+
+                {active.blueprint ? (
+                  <ApplicationBlueprintPanel blueprint={active.blueprint} />
+                ) : (
+                  <>
+                    <div className="flex flex-col gap-4">
+                      <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                        Workflow
+                      </span>
+                      <WorkflowStepper
+                        workflow={{
+                          title: active.shortLabel ?? active.title,
+                          steps: active.workflowSteps.map((step, i) => ({
+                            id: `${active.id}-step-${i}`,
+                            title: step,
+                          })),
+                        }}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                          Working context
+                        </span>
+                        <ul className="flex flex-col gap-1">
+                          {active.contextItems.map((item) => (
+                            <li key={item} className="text-sm/6 text-olive-700 dark:text-orca-frost">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                          Built for
+                        </span>
+                        <ul className="flex flex-col gap-1">
+                          {active.roles.map((role) => (
+                            <li key={role} className="text-sm/6 text-olive-700 dark:text-orca-frost">
+                              {role}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
+                          Works across
+                        </span>
+                        <ul className="flex flex-col gap-1">
+                          {active.systems.map((system) => (
+                            <li key={system} className="text-sm/6 text-olive-700 dark:text-orca-frost">
+                              {system}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <ButtonLink
+                  href={active.cta.href}
+                  size="lg"
+                  target={active.cta.type === 'external' ? '_blank' : undefined}
+                  rel={active.cta.type === 'external' ? 'noopener noreferrer' : undefined}
                 >
-                  <div className="z-10 -mx-5 -mt-5 flex flex-col gap-4 border-b border-olive-950/10 bg-orca-mist px-5 pt-5 pb-5 sm:-mx-8 sm:-mt-8 sm:px-8 sm:pt-8 sm:pb-6 lg:sticky lg:top-(--scroll-padding-top) dark:border-white/10 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
-                    <Eyebrow variant="brand">{active.shortLabel ?? active.title}</Eyebrow>
-                    <h3 className="font-display text-3xl text-olive-950 sm:text-4xl dark:text-white">
-                      {active.headline}
-                    </h3>
-                  </div>
-
-                  <div className="relative z-0 flex flex-col gap-6 sm:gap-8">
-                    <p className="text-base/7 whitespace-pre-line text-olive-700 dark:text-orca-frost">
-                      {active.description}
-                    </p>
-
-                    {active.blueprint ? (
-                      <ApplicationBlueprintPanel blueprint={active.blueprint} />
-                    ) : (
-                      <>
-                        <div className="flex flex-col gap-4">
-                          <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
-                            Workflow
-                          </span>
-                          <WorkflowStepper
-                            workflow={{
-                              title: active.shortLabel ?? active.title,
-                              steps: active.workflowSteps.map((step, i) => ({
-                                id: `${active.id}-step-${i}`,
-                                title: step,
-                              })),
-                            }}
-                          />
-                        </div>
-
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                          <div className="flex flex-col gap-2">
-                            <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
-                              Working context
-                            </span>
-                            <ul className="flex flex-col gap-1">
-                              {active.contextItems.map((item) => (
-                                <li key={item} className="text-sm/6 text-olive-700 dark:text-orca-frost">
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className="flex flex-col gap-2">
-                            <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
-                              Built for
-                            </span>
-                            <ul className="flex flex-col gap-1">
-                              {active.roles.map((role) => (
-                                <li key={role} className="text-sm/6 text-olive-700 dark:text-orca-frost">
-                                  {role}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className="flex flex-col gap-2">
-                            <span className="text-xs/4 font-semibold tracking-wider text-olive-600 uppercase dark:text-orca-frost">
-                              Works across
-                            </span>
-                            <ul className="flex flex-col gap-1">
-                              {active.systems.map((system) => (
-                                <li key={system} className="text-sm/6 text-olive-700 dark:text-orca-frost">
-                                  {system}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                      </>
-                    )}
-
-                    <ButtonLink
-                      href={active.cta.href}
-                      size="lg"
-                      target={active.cta.type === 'external' ? '_blank' : undefined}
-                      rel={active.cta.type === 'external' ? 'noopener noreferrer' : undefined}
-                    >
-                      {active.cta.label}
-                    </ButtonLink>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                  {active.cta.label}
+                </ButtonLink>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 

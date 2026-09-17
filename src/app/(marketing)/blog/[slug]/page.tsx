@@ -37,6 +37,8 @@ export async function generateMetadata({ params }: Props) {
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt || undefined,
     path: `/blog/${post.slug}`,
+    canonical: post.canonical || undefined,
+    robots: post.robots ?? undefined,
     ogImage: cmsImageUrl(post.ogImage) ?? cmsImageUrl(post.heroImage),
     type: 'article',
     publishedTime: new Date(post.publishedDate).toISOString(),

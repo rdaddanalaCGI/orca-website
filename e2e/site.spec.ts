@@ -34,7 +34,7 @@ test.describe('page delivery', () => {
 
     await expect(page.locator('h1')).toBeVisible()
     // The "Declare the Work" animation is decorative; its pillar copy must be server-rendered HTML.
-    await expect(page.getByRole('heading', { name: 'Declare the interaction' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Declare agent interaction.' })).toBeVisible()
     await context.close()
   })
 })

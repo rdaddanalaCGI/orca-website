@@ -4,7 +4,7 @@ import { ApaSection } from '@/components/solutions/landing/apa-section'
 import { SolutionsLandingHero } from '@/components/solutions/landing/hero'
 import { IndustryExplorer, type ExplorerVertical } from '@/components/solutions/landing/industry-explorer'
 import { createMetadata } from '@/lib/seo'
-import { getSolutionExplorerApplications, solutions } from '@/lib/solutions'
+import { getSolutionExplorerApplications, visibleSolutions } from '@/lib/solutions'
 
 export const metadata = createMetadata({
   title: 'AI Solutions & Agentic Process Automation',
@@ -14,7 +14,7 @@ export const metadata = createMetadata({
 })
 
 export default function Page() {
-  const verticals: ExplorerVertical[] = solutions.map((solution) => ({
+  const verticals: ExplorerVertical[] = visibleSolutions.map((solution) => ({
     id: solution.id,
     name: solution.name,
     shortName: solution.shortName,

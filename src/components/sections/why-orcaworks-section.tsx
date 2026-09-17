@@ -1,17 +1,25 @@
 'use client'
 
-import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
+import { ButtonLink } from '@/components/elements/button'
+import { Link } from '@/components/elements/link'
 import { Section } from '@/components/elements/section'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
+import { ConnectedContextVisual } from '@/components/why-orcaworks/connected-context-visual'
+import { FasterDeliveryVisual } from '@/components/why-orcaworks/faster-delivery-visual'
+import { GovernedExecutionVisual } from '@/components/why-orcaworks/governed-execution-visual'
+import { OperatingBlueprintVisual } from '@/components/why-orcaworks/operating-blueprint-visual'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
+import type { ReactNode } from 'react'
+
+type CardVisual =
+  'operating-blueprint' | 'faster-delivery' | 'connected-context' | 'governed-execution' | 'where-work-happens'
 
 type BentoCard = {
   eyebrow: string
   heading: string
   text: string
-  image: string
-  darkImage: string
+  visual: CardVisual
 }
 
 const cards: BentoCard[] = [
@@ -19,38 +27,58 @@ const cards: BentoCard[] = [
     eyebrow: 'OPERATING BLUEPRINT',
     heading: 'Define the whole application from one understanding of the work.',
     text: 'Capture the business context, workflow, system actions, human decisions and experience together, so every part of the application is built from the same operating blueprint.',
-    image: '/img/bento/operating-blueprint.png',
-    darkImage: '/img/bento/operating-blueprint.png',
+    visual: 'operating-blueprint',
   },
   {
     eyebrow: 'FASTER DELIVERY',
     heading: 'Move from discovery to working software faster.',
     text: 'Because context, execution, controls and experience share the same blueprint, teams spend less time rebuilding and reconnecting each layer of every new application.',
-    image: '/img/bento/faster-delivery.png',
-    darkImage: '/img/bento/faster-delivery.png',
+    visual: 'faster-delivery',
   },
   {
     eyebrow: 'CONNECTED CONTEXT',
     heading: 'Your digital coworker has the same view of the work as you.',
     text: 'Bring the right information together, preserve access controls, and give agents and users the same governed context.',
-    image: '/img/bento/connected-context.png',
-    darkImage: '/img/bento/connected-context.png',
+    visual: 'connected-context',
   },
   {
     eyebrow: 'GOVERNED EXECUTION',
     heading: 'Your digital coworker knows what to do, and when to hand off.',
     text: 'Coordinate agents, system actions and human decisions in one governed workflow, with clear boundaries for what happens next.',
-    image: '/img/bento/governed-execution.png',
-    darkImage: '/img/bento/governed-execution.png',
+    visual: 'governed-execution',
   },
   {
     eyebrow: 'WHERE WORK HAPPENS',
     heading: 'Works where your teams already work.',
     text: 'Bring governed workflows into Teams, Outlook, Chrome and your enterprise systems, without forcing people into another application.',
-    image: '/img/bento/where-work-happens.png',
-    darkImage: '/img/bento/where-work-happens.png',
+    visual: 'where-work-happens',
   },
 ]
+
+const cardVisuals: Record<CardVisual, ReactNode> = {
+  'operating-blueprint': <OperatingBlueprintVisual />,
+  'faster-delivery': <FasterDeliveryVisual />,
+  'connected-context': <ConnectedContextVisual />,
+  'governed-execution': <GovernedExecutionVisual />,
+  'where-work-happens': (
+    <>
+      <Image
+        src="https://tailwindcss.com/plus-assets/img/component-images/bento-01-integrations.png"
+        alt=""
+        fill
+        sizes="(max-width: 1024px) 100vw, 33vw"
+        className="object-contain lg:object-cover dark:hidden"
+      />
+      <Image
+        src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-01-integrations.png"
+        alt=""
+        fill
+        sizes="(max-width: 1024px) 100vw, 33vw"
+        className="object-contain not-dark:hidden lg:object-cover"
+      />
+    </>
+  ),
+}
 
 const cardVariants = {
   rest: { y: 0 },
@@ -67,35 +95,23 @@ function BentoCardItem({ card, index }: { card: BentoCard; index: number }) {
   const topRow = index < 2
   const rowDelay = topRow ? 0 : 0.25
   const delay = rowDelay + (topRow ? index : index - 2) * 0.08
-  const sizes = index < 2 ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 1024px) 100vw, 33vw'
+
+  const onPageSurface = card.visual !== 'where-work-happens'
 
   const content = (
     <>
-      <div className="relative aspect-4/3 w-full overflow-hidden bg-orca-mist lg:aspect-auto lg:h-56 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]">
+      <div
+        className={`relative aspect-4/3 w-full overflow-hidden lg:aspect-auto lg:h-56 ${
+          onPageSurface
+            ? 'bg-orca-page dark:bg-olive-950'
+            : 'bg-orca-mist dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]'
+        }`}
+      >
         {shouldReduceMotion ? (
-          <>
-            <Image src={card.image} alt="" fill sizes={sizes} className="object-contain lg:object-cover dark:hidden" />
-            <Image
-              src={card.darkImage}
-              alt=""
-              fill
-              sizes={sizes}
-              className="object-contain not-dark:hidden lg:object-cover"
-            />
-          </>
+          cardVisuals[card.visual]
         ) : (
-          <motion.div
-            className="relative aspect-4/3 w-full overflow-hidden bg-orca-mist lg:aspect-auto lg:h-56 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))]"
-            variants={imageVariants}
-          >
-            <Image src={card.image} alt="" fill sizes={sizes} className="object-contain lg:object-cover dark:hidden" />
-            <Image
-              src={card.darkImage}
-              alt=""
-              fill
-              sizes={sizes}
-              className="object-contain not-dark:hidden lg:object-cover"
-            />
+          <motion.div className="relative h-full w-full" variants={imageVariants}>
+            {cardVisuals[card.visual]}
           </motion.div>
         )}
       </div>
@@ -145,7 +161,7 @@ function BentoCtaCard({ index }: { index: number }) {
         FROM BLUEPRINT TO PRODUCTION
       </span>
       <h3 className="max-w-2xl font-display text-2xl/8 text-olive-950 transition-colors duration-300 group-hover:text-orca-orange dark:text-white dark:group-hover:text-orca-orange">
-        Move faster. Keep the work and the controls, connected.
+        Move faster. Keep the work, and the controls, connected.
       </h3>
       <p className="max-w-2xl text-base/7 text-olive-700 dark:text-orca-frost">
         One shared blueprint keeps context, execution, governance and experience aligned from discovery through
@@ -155,9 +171,9 @@ function BentoCtaCard({ index }: { index: number }) {
         <ButtonLink href="/agentic-automation-platform" color="dark/light" size="lg">
           Explore the platform <ArrowNarrowRightIcon />
         </ButtonLink>
-        <PlainButtonLink href="/contact" size="lg">
+        <Link href="/contact" color="brand">
           Talk to us <ArrowNarrowRightIcon />
-        </PlainButtonLink>
+        </Link>
       </div>
     </div>
   )

@@ -44,6 +44,8 @@ export interface CmsPost {
   status: 'draft' | 'published'
   seoTitle?: string | null
   seoDescription?: string | null
+  canonical?: string | null
+  robots?: 'index-follow' | 'noindex-follow' | 'index-nofollow' | 'noindex-nofollow' | null
   ogImage?: CmsMedia | number | string | null
   updatedAt: string
   createdAt: string

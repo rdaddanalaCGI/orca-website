@@ -40,7 +40,6 @@ export const insurance: SolutionVertical = {
   name: 'Insurance',
   slug: 'insurance',
   href,
-  image: '/img/verticals/briefs/insurance.jpg',
   solutionsPage: {
     positioning:
       'Build decision-ready specialty cases and keep recoveries, claim actions and endorsement exceptions moving across the claims, policy and document systems a specialty carrier already runs.',
@@ -48,6 +47,7 @@ export const insurance: SolutionVertical = {
   hero: {
     eyebrow: 'SPECIALTY INSURANCE',
     headline: 'AI orchestration for complex insurance cases and operational exceptions',
+    shortHeadline: 'Insurance cases and operational exceptions',
     subheadline:
       'Build decision-ready cases across medical, legal, technical and policy evidence—and keep recoveries, claim actions and policy exceptions moving across the systems and people already in place.',
     primaryCta: { label: 'Explore applications', href: '#applications' },

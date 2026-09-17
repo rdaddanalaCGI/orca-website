@@ -16,12 +16,26 @@ function absolute(pathOrUrl: string) {
   return `${site.url}${pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`}`
 }
 
+export type RobotsOption = 'index-follow' | 'noindex-follow' | 'index-nofollow' | 'noindex-nofollow'
+
+function robotsOptionToIntent(robots: RobotsOption | undefined, noindex: boolean | undefined) {
+  if (robots) {
+    return {
+      index: robots === 'index-follow' || robots === 'index-nofollow',
+      follow: robots === 'index-follow' || robots === 'noindex-follow',
+    }
+  }
+  return { index: !noindex, follow: !noindex }
+}
+
 export function createMetadata({
   title,
   description,
   path,
+  canonical: canonicalOverride,
   ogImage,
   noindex,
+  robots,
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -29,19 +43,25 @@ export function createMetadata({
   title?: string
   description?: string
   path?: string
+  /** Absolute or relative canonical URL override (e.g. a CMS-editable field). Falls back to `path`. */
+  canonical?: string
   ogImage?: string
   noindex?: boolean
+  /** Per-page index/follow intent (e.g. a CMS `robots` field). Takes precedence over `noindex`. */
+  robots?: RobotsOption
   type?: 'website' | 'article'
   publishedTime?: string
   modifiedTime?: string
 } = {}): Metadata {
   const fullTitle = title ? `${title} — ${site.name}` : site.defaultTitle
   const desc = description || site.defaultDescription
-  const canonical = absolute(path ?? '/')
+  const canonical = absolute(canonicalOverride || path || '/')
   const image = absolute(ogImage ?? site.defaultOgImage)
 
-  // Non-production environments are never indexable, regardless of page intent.
-  const index = isIndexable && !noindex
+  const intent = robotsOptionToIntent(robots, noindex)
+  // Non-production environments are never indexable or followable, regardless of page intent.
+  const index = isIndexable && intent.index
+  const follow = isIndexable && intent.follow
 
   return {
     title: fullTitle,
@@ -69,10 +89,10 @@ export function createMetadata({
     },
     robots: {
       index,
-      follow: index,
+      follow,
       googleBot: {
         index,
-        follow: index,
+        follow,
         'max-snippet': -1,
         'max-image-preview': 'large',
         'max-video-preview': -1,

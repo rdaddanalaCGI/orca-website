@@ -1,92 +1,14 @@
 'use client'
 
-import { PlainButtonLink } from '@/components/elements/button'
+import { Link } from '@/components/elements/link'
 import { Section } from '@/components/elements/section'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
+import { VerticalImage } from '@/components/solutions/vertical-image'
+import { getFeaturedVerticals, type FeaturedVertical } from '@/lib/solutions'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import NextLink from 'next/link'
 
-type Application = {
-  href: string
-  vertical: string
-  name: string
-  problem: string
-  useCases: string[]
-  count: number
-  image?: string
-  /**
-   * Cards without a dedicated photo yet show the decorative network-mesh
-   * background with this title overlaid, in the same image slot a photo
-   * card would use.
-   */
-  pattern?: string
-}
-
-const applications: Application[] = [
-  {
-    href: '/solutions/logistics-and-distribution#shipment-exception-resolution',
-    vertical: 'LOGISTICS',
-    name: 'Shipment Exception Resolution',
-    problem:
-      'When a load misses a pickup or the ETA slips, coordinators reconstruct the chronology across the TMS, carrier emails, PODs and the WMS before a planner can approve an expedite, reschedule or changed customer promise.',
-    useCases: [
-      'Flag missing milestones and contradictory proof',
-      'Request carrier evidence and assess customer impact',
-      'Planner approves recovery; TMS and customer updated',
-    ],
-    count: 8,
-    image: '/img/verticals/logistics.jpeg',
-  },
-  {
-    href: '/solutions/insurance#claims',
-    vertical: 'INSURANCE',
-    name: 'Claims Investigation',
-    problem:
-      'Adjusters have to piece together claim data, correspondence, medical records and supporting evidence across multiple systems before they can make a defensible decision.',
-    useCases: ['Build the claim evidence pack', 'Identify missing evidence', 'Prepare issues for adjuster review'],
-    count: 7,
-    pattern: 'Insurance',
-  },
-  {
-    href: '/solutions/specialty-commercial-lending-finance#closing-condition-orchestration',
-    vertical: 'SPECIALTY LENDING',
-    name: 'Closing Condition Orchestration',
-    problem:
-      'A credit approval is complete, but title, UCC, insurance, appraisal and counsel evidence live across different parties and systems before loan operations can clear the transaction to close.',
-    useCases: [
-      'Map evidence to each approval condition',
-      'Chase borrower, counsel and title items',
-      'Loan operations clears or holds the file',
-    ],
-    count: 8,
-    pattern: 'Specialty Lending',
-  },
-  {
-    href: '/solutions/legal#intake-to-retainer',
-    vertical: 'LAW FIRMS',
-    name: 'Prior Authorization',
-    problem:
-      'Legal teams collect client information, engagement documents, conflict checks, supporting evidence, and case history from forms, emails, document repositories, and intake systems before a new matter can be evaluated and opened.',
-    useCases: ['Build the auth packet', 'Check coverage and formulary', 'Track status and appeal'],
-    count: 8,
-    pattern: 'Law Firms',
-  },
-  {
-    href: '/solutions/architecture-construction-engineering#change-evidence-to-decision',
-    vertical: 'ARCHITECTURE, CONSTRUCTION & ENGINEERING',
-    name: 'Change Evidence-to-Decision',
-    problem:
-      'Project and commercial teams rebuild each potential change from the RFI, current and superseded drawings, site photos, subcontractor pricing and schedule before the PM can set a position and the owner can approve.',
-    useCases: [
-      'Assemble RFI, revision, field and pricing evidence',
-      'Flag missing or superseded support',
-      'Route the position to the PM and owner',
-    ],
-    count: 8,
-    image: '/img/verticals/aec.jpeg',
-  },
-]
+const verticals = getFeaturedVerticals()
 
 const cardVariants = { rest: {}, hover: {} }
 const imageVariants = { rest: { scale: 1 }, hover: { scale: 1.05 } }
@@ -94,9 +16,9 @@ const useCaseVariants = { rest: { opacity: 0, height: 0 }, hover: { opacity: 1, 
 const arrowVariants = { rest: { x: 0 }, hover: { x: 4 } }
 const lineVariants = { rest: { width: 0 }, hover: { width: 48 } }
 
-function ApplicationCard({ application }: { application: Application }) {
+function VerticalCard({ vertical }: { vertical: FeaturedVertical }) {
   return (
-    <NextLink href={application.href} className="group block h-full">
+    <NextLink href={vertical.href} className="group block h-full">
       <motion.div
         className="flex h-full flex-col overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10"
         initial="rest"
@@ -104,37 +26,31 @@ function ApplicationCard({ application }: { application: Application }) {
         variants={cardVariants}
         transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        {application.pattern ? (
-          <div className="relative flex aspect-video w-full items-start overflow-hidden bg-[url(/img/patterns/network-mesh.jpg)] bg-cover bg-center p-5 sm:p-6 lg:p-8">
-            <span className="font-display text-2xl/8 text-olive-950 sm:text-3xl/9">{application.pattern}</span>
-          </div>
-        ) : (
-          <div className="relative aspect-video w-full overflow-hidden">
-            <motion.div
-              className="relative h-full w-full"
-              variants={imageVariants}
-              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <Image
-                src={application.image!}
-                alt={application.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                className="object-cover"
-              />
-            </motion.div>
-          </div>
-        )}
+        <div className="relative aspect-video w-full overflow-hidden">
+          <motion.div
+            className="relative h-full w-full"
+            variants={imageVariants}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <VerticalImage
+              image={vertical.image}
+              name={vertical.name}
+              alt={vertical.name}
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </motion.div>
+        </div>
         <div className="flex flex-col gap-3 p-5 sm:gap-4 sm:p-6 lg:p-8">
-          <div className="text-xs/4 font-semibold tracking-wider text-orca-orange uppercase">
-            {application.vertical}
-          </div>
-          <h3 className="font-display text-xl/8 text-olive-950 sm:text-2xl/9 dark:text-white">{application.name}</h3>
-          <p className="text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">{application.problem}</p>
+          <div className="text-xs/4 font-semibold tracking-wider text-orca-orange uppercase">{vertical.eyebrow}</div>
+          <h3 className="font-display text-xl/8 text-olive-950 sm:text-2xl/9 dark:text-white">{vertical.headline}</h3>
+          {vertical.subheadline && (
+            <p className="text-sm/6 text-olive-700 sm:text-base/7 dark:text-orca-frost">{vertical.subheadline}</p>
+          )}
 
           <div className="block lg:hidden">
             <ul className="flex flex-col gap-2">
-              {application.useCases.map((useCase) => (
+              {vertical.useCases.map((useCase) => (
                 <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-orca-frost">
                   <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
                   {useCase}
@@ -148,7 +64,7 @@ function ApplicationCard({ application }: { application: Application }) {
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <ul className="flex flex-col gap-2">
-              {application.useCases.map((useCase) => (
+              {vertical.useCases.map((useCase) => (
                 <li key={useCase} className="flex items-start gap-2 text-sm/6 text-olive-700 dark:text-orca-frost">
                   <span className="mt-2 h-1 w-1 rounded-full bg-orca-orange" aria-hidden />
                   {useCase}
@@ -159,7 +75,7 @@ function ApplicationCard({ application }: { application: Application }) {
 
           <div className="mt-auto flex items-center justify-between gap-4">
             <div className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-orca-frost">
-              {application.count} USE CASES
+              {vertical.count} USE CASES
             </div>
             <div className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 dark:text-white">
               Explore guide
@@ -196,15 +112,15 @@ export function ApplicationsSection() {
         </>
       }
       cta={
-        <PlainButtonLink href="/solutions" size="lg" className="self-start">
+        <Link href="/solutions" color="brand">
           Explore all applications <ArrowNarrowRightIcon />
-        </PlainButtonLink>
+        </Link>
       }
     >
       <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
-        {applications.map((application, i) => (
-          <div key={application.href} className={i === 0 ? 'lg:col-span-2' : ''}>
-            <ApplicationCard application={application} />
+        {verticals.map((vertical, i) => (
+          <div key={vertical.href} className={i === 0 ? 'lg:col-span-2' : ''}>
+            <VerticalCard vertical={vertical} />
           </div>
         ))}
       </div>

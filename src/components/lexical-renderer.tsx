@@ -2,6 +2,8 @@ import type { ReactNode } from 'react'
 
 import NextLink from 'next/link'
 
+import { CtaBannerBlock } from '@/components/blog/cta-banner'
+
 type LexicalNode = {
   type: string
   version?: number
@@ -13,7 +15,15 @@ type LexicalNode = {
   src?: string
   alt?: string
   children?: LexicalNode[]
-  fields?: { url?: string; newWindow?: boolean }
+  fields?: {
+    url?: string
+    newWindow?: boolean
+    blockType?: string
+    title?: string
+    buttonLabel?: string
+    buttonHref?: string
+    theme?: 'teal' | 'orange' | 'dark'
+  }
   direction?: 'ltr' | 'rtl' | null
 } & Record<string, unknown>
 
@@ -142,6 +152,20 @@ function renderBlock(node: LexicalNode, index: number): ReactNode {
         // eslint-disable-next-line @next/next/no-img-element
         <img key={index} src={node.src} alt={node.alt ?? ''} className="w-full rounded-lg" />
       ) : null
+    case 'block': {
+      if (node.fields?.blockType === 'ctaBanner') {
+        return (
+          <CtaBannerBlock
+            key={index}
+            title={node.fields.title ?? ''}
+            buttonLabel={node.fields.buttonLabel ?? ''}
+            buttonHref={node.fields.buttonHref}
+            theme={node.fields.theme ?? 'teal'}
+          />
+        )
+      }
+      return null
+    }
     case 'table':
       return (
         <table key={index} className="w-full border-collapse text-sm">

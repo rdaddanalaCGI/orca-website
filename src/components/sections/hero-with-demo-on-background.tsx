@@ -1,8 +1,7 @@
 import { clsx } from 'clsx/lite'
-import type { ComponentProps, CSSProperties, ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 import { Container } from '../elements/container'
 import { Heading } from '../elements/heading'
-import { Wallpaper } from '../elements/wallpaper'
 
 export function HeroWithDemoOnBackground({
   eyebrow,
@@ -12,7 +11,6 @@ export function HeroWithDemoOnBackground({
   demo,
   footer,
   className,
-  wallpaperStyle,
   ...props
 }: {
   eyebrow?: ReactNode
@@ -21,11 +19,10 @@ export function HeroWithDemoOnBackground({
   cta?: ReactNode
   demo?: ReactNode
   footer?: ReactNode
-  wallpaperStyle?: CSSProperties
 } & ComponentProps<'section'>) {
   return (
     <section className={clsx('flex flex-col gap-16 px-2 pb-16', className)} {...props}>
-      <Wallpaper className="rounded-lg" color="green" style={wallpaperStyle}>
+      <div className="relative overflow-hidden rounded-lg bg-orca-teal-dark">
         <div className="-mx-2 sm:px-6 md:px-12 lg:px-0">
           <Container className="flex flex-col gap-16">
             <div className="flex gap-x-10 gap-y-16 max-lg:flex-col sm:gap-y-24">
@@ -47,7 +44,7 @@ export function HeroWithDemoOnBackground({
             </div>
           </Container>
         </div>
-      </Wallpaper>
+      </div>
       <Container>{footer}</Container>
     </section>
   )

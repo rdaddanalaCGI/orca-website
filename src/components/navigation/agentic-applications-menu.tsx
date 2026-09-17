@@ -2,7 +2,6 @@
 
 import { clsx } from 'clsx/lite'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -12,8 +11,9 @@ import { Container } from '@/components/elements/container'
 import { Text } from '@/components/elements/text'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { ChevronIcon } from '@/components/icons/chevron-icon'
+import { VerticalImage } from '@/components/solutions/vertical-image'
 import type { SolutionVertical } from '@/lib/solutions'
-import { solutions } from '@/lib/solutions'
+import { visibleSolutions } from '@/lib/solutions'
 
 import { Details } from './details'
 
@@ -48,27 +48,41 @@ export function AgenticApplicationsMenu() {
   const pathname = usePathname()
   const router = useRouter()
   const shouldReduceMotion = useReducedMotion() ?? false
-  const [activeId, setActiveId] = useState(solutions[0].id)
+  const [activeId, setActiveId] = useState(visibleSolutions[0].id)
   const [hoveredItemId, setHoveredItemId] = useState<string | null>(null)
   const [openMobileId, setOpenMobileId] = useState<string | null>(null)
   const [hashNonce, setHashNonce] = useState(0)
   const pendingHashRef = useRef<string | null>(null)
-  const active = solutions.find((solution) => solution.id === activeId) ?? solutions[0]
+  const active = visibleSolutions.find((solution) => solution.id === activeId) ?? visibleSolutions[0]
   const activeItems = getMenuItems(active)
   const shownItemId = hoveredItemId ?? activeItems[0]?.id
   const executiveBrief = active.resources?.items.find((item) => item.eyebrow.toUpperCase() === '2-PAGE VERTICAL BRIEF')
   const hasActive = pathname.startsWith('/solutions')
 
   useEffect(() => {
-    if (pendingHashRef.current) {
-      window.location.hash = pendingHashRef.current
-      pendingHashRef.current = null
+    const hash = pendingHashRef.current
+    if (!hash) return
+    pendingHashRef.current = null
+    if (window.location.hash === `#${hash}`) {
+      window.dispatchEvent(new HashChangeEvent('hashchange'))
+    } else {
+      window.location.hash = hash
     }
   }, [hashNonce])
 
   function activateVertical(id: string) {
     setActiveId(id)
     setHoveredItemId(null)
+  }
+
+  function handleVerticalClick(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    closeMenu(event)
+    if (href !== pathname) return
+    event.preventDefault()
+    window.history.replaceState(null, '', href)
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' })),
+    )
   }
 
   function handleApplicationClick(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
@@ -85,7 +99,13 @@ export function AgenticApplicationsMenu() {
       }
     } else {
       event.preventDefault()
-      router.push(href)
+      const isVirtualHash = Boolean(
+        hash &&
+        visibleSolutions
+          .find((solution) => solution.href === path)
+          ?.applications?.applications.some((app) => app.id === hash),
+      )
+      router.push(href, { scroll: !isVirtualHash })
     }
   }
 
@@ -116,7 +136,7 @@ export function AgenticApplicationsMenu() {
               <div className="flex flex-col items-start gap-3">
                 <Link
                   href="/solutions"
-                  onClick={closeMenu}
+                  onClick={(event) => handleVerticalClick(event, '/solutions')}
                   className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
                 >
                   Explore all solutions <ArrowNarrowRightIcon className="h-4 w-4" />
@@ -136,7 +156,7 @@ export function AgenticApplicationsMenu() {
                 Industries
               </span>
               <ul className="mt-4 flex flex-col gap-1" role="list">
-                {solutions.map((vertical) => {
+                {visibleSolutions.map((vertical) => {
                   const isActive = active.id === vertical.id
                   return (
                     <li key={vertical.id}>
@@ -144,7 +164,7 @@ export function AgenticApplicationsMenu() {
                         href={vertical.href}
                         onMouseEnter={() => activateVertical(vertical.id)}
                         onFocus={() => activateVertical(vertical.id)}
-                        onClick={closeMenu}
+                        onClick={(event) => handleVerticalClick(event, vertical.href)}
                         className={clsx(
                           'group flex items-center justify-between py-2 text-sm/7 font-medium transition-colors',
                           isActive ? 'text-orca-orange' : 'text-olive-950 dark:text-white',
@@ -222,7 +242,7 @@ export function AgenticApplicationsMenu() {
               </AnimatePresence>
               <Link
                 href={active.href}
-                onClick={closeMenu}
+                onClick={(event) => handleVerticalClick(event, active.href)}
                 className="mt-3 inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
               >
                 View all in {active.name} <ArrowNarrowRightIcon className="h-4 w-4" />
@@ -230,11 +250,9 @@ export function AgenticApplicationsMenu() {
             </div>
 
             <div className="flex flex-col gap-4 lg:col-span-3">
-              {active.image && (
-                <div className="relative aspect-4/3 w-full overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
-                  <Image src={active.image} alt="" fill sizes="300px" className="object-cover" />
-                </div>
-              )}
+              <div className="relative aspect-4/3 w-full overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
+                <VerticalImage image={active.image} name={active.name} sizes="300px" className="object-cover" />
+              </div>
               {executiveBrief && (
                 <div className="flex flex-col gap-2">
                   <span className="text-xs/4 font-semibold tracking-wider text-olive-700 uppercase dark:text-orca-frost">
@@ -259,7 +277,7 @@ export function AgenticApplicationsMenu() {
             <span className="text-xs/4 font-semibold tracking-wider text-orca-orange uppercase">AI SOLUTIONS</span>
             <Link
               href="/solutions"
-              onClick={closeMenu}
+              onClick={(event) => handleVerticalClick(event, '/solutions')}
               className="inline-flex items-center gap-2 text-sm/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
             >
               Explore all solutions <ArrowNarrowRightIcon className="h-4 w-4" />
@@ -272,7 +290,7 @@ export function AgenticApplicationsMenu() {
               Understand our process <ArrowNarrowRightIcon className="h-4 w-4" />
             </Link>
             <ul className="mt-3 flex flex-col" role="list">
-              {solutions.map((vertical) => {
+              {visibleSolutions.map((vertical) => {
                 const isOpen = openMobileId === vertical.id
                 return (
                   <li
@@ -282,7 +300,7 @@ export function AgenticApplicationsMenu() {
                     <div className="flex items-center justify-between gap-2">
                       <Link
                         href={vertical.href}
-                        onClick={closeMenu}
+                        onClick={(event) => handleVerticalClick(event, vertical.href)}
                         className="text-base/7 font-medium text-olive-950 hover:text-orca-orange dark:text-white"
                       >
                         {vertical.name}

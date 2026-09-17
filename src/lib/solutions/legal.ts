@@ -37,11 +37,10 @@ function application(copy: ApplicationCopy, blueprint: ApplicationBlueprint): So
 
 export const legal: SolutionVertical = {
   id: 'legal',
-  name: 'Law Firms',
-  shortName: 'Law Firms',
+  name: 'Legal',
+  shortName: 'Legal',
   slug: 'legal',
   href,
-  image: '/img/verticals/briefs/legal.jpg',
   solutionsPage: {
     positioning:
       'Coordinate intake, records requests, case assignment, stalled matters and settlement closeout across the case-management system, calendars, e-signature and document platforms a litigation firm already runs—while attorneys keep the decisions only lawyers should make.',
@@ -49,6 +48,7 @@ export const legal: SolutionVertical = {
   hero: {
     eyebrow: 'LAW FIRMS & LITIGATION',
     headline: 'AI orchestration for complex litigation and case operations',
+    shortHeadline: 'Litigation and case operations',
     subheadline:
       'Move matters from qualified lead through records, assignment, scheduling and closeout across your case system, Outlook, DocuSign and DMS—with attorneys keeping representation, legal judgment, settlement and money decisions.',
     primaryCta: { label: 'Explore applications', href: '#applications' },

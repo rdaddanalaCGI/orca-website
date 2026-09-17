@@ -163,6 +163,8 @@ export interface Post {
   status: 'draft' | 'published';
   seoTitle?: string | null;
   seoDescription?: string | null;
+  canonical?: string | null;
+  robots?: ('index-follow' | 'noindex-follow' | 'index-nofollow' | 'noindex-nofollow') | null;
   ogImage?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
@@ -485,6 +487,8 @@ export interface PostsSelect<T extends boolean = true> {
   status?: T;
   seoTitle?: T;
   seoDescription?: T;
+  canonical?: T;
+  robots?: T;
   ogImage?: T;
   updatedAt?: T;
   createdAt?: T;

@@ -9,51 +9,26 @@ import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon
 import { ChevronIcon } from '@/components/icons/chevron-icon'
 import { clsx } from 'clsx/lite'
 import { animate, LayoutGroup, motion, useMotionValue, type PanInfo } from 'framer-motion'
-import Image from 'next/image'
 import NextLink from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-import { solutions } from '@/lib/solutions'
+import { VerticalImage } from '@/components/solutions/vertical-image'
+import { getSolutionExplorerApplications, visibleSolutions } from '@/lib/solutions'
 
 type Vertical = {
   href: string
+  name: string
   shortLabel: string
-  image: string
+  image?: string
   useCases: string[]
 }
 
-const useCasesBySlug: Record<string, string[]> = {
-  'logistics-and-distribution': [
-    'Shipment exceptions',
-    'supplier promises',
-    'order intake',
-    'inventory reconciliation',
-    'freight audit',
-  ],
-  insurance: ['Claims', 'underwriting', 'servicing', 'investigations', 'evidence review'],
-  legal: ['Intake to retainer', 'records requests', 'case assignment', 'stalled cases', 'settlement closeout'],
-  'specialty-commercial-lending-finance': [
-    'Closing conditions',
-    'docs vs booking',
-    'covenant exceptions',
-    'annual reviews',
-    'borrowing base',
-  ],
-  'clinical-research-organisations': ['Intake', 'prior authorization', 'care coordination', 'claims review'],
-  'architecture-construction-engineering': [
-    'Change evidence',
-    'closeout readiness',
-    'plan-vs-actual',
-    'cross-platform RFIs',
-    'submittal readiness',
-  ],
-}
-
-const verticals: Vertical[] = solutions.map((solution) => ({
+const verticals: Vertical[] = visibleSolutions.map((solution) => ({
   href: solution.href,
+  name: solution.name,
   shortLabel: solution.shortName ?? solution.name,
-  image: solution.image ?? '',
-  useCases: useCasesBySlug[solution.slug] ?? [],
+  image: solution.image,
+  useCases: getSolutionExplorerApplications(solution).map((app) => app.shortLabel ?? app.title),
 }))
 
 function VerticalCard({ vertical, isDragging }: { vertical: Vertical; isDragging: boolean }) {
@@ -66,10 +41,10 @@ function VerticalCard({ vertical, isDragging }: { vertical: Vertical; isDragging
       }}
     >
       <div className="relative aspect-video w-full overflow-hidden">
-        <Image
-          src={vertical.image}
+        <VerticalImage
+          image={vertical.image}
+          name={vertical.name}
           alt={vertical.shortLabel}
-          fill
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />

@@ -41,8 +41,6 @@ export const specialtyCommercialLendingFinance: SolutionVertical = {
   shortName: 'Specialty Lending',
   slug: 'specialty-commercial-lending-finance',
   href,
-  // Placeholder: no specialty-lending vertical image exists yet; design team to supply /img/verticals/specialty-lending.*
-  image: '/img/verticals/briefs/specialty-commercial-lending-finance.jpg',
   solutionsPage: {
     positioning:
       'Coordinate closing conditions, approval-to-booking reconciliation, covenant exceptions and renewal reviews across the LOS, ABL, factoring and document systems a specialty lender already runs—while credit and loan operations keep the decisions.',
@@ -50,6 +48,7 @@ export const specialtyCommercialLendingFinance: SolutionVertical = {
   hero: {
     eyebrow: 'SPECIALTY COMMERCIAL LENDING & FINANCE',
     headline: 'AI orchestration for complex specialty commercial lending operations',
+    shortHeadline: 'Specialty commercial lending operations',
     subheadline:
       'Coordinate closing conditions, covenant exceptions, portfolio reviews and document reconciliation across lending systems, files and communications—so loan operations, portfolio managers and credit officers can act on a complete evidence trail.',
     primaryCta: { label: 'Explore applications', href: '#applications' },

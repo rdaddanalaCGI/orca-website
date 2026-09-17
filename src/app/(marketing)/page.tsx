@@ -1,6 +1,7 @@
 import { DeclaredWorkAnimation } from '@/components/declared-work/declared-work-animation'
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
+import { Link } from '@/components/elements/link'
 import { Section } from '@/components/elements/section'
 import { Subheading } from '@/components/elements/subheading'
 import { Text } from '@/components/elements/text'
@@ -44,7 +45,7 @@ export default async function Page() {
       eyebrow: 'AI AGENT HANDBOOK',
       title: 'Build a practical understanding of enterprise AI agents.',
       text: 'From models and tools to context, orchestration and enterprise deployment.',
-      image: '/img/insights/ai-agent-handbook.png',
+      image: '/img/photos/1.webp',
       href: '/ai-agent-handbook',
       featured: true,
     },
@@ -52,7 +53,7 @@ export default async function Page() {
       eyebrow: 'ENTERPRISE AI SAFETY HANDBOOK',
       title: 'Put powerful AI to work without giving up control.',
       text: 'A practical guide to governance, risk and safe enterprise deployment.',
-      image: '/img/insights/enterprise-ai-safety-handbook.png',
+      image: '/enterprise-ai-safety-handbook/agent-framework.png',
       href: '/enterprise-ai-safety-handbook',
       featured: true,
     },
@@ -96,23 +97,24 @@ export default async function Page() {
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col gap-6">
               <Subheading>
-                Governance starts with visibility & control: introducing the Agentic Blueprint as Code (ABC).
+                Governance starts with visibility &amp; control: introducing the Agentic Blueprint as Code (ABC).
               </Subheading>
               <Text className="text-pretty">
                 <span className="flex flex-col gap-4">
                   <p>
-                    Your business logic is encoded into the Agentic Blueprint as Code (ABC). This Blueprint makes the
-                    context, workflow, actions and controls behind enterprise AI explicit, so that teams can see how it
-                    operates, review what it can do and govern it before it runs.
+                    Governance starts with declaring how AI is meant to work — that declaration is the Agentic Blueprint
+                    as Code (ABC). The Agentic Blueprint as Code (ABC) makes the context, workflow, actions and controls
+                    behind enterprise AI explicit — so teams can see how it operates, review what it can do and govern
+                    it before it runs.
                   </p>
                   <p>
                     <strong className="text-olive-950 dark:text-white">What you review is what runs.</strong>
                   </p>
                 </span>
               </Text>
-              <PlainButtonLink href="/agentic-automation-platform" size="lg" className="self-start">
+              <Link href="/agentic-automation-platform">
                 Explore the platform <ArrowNarrowRightIcon />
-              </PlainButtonLink>
+              </Link>
             </div>
             <YouTubeEmbed videoId="M7lc1UVf-VE" title="Orcaworks governance overview (placeholder)" />
           </div>
@@ -122,20 +124,20 @@ export default async function Page() {
               {
                 id: 'context',
                 ident: '01',
-                heading: 'Declare agent context',
+                heading: 'Declare agent context.',
                 copy: 'Bring together the data, documents, systems and relationships AI needs to understand the work.',
               },
               {
                 id: 'workflow',
                 ident: '02',
-                heading: 'Declare agent workflow',
+                heading: 'Declare agent workflow.',
                 copy: 'Define the actions, system calls, decisions and handoffs that move the work forward.',
               },
               {
                 id: 'interaction',
                 ident: '03',
-                heading: 'Declare agent interaction',
-                copy: 'Define where people interact with agents to review outputs, approve actions, or take control, all within the tools they already use.',
+                heading: 'Declare agent interaction.',
+                copy: 'Define where employees meet the agents inside the tools they already use, so every review, approval and hand-off happens without leaving their normal workflow.',
               },
             ]}
           />

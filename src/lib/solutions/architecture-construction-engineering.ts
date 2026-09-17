@@ -41,7 +41,7 @@ export const architectureConstructionEngineering: SolutionVertical = {
   shortName: 'ACE',
   slug: 'architecture-construction-engineering',
   href,
-  image: '/img/verticals/briefs/architecture-construction-engineering.jpg',
+  image: '/img/verticals/aec.avif',
   solutionsPage: {
     positioning:
       'Resolve potential changes, closeout gaps, schedule variance and cross-platform RFIs across the project platform, master schedule, cost system and email a general contractor already runs—with PMs, superintendents, designers and commercial leads keeping the decisions.',
@@ -49,6 +49,7 @@ export const architectureConstructionEngineering: SolutionVertical = {
   hero: {
     eyebrow: 'ARCHITECTURE, CONSTRUCTION & ENGINEERING',
     headline: 'AI orchestration for complex construction project delivery',
+    shortHeadline: 'Construction project delivery',
     subheadline:
       'Connect changes, RFIs, submittals, schedule variance and closeout across project platforms, schedules, cost systems and email—so project managers, superintendents, designers and commercial teams can act from the same evidence.',
     primaryCta: { label: 'Explore applications', href: '#applications' },

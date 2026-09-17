@@ -1,4 +1,7 @@
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
+
+import { CtaBanner } from '@/blocks/cta-banner'
 import { authenticated, publishedOrAuthenticated } from './access'
 
 export const Posts: CollectionConfig = {
@@ -57,6 +60,9 @@ export const Posts: CollectionConfig = {
     {
       name: 'body',
       type: 'richText',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [...defaultFeatures, BlocksFeature({ blocks: [CtaBanner] })],
+      }),
     },
     {
       name: 'status',
@@ -75,6 +81,18 @@ export const Posts: CollectionConfig = {
     {
       name: 'seoDescription',
       type: 'textarea',
+    },
+    { name: 'canonical', type: 'text' },
+    {
+      name: 'robots',
+      type: 'select',
+      defaultValue: 'index-follow',
+      options: [
+        { label: 'Index, Follow', value: 'index-follow' },
+        { label: 'Noindex, Follow', value: 'noindex-follow' },
+        { label: 'Index, Nofollow', value: 'index-nofollow' },
+        { label: 'Noindex, Nofollow', value: 'noindex-nofollow' },
+      ],
     },
     {
       name: 'ogImage',

@@ -41,7 +41,7 @@ export const logisticsAndDistribution: SolutionVertical = {
   shortName: 'Logistics',
   slug: 'logistics-and-distribution',
   href,
-  image: '/img/verticals/briefs/logistics-and-distribution.jpg',
+  image: '/img/verticals/logistics.avif',
   solutionsPage: {
     positioning:
       'Resolve shipment exceptions, changed supplier promises, mismatched inventory records and held freight invoices across the ERP, WMS and TMS a distributor already runs.',
@@ -49,6 +49,7 @@ export const logisticsAndDistribution: SolutionVertical = {
   hero: {
     eyebrow: 'LOGISTICS & DISTRIBUTION',
     headline: 'AI orchestration for complex distribution and logistics operations',
+    shortHeadline: 'Distribution and logistics operations',
     subheadline:
       'Resolve shipment exceptions, changed supplier promises, order and inventory mismatches and held freight invoices across your ERP, WMS and TMS—with the evidence, approvals and controlled updates each case requires.',
     primaryCta: { label: 'Explore applications', href: '#applications' },

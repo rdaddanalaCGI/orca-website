@@ -16,7 +16,6 @@ permissions:
 
 env:
   NODE_VERSION: '24.x'
-  PNPM_VERSION: '11.24.0'
 
 jobs:
   quality:
@@ -40,9 +39,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # pnpm version comes from package.json's "packageManager" field.
       - uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v4
         with:
@@ -103,9 +101,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # pnpm version comes from package.json's "packageManager" field.
       - uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v4
         with:
@@ -141,9 +138,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # pnpm version comes from package.json's "packageManager" field.
       - uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v4
         with:
@@ -184,9 +180,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # pnpm version comes from package.json's "packageManager" field.
       - uses: pnpm/action-setup@v4
-        with:
-          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v4
         with:

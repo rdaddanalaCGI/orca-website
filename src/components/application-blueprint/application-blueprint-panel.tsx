@@ -49,8 +49,8 @@ function BlueprintRow({
   return (
     <div className="grid grid-cols-1 gap-6 p-5 sm:p-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-8 lg:p-8">
       <div className="flex flex-col gap-4">
-        <div className="flex items-start justify-between">
-          <span className="text-[10px] font-semibold tracking-widest text-olive-400 uppercase">{number}</span>
+        <div className="flex items-baseline gap-3">
+          <span className="font-display text-sm/5 font-semibold text-orca-orange tabular-nums">{number}</span>
           <span className="text-[10px] font-semibold tracking-widest text-olive-400 uppercase">{eyebrow}</span>
         </div>
         <div className="flex items-start gap-4">
@@ -93,7 +93,7 @@ function ContextPillar({ context }: { context: BlueprintContext }) {
       title={context.title}
       description={context.description}
     >
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {context.items.map((item) => (
           <ContextCard key={item.id} item={item} />
         ))}
@@ -195,7 +195,7 @@ function InteractionPillar({ interaction }: { interaction: BlueprintInteraction 
           <span className="mb-3 block text-[10px] font-semibold tracking-widest text-olive-500 uppercase">
             Systems & Surfaces
           </span>
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-2">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
             {interaction.systems!.map((system) => (
               <SystemCard key={system.id} system={system} />
             ))}
@@ -203,6 +203,16 @@ function InteractionPillar({ interaction }: { interaction: BlueprintInteraction 
         </div>
       )}
     </BlueprintRow>
+  )
+}
+
+function BlueprintRowConnector() {
+  return (
+    <div aria-hidden="true" className="relative h-px bg-olive-950/10 dark:bg-white/10">
+      <span className="absolute top-0 left-6 flex size-6 -translate-y-1/2 items-center justify-center rounded-full border border-olive-950/15 bg-orca-page sm:left-8 dark:border-white/15 dark:bg-olive-950">
+        <ArrowDown className="size-3 text-orca-orange" strokeWidth={1.5} />
+      </span>
+    </div>
   )
 }
 
@@ -235,9 +245,11 @@ export function ApplicationBlueprintPanel({ blueprint }: { blueprint: Applicatio
         </div>
       )}
 
-      <div className="relative z-10 divide-y divide-olive-950/10 dark:divide-white/10">
+      <div className="relative z-10">
         <ContextPillar context={blueprint.context} />
+        <BlueprintRowConnector />
         <WorkflowPillar workflow={blueprint.workflow} />
+        <BlueprintRowConnector />
         <InteractionPillar interaction={blueprint.interaction} />
       </div>
     </div>

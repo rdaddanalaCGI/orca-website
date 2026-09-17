@@ -10,9 +10,11 @@ export function ClosingCtaSection() {
           Bring us a workflow that crosses systems, documents, people and decisions. See how Orcaworks can turn it into
           a governed AI application.
         </p>
-        <ButtonLink href="/contact" size="lg">
-          Get a demo
-        </ButtonLink>
+        <div className="flex flex-wrap items-center gap-4">
+          <ButtonLink href="/contact" size="lg">
+            Get a demo
+          </ButtonLink>
+        </div>
       </Container>
     </section>
   )

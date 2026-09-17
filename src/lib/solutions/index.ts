@@ -19,6 +19,13 @@ export const solutions: SolutionVertical[] = [
 
 export const solutionSlugs = solutions.map((solution) => solution.slug)
 
+/**
+ * Verticals highlighted across the nav menu, home page and /solutions page.
+ * A vertical with `hiddenFromMenu: true` keeps its route (for SEO and direct
+ * links) but is not promoted anywhere.
+ */
+export const visibleSolutions = solutions.filter((solution) => !solution.hiddenFromMenu)
+
 export function getSolutionBySlug(slug: string): SolutionVertical | undefined {
   return solutions.find((solution) => solution.slug === slug)
 }
@@ -69,6 +76,41 @@ export function getSolutionExplorerApplications(solution: SolutionVertical, limi
     shortLabel: useCase.shortLabel,
     href: useCase.href,
   }))
+}
+
+export type FeaturedVertical = {
+  id: string
+  href: string
+  eyebrow: string
+  name: string
+  headline: string
+  subheadline?: string
+  useCases: string[]
+  count: number
+  image?: string
+}
+
+/**
+ * One card per promoted vertical for the home-page "Start with the work
+ * that matters" section. Each card describes the vertical as a whole —
+ * `hero.shortHeadline` as the headline and `hero.subheadline` as the
+ * descriptive text — with the vertical's first use cases listed beneath.
+ */
+export function getFeaturedVerticals(solutionsList: SolutionVertical[] = visibleSolutions): FeaturedVertical[] {
+  return solutionsList.map((solution) => {
+    const items = getSolutionApplicationsForLanding(solution)
+    return {
+      id: solution.id,
+      href: solution.href,
+      eyebrow: (solution.shortName ?? solution.name).toUpperCase(),
+      name: solution.name,
+      headline: solution.hero?.shortHeadline ?? solution.name,
+      subheadline: solution.hero?.subheadline ?? solution.solutionsPage?.positioning,
+      useCases: items.slice(0, 3).map((item) => item.shortLabel ?? item.title),
+      count: items.length,
+      image: solution.image,
+    }
+  })
 }
 
 export function getCrossIndustryApplications(

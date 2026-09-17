@@ -2,12 +2,12 @@
 
 import { clsx } from 'clsx/lite'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import Image from 'next/image'
 import NextLink from 'next/link'
 import { useState, type KeyboardEvent } from 'react'
 
 import { Link } from '@/components/elements/link'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
+import { VerticalImage } from '@/components/solutions/vertical-image'
 
 export type ExplorerVertical = {
   id: string
@@ -153,24 +153,15 @@ export function IndustryExplorer({ verticals }: { verticals: ExplorerVertical[] 
             )}
 
             <div className="grid gap-6 sm:grid-cols-5">
-              {current.image && (
-                <div className="relative aspect-4/3 overflow-hidden rounded-lg sm:col-span-2">
-                  <Image
-                    src={current.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 100vw, 320px"
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <ul
-                className={clsx(
-                  'flex flex-col divide-y divide-olive-950/10 dark:divide-white/10',
-                  current.image ? 'sm:col-span-3' : 'sm:col-span-5',
-                )}
-                role="list"
-              >
+              <div className="relative aspect-4/3 overflow-hidden rounded-lg sm:col-span-2">
+                <VerticalImage
+                  image={current.image}
+                  name={current.name}
+                  sizes="(max-width: 640px) 100vw, 320px"
+                  className="object-cover"
+                />
+              </div>
+              <ul className="flex flex-col divide-y divide-olive-950/10 sm:col-span-3 dark:divide-white/10" role="list">
                 {current.applications.map((application) => (
                   <li key={application.id}>
                     <NextLink

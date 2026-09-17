@@ -37,8 +37,8 @@ function application(copy: ApplicationCopy, blueprint: ApplicationBlueprint): So
 
 export const legal: SolutionVertical = {
   id: 'legal',
-  name: 'Legal',
-  shortName: 'Legal',
+  name: 'Law Firms',
+  shortName: 'Law Firms',
   slug: 'legal',
   href,
   menuImage: '/img/verticals/briefs/legal.jpg',

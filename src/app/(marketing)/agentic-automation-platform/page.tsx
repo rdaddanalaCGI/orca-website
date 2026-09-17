@@ -147,6 +147,15 @@ export default function Page() {
           <>
             <AnimatedCard index={0}>
               <Feature
+                icon={
+                  <Image
+                    src="/img/icons/control-plane/control-plane.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
+                }
                 headline="A Control Plane, Not an Agentic Black Box."
                 subheadline={
                   <p>
@@ -158,6 +167,15 @@ export default function Page() {
             </AnimatedCard>
             <AnimatedCard index={1}>
               <Feature
+                icon={
+                  <Image
+                    src="/img/icons/control-plane/rules-to-results.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
+                }
                 headline="From Rules to Results."
                 subheadline={
                   <p>
@@ -169,6 +187,15 @@ export default function Page() {
             </AnimatedCard>
             <AnimatedCard index={2}>
               <Feature
+                icon={
+                  <Image
+                    src="/img/icons/control-plane/on-policy-by-design.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
+                }
                 headline="On-Policy by Design."
                 subheadline={
                   <p>
@@ -180,6 +207,15 @@ export default function Page() {
             </AnimatedCard>
             <AnimatedCard index={3}>
               <Feature
+                icon={
+                  <Image
+                    src="/img/icons/control-plane/works-inside-your-stack.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
+                }
                 headline="Works Inside Your Stack."
                 subheadline={
                   <p>
@@ -191,6 +227,15 @@ export default function Page() {
             </AnimatedCard>
             <AnimatedCard index={4}>
               <Feature
+                icon={
+                  <Image
+                    src="/img/icons/control-plane/speed-without-losing-control.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
+                }
                 headline="Speed Without Losing Control."
                 subheadline={
                   <p>
@@ -202,6 +247,15 @@ export default function Page() {
             </AnimatedCard>
             <AnimatedCard index={5}>
               <Feature
+                icon={
+                  <Image
+                    src="/img/icons/control-plane/face-and-engine.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="dark:invert"
+                  />
+                }
                 headline="The Face and the Engine."
                 subheadline={
                   <p>

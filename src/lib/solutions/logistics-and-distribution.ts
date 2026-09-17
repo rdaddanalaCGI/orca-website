@@ -41,6 +41,7 @@ export const logisticsAndDistribution: SolutionVertical = {
   shortName: 'Logistics',
   slug: 'logistics-and-distribution',
   href,
+  menuImage: '/img/verticals/briefs/logistics-and-distribution.jpg',
   image: '/img/verticals/logistics.avif',
   solutionsPage: {
     positioning:

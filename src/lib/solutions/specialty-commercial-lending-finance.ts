@@ -41,6 +41,7 @@ export const specialtyCommercialLendingFinance: SolutionVertical = {
   shortName: 'Specialty Lending',
   slug: 'specialty-commercial-lending-finance',
   href,
+  menuImage: '/img/verticals/briefs/specialty-commercial-lending-finance.jpg',
   solutionsPage: {
     positioning:
       'Coordinate closing conditions, approval-to-booking reconciliation, covenant exceptions and renewal reviews across the LOS, ABL, factoring and document systems a specialty lender already runs—while credit and loan operations keep the decisions.',

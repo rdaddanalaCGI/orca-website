@@ -41,6 +41,7 @@ export const architectureConstructionEngineering: SolutionVertical = {
   shortName: 'ACE',
   slug: 'architecture-construction-engineering',
   href,
+  menuImage: '/img/verticals/briefs/architecture-construction-engineering.jpg',
   image: '/img/verticals/aec.avif',
   solutionsPage: {
     positioning:

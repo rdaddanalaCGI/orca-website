@@ -251,7 +251,12 @@ export function AgenticApplicationsMenu() {
 
             <div className="flex flex-col gap-4 lg:col-span-3">
               <div className="relative aspect-4/3 w-full overflow-hidden rounded-lg bg-orca-mist ring-1 ring-olive-950/5 dark:bg-[color-mix(in_oklab,var(--color-orca-teal-dark)_20%,var(--color-olive-950))] dark:ring-white/10">
-                <VerticalImage image={active.image} name={active.name} sizes="300px" className="object-cover" />
+                <VerticalImage
+                  image={active.menuImage ?? active.image}
+                  name={active.name}
+                  sizes="300px"
+                  className="object-cover"
+                />
               </div>
               {executiveBrief && (
                 <div className="flex flex-col gap-2">

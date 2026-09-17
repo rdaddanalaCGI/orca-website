@@ -40,6 +40,7 @@ export const insurance: SolutionVertical = {
   name: 'Insurance',
   slug: 'insurance',
   href,
+  menuImage: '/img/verticals/briefs/insurance.jpg',
   solutionsPage: {
     positioning:
       'Build decision-ready specialty cases and keep recoveries, claim actions and endorsement exceptions moving across the claims, policy and document systems a specialty carrier already runs.',

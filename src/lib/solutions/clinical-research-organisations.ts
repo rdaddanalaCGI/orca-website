@@ -6,6 +6,7 @@ export const clinicalResearchOrganisations: SolutionVertical = {
   shortName: 'CRO',
   slug: 'clinical-research-organisations',
   href: '/solutions/clinical-research-organisations',
+  menuImage: '/img/verticals/briefs/clinical-research-organisations.jpg',
   hiddenFromMenu: true,
   solutionsPage: {
     positioning:

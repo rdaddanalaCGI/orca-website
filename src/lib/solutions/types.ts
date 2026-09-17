@@ -146,6 +146,8 @@ export type SolutionVertical = {
   href: string
   description?: string
   image?: string
+  /** Preview image shown in the AI Solutions nav menu only (falls back to `image` when unset). */
+  menuImage?: string
   hiddenFromMenu?: boolean
   solutionsPage?: SolutionVerticalSolutionsPage
   hero?: SolutionHero

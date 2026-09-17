@@ -41,6 +41,7 @@ export const legal: SolutionVertical = {
   shortName: 'Legal',
   slug: 'legal',
   href,
+  menuImage: '/img/verticals/briefs/legal.jpg',
   solutionsPage: {
     positioning:
       'Coordinate intake, records requests, case assignment, stalled matters and settlement closeout across the case-management system, calendars, e-signature and document platforms a litigation firm already runs—while attorneys keep the decisions only lawyers should make.',

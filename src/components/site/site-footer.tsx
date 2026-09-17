@@ -45,7 +45,7 @@ export function SiteFooter() {
           </FooterCategory>
         </>
       }
-      fineprint="© 2026 Orcaworks, Inc."
+      fineprint="© 2026 Orcaworks, Inc. · Powered by Charter Global"
       socialLinks={
         <>
           <SocialLink href="https://x.com" name="X">

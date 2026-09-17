@@ -54,9 +54,7 @@ export function DeclaredWorkAnimation({ pillars }: { pillars: DeclaredPillar[] }
           {pillars.map((pillar) => (
             <div key={pillar.id} className="grid gap-6 lg:row-span-2 lg:grid-rows-subgrid">
               <div>
-                <h3 className="font-display text-xl/8 text-olive-950 sm:text-2xl/9 dark:text-white">
-                  {pillar.heading}
-                </h3>
+                <h3 className="text-sm/7 font-semibold text-olive-950 dark:text-white">{pillar.heading}</h3>
                 <p className="mt-2 text-sm/7 text-olive-700 dark:text-orca-frost">{pillar.copy}</p>
               </div>
 

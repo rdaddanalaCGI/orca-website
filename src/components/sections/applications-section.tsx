@@ -60,7 +60,7 @@ const applications: Application[] = [
       'Loan operations clears or holds the file',
     ],
     count: 8,
-    image: '/img/verticals/fintech.jpeg',
+    pattern: 'Specialty Lending',
   },
   {
     href: '/solutions/legal#intake-to-retainer',
@@ -70,7 +70,7 @@ const applications: Application[] = [
       'Legal teams collect client information, engagement documents, conflict checks, supporting evidence, and case history from forms, emails, document repositories, and intake systems before a new matter can be evaluated and opened.',
     useCases: ['Build the auth packet', 'Check coverage and formulary', 'Track status and appeal'],
     count: 8,
-    image: '/img/verticals/healthtech.png',
+    pattern: 'Law Firms',
   },
   {
     href: '/solutions/architecture-construction-engineering#change-evidence-to-decision',

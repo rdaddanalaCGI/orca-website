@@ -6,7 +6,7 @@ export const clinicalResearchOrganisations: SolutionVertical = {
   shortName: 'CRO',
   slug: 'clinical-research-organisations',
   href: '/solutions/clinical-research-organisations',
-  image: '/img/verticals/healthtech.png',
+  image: '/img/verticals/briefs/clinical-research-organisations.jpg',
   solutionsPage: {
     positioning:
       'Streamline patient intake, prior authorization and care coordination across EHRs, faxes, portals and the clinical data they depend on.',

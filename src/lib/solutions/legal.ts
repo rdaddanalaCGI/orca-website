@@ -41,8 +41,7 @@ export const legal: SolutionVertical = {
   shortName: 'Law Firms',
   slug: 'legal',
   href,
-  // Placeholder: no legal vertical image exists yet; design team to supply /img/verticals/legal.*
-  image: '/img/verticals/insurance.jpeg',
+  image: '/img/verticals/briefs/legal.jpg',
   solutionsPage: {
     positioning:
       'Coordinate intake, records requests, case assignment, stalled matters and settlement closeout across the case-management system, calendars, e-signature and document platforms a litigation firm already runs—while attorneys keep the decisions only lawyers should make.',

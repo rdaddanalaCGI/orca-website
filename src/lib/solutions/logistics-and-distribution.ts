@@ -41,7 +41,7 @@ export const logisticsAndDistribution: SolutionVertical = {
   shortName: 'Logistics',
   slug: 'logistics-and-distribution',
   href,
-  image: '/img/verticals/logistics.jpeg',
+  image: '/img/verticals/briefs/logistics-and-distribution.jpg',
   solutionsPage: {
     positioning:
       'Resolve shipment exceptions, changed supplier promises, mismatched inventory records and held freight invoices across the ERP, WMS and TMS a distributor already runs.',

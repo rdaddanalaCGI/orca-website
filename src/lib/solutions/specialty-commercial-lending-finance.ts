@@ -42,7 +42,7 @@ export const specialtyCommercialLendingFinance: SolutionVertical = {
   slug: 'specialty-commercial-lending-finance',
   href,
   // Placeholder: no specialty-lending vertical image exists yet; design team to supply /img/verticals/specialty-lending.*
-  image: '/img/verticals/fintech.jpeg',
+  image: '/img/verticals/briefs/specialty-commercial-lending-finance.jpg',
   solutionsPage: {
     positioning:
       'Coordinate closing conditions, approval-to-booking reconciliation, covenant exceptions and renewal reviews across the LOS, ABL, factoring and document systems a specialty lender already runs—while credit and loan operations keep the decisions.',

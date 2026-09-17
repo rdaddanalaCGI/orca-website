@@ -41,7 +41,7 @@ export const architectureConstructionEngineering: SolutionVertical = {
   shortName: 'ACE',
   slug: 'architecture-construction-engineering',
   href,
-  image: '/img/verticals/aec.jpeg',
+  image: '/img/verticals/briefs/architecture-construction-engineering.jpg',
   solutionsPage: {
     positioning:
       'Resolve potential changes, closeout gaps, schedule variance and cross-platform RFIs across the project platform, master schedule, cost system and email a general contractor already runs—with PMs, superintendents, designers and commercial leads keeping the decisions.',
